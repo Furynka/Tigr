@@ -1,6 +1,12 @@
 package com.dreamteam.entity;
 
-public Class Animal{
+
+/**
+ * Entity class representing animals.
+ * 
+ * @author Jiri Oliva
+ */
+public class Animal{
 	
 	
 	
