@@ -23,7 +23,7 @@ public class Environment {
 
     public Environment(int envId){ this.id = envId; }
 
-    public int getEnvironmentId(Environment e){ return this.id; }
+    public int getEnvironmentId(){ return this.id; }
 
     public String getName() {
         return name;
@@ -33,10 +33,33 @@ public class Environment {
         this.name = name;
     }
 
-   /* @Override
+    @Override
     public boolean equals(Object o){
+        if (o == this) {
+            return true;
+        }
+        if (o == null){
+            return false;
+        }
+        if (!(o instanceof Environment)){
+            return false;
+        }
 
-    }*/
+        Environment other = (Environment) o;
+
+        if (name == null) {
+            if (other.name != null) {
+                return false;
+            }
+        } else if (!name.equals(other.getName())){
+            return false;
+        }
+
+        if (id != other.getEnvironmentId()){
+            return false;
+        }
+        return true;
+    }
 
     @Override
     public int hashCode(){
