@@ -1,7 +1,7 @@
 package com.dreamteam.dao;
 
 import com.dreamteam.entity.Animal;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Access interface for Animal entities.
@@ -43,8 +43,8 @@ public interface AnimalDao {
     public Animal findByName(String name);
     
     /**
-     * Returns all existing Animal entitites.
-     * @return Set filled with existing Animal entities.
+     * Returns all existing Animal entities.
+     * @return List filled with existing Animal entities.
      */
-    public Set<Animal> getAll();
+    public List<Animal> getAll();
 }
