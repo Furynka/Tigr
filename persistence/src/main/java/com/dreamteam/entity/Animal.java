@@ -1,40 +1,40 @@
 package com.dreamteam.entity;
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
  * Entity class representing animals.
- * 
+ *
  * @author Jiri Oliva
  */
 @Entity
 public class Animal{
-	
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	
+
     @NotNull
     private String name;
-    
+
     @NotNull
     private String species;
-    
+
     @NotNull
     private String description;
-    
+
     private Set<Animal> predators = new HashSet<>();
-    
+
     private Set<Animal> preys = new HashSet<>();
-    
-    private Set<Enviroment> enviroments = new HashSet<>();
+
+    private Set<Environment> environments = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -83,13 +83,13 @@ public class Animal{
     public void setPreys(Set<Animal> preys) {
         this.preys = preys;
     }
-    
-    public Set<Enviroment> getEnviroments() {
-        return enviroments;
+
+    public Set<Environment> getEnvironments() {
+        return environments;
     }
-    
-    public void setEnviroments(Set<Enviroment> enviroments) {
-        this.enviroments = enviroments;
+
+    public void setEnviroments(Set<Environment> environments) {
+        this.environments = environments;
     }
     
     @Override
