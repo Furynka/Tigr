@@ -4,8 +4,13 @@
 	 <groupId>com.dreamteam</groupId>
     <artifactId>persistence</artifactId>
     <packaging>jar</packaging>
-	<version>1.0</version>
-    <name>Persistence Layer and Beans Validation</name>
+    <version>1.0</version>
+    <name>Persistence</name>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
 
     <dependencies>
         <dependency>
