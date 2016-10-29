@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import com.dreamteam.entity.Environment;
 
 
 /**
@@ -34,7 +35,7 @@ public class Animal{
     
     private Set<Animal> preys = new HashSet<>();
     
-    private Set<Enviroment> enviroments = new HashSet<>();
+    private Set<Environment> environments = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -84,12 +85,12 @@ public class Animal{
         this.preys = preys;
     }
     
-    public Set<Enviroment> getEnviroments() {
-        return enviroments;
+    public Set<Environment> getEnvironments() {
+        return environments;
     }
     
-    public void setEnviroments(Set<Enviroment> enviroments) {
-        this.enviroments = enviroments;
+    public void setEnviroments(Set<Environment> environments) {
+        this.environments = environments;
     }
     
     @Override
