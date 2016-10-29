@@ -1,6 +1,13 @@
 package com.dreamteam.entity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Entity class representing environment.
  *
@@ -13,10 +20,13 @@ public class Environment {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
 
+    @NotNull
     private String name;
 
-    //TODO: namiesto String bude vytvoreny novy Typ Description
+    @NotNull
     private String description;
+
+    private Set<Animal> animalsLiving = new HashSet<>();
 
 
     public Environment() {}
@@ -31,6 +41,14 @@ public class Environment {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Animal> getAnimalsLiving() {
+        return animalsLiving;
+    }
+
+    public void setAnimalsLiving(Set<Animal> animalsLiving) {
+        this.animalsLiving = animalsLiving;
     }
 
     @Override
