@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /**
- * Entity class representing animals.
+ * Entity class representing workers.
  *
  * @author Daniil Khudiakov
  */
@@ -22,19 +22,22 @@ public class Worker{
     private String email;
 
     @NotNull
-    private String password;
+    private String passwordHash;
 
     private boolean administrator;
 
-    public String getEmail() {
-        return email;
+    public void setEmail(String email) { this.email = email; }
+    public String getEmail() { return email; }
+
+    public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
+    public String getPasswordHash() { return this.passwordHash; }
+
+    public void setAdministrator(boolean administrator) { this.administrator = administrator; }
+    public boolean isAdministrator() { return this.administrator; }
+
     }
 
-    public void setPassword(String password) {
-        this.password = password;
     }
 
-    public boolean isAdministrator() {
-        return this.administrator;
     }
 }
