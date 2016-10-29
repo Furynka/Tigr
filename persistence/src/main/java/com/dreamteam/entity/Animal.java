@@ -1,12 +1,13 @@
 package com.dreamteam.entity;
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
-import java.util.Set;
+import com.dreamteam.entity.Environment;
 
 
 /**
@@ -83,11 +84,11 @@ public class Animal{
     public void setPreys(Set<Animal> preys) {
         this.preys = preys;
     }
-
+    
     public Set<Environment> getEnvironments() {
         return environments;
     }
-
+    
     public void setEnviroments(Set<Environment> environments) {
         this.environments = environments;
     }

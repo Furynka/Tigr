@@ -1,1 +1,5 @@
 /persistence/target/
+
+# idea rules
+/.idea
+*.iml
