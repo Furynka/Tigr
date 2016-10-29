@@ -23,6 +23,12 @@ public class WorkerDaoImpl implements WorkerDao {
     }
 
     @Override
+    public void update(Worker w) { em.merge(w); }
+
+    @Override
+    public void delete(Worker w) { em.remove(w); }
+
+    @Override
     public Worker findWorkerByEmail(String email) {
         if (email == null || email.isEmpty())
             throw new IllegalArgumentException("Cannot search for null e-mail");
