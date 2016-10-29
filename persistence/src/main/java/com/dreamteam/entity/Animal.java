@@ -32,6 +32,8 @@ public class Animal{
     private Set<Animal> predators = new HashSet<>();
     
     private Set<Animal> preys = new HashSet<>();
+    
+    private Set<Enviroment> enviroments = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -81,4 +83,11 @@ public class Animal{
         this.preys = preys;
     }
     
+    public Set<Enviroment> getEnviroments() {
+        return enviroments;
+    }
+    
+    public void setEnviroments(Set<Enviroment> enviroments) {
+        this.enviroments = enviroments;
+    }
 }
