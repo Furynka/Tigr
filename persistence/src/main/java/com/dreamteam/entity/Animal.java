@@ -1,5 +1,6 @@
 package com.dreamteam.entity;
 
+import java.util.HashSet;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,6 +28,10 @@ public class Animal{
     
     @NotNull
     private String description;
+    
+    private Set<Animal> predators = new HashSet<>();
+    
+    private Set<Animal> preys = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -58,6 +63,22 @@ public class Animal{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<Animal> getPredators() {
+        return predators;
+    }
+
+    public void setPredators(Set<Animal> predators) {
+        this.predators = predators;
+    }
+
+    public Set<Animal> getPreys() {
+        return preys;
+    }
+
+    public void setPreys(Set<Animal> preys) {
+        this.preys = preys;
     }
     
 }
