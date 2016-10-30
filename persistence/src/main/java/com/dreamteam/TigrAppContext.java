@@ -20,7 +20,7 @@ import javax.sql.DataSource;
  */
 @ComponentScan(basePackages = "com.dreamteam.dao")
 @Configuration
-public class AppContext {
+public class TigrAppContext {
 
     /**
     * Enables automatic translation of exceptions to DataAccessExceptions.
