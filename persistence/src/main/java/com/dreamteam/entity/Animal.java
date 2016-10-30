@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import com.dreamteam.entity.Environment;
+import java.util.Collections;
+import javax.persistence.ManyToMany;
 
 
 /**
@@ -31,10 +33,13 @@ public class Animal{
     @NotNull
     private String description;
 
+    @ManyToMany
     private Set<Animal> predators = new HashSet<>();
 
+    @ManyToMany
     private Set<Animal> preys = new HashSet<>();
 
+    @ManyToMany
     private Set<Environment> environments = new HashSet<>();
 
     public Long getId() {
@@ -70,27 +75,39 @@ public class Animal{
     }
 
     public Set<Animal> getPredators() {
-        return predators;
+        return Collections.unmodifiableSet(predators);
     }
 
-    public void setPredators(Set<Animal> predators) {
-        this.predators = predators;
+    public void addPredator(Animal predator) {
+        predators.add(predator);
+    }
+    
+    public void removePredator(Animal predator) {
+        predators.remove(predator);
     }
 
     public Set<Animal> getPreys() {
-        return preys;
+        return Collections.unmodifiableSet(preys);
     }
 
-    public void setPreys(Set<Animal> preys) {
-        this.preys = preys;
+    public void addPrey(Animal prey) {
+        preys.add(prey);
+    }
+    
+    public void removePrey(Animal prey) {
+        preys.remove(prey);
     }
     
     public Set<Environment> getEnvironments() {
-        return environments;
+        return Collections.unmodifiableSet(environments);
     }
     
-    public void setEnviroments(Set<Environment> environments) {
-        this.environments = environments;
+    public void addEnvironment(Environment environment) {
+        environments.add(environment);
+    }
+    
+    public void removeEnvironment(Environment environment) {
+        environments.remove(environment);
     }
     
     @Override
