@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-import com.dreamteam.entity.Environment;
 import java.util.Collections;
 import javax.persistence.ManyToMany;
 
@@ -34,13 +33,13 @@ public class Animal{
     private String description;
 
     @ManyToMany
-    private Set<Animal> predators = new HashSet<>();
+    private final Set<Animal> predators = new HashSet<>();
 
     @ManyToMany
-    private Set<Animal> preys = new HashSet<>();
+    private final Set<Animal> preys = new HashSet<>();
 
     @ManyToMany
-    private Set<Environment> environments = new HashSet<>();
+    private final Set<Environment> environments = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -114,7 +113,7 @@ public class Animal{
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + name.hashCode();
         return result;
     }
 
@@ -130,10 +129,7 @@ public class Animal{
             return false;
         }
         final Animal other = (Animal) obj;
-        if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
-            return false;
-        }
-        return true;
+        return this.name.equals(other.name);
     }
       
 }
