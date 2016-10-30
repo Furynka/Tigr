@@ -1,10 +1,8 @@
 package com.dreamteam.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,8 +24,8 @@ public class Environment {
     @NotNull
     private String description;
 
+    @ManyToMany(mappedBy="environment")
     private Set<Animal> animalsLiving = new HashSet<>();
-
 
     public Environment() {}
 
@@ -43,12 +41,12 @@ public class Environment {
         this.name = name;
     }
 
-    public Set<Animal> getAnimalsLiving() {
-        return animalsLiving;
+    public void addAnimal(Animal animal) {
+        this.animalsLiving.add(animal);
     }
 
-    public void setAnimalsLiving(Set<Animal> animalsLiving) {
-        this.animalsLiving = animalsLiving;
+    public Set<Animal> getAnimals() {
+        return Collections.unmodifiableSet(animalsLiving);
     }
 
     @Override
