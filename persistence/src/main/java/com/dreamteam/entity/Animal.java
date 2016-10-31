@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import javax.persistence.ManyToMany;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -17,6 +18,7 @@ import javax.persistence.ManyToMany;
  * @author Jiri Oliva
  */
 @Entity
+@Transactional
 public class Animal{
 
     @Id
