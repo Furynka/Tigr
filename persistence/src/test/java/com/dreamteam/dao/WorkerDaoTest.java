@@ -3,6 +3,8 @@ package com.dreamteam.dao;
 import com.dreamteam.TigrAppContext;
 import com.dreamteam.entity.Worker;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -22,8 +24,9 @@ import org.testng.annotations.Test;
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
 public class WorkerDaoTest extends AbstractTestNGSpringContextTests{
-//    @PersistenceContext
-//    private EntityManager entityManager;
+
+    @PersistenceContext
+    private EntityManager entityManager;
     
     @Autowired
     private WorkerDao workerDao;
@@ -63,6 +66,13 @@ public class WorkerDaoTest extends AbstractTestNGSpringContextTests{
     }
     
     @Test
+    public void testCreate() {
+        List<Worker> result = entityManager.createQuery("select w from Worker w", Worker.class).getResultList();
+        Assert.assertNotNull(result);
+        Assert.assertEquals(result.size(), 3);
+    }
+    
+    @Test
     public void testGetAll() {
         List<Worker> result = workerDao.all();
         Assert.assertEquals(result.size(), 3);
@@ -78,10 +88,10 @@ public class WorkerDaoTest extends AbstractTestNGSpringContextTests{
         Assert.assertNull(result);
     }
     
-//    @Test(expectedExceptions = IllegalArgumentException.class)
-//    public void testFindByIdWithNullParameter() {
-//        workerDao.findById(null);
-//    }
+    @Test(expectedExceptions = RuntimeException.class)
+    public void testFindByIdWithNullParameter() {
+        workerDao.findById(null);
+    }
     
     @Test
     public void testFindByEmail() {
@@ -93,10 +103,10 @@ public class WorkerDaoTest extends AbstractTestNGSpringContextTests{
         Assert.assertNull(result);
     }
     
-//    @Test(expectedExceptions = IllegalArgumentException.class)
-//    public void testFindByEmailWithNullParameter() {
-//        workerDao.findWorkerByEmail(null);
-//    }
+    @Test(expectedExceptions = RuntimeException.class)
+    public void testFindByEmailWithNullParameter(){
+        workerDao.findWorkerByEmail(null);
+    }
     
     @Test
     public void testUpdate() {
