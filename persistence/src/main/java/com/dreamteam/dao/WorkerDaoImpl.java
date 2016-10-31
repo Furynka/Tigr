@@ -54,7 +54,14 @@ public class WorkerDaoImpl implements WorkerDao {
 
     @Override
     public Worker findById(Long id) {
-        return entityManager.find(Worker.class, id);
+        if (id == null)
+            throw new IllegalArgumentException("Cannot search for null id");
+
+        try {
+            return entityManager.find(Worker.class, id);
+        } catch (NoResultException nre) {
+            return null;
+        }
     }
 
     @Override

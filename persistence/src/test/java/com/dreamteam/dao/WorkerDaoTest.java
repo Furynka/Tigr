@@ -7,10 +7,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 /**
@@ -18,8 +21,10 @@ import org.testng.annotations.Test;
  * @author Jiri Oliva
  */
 @ContextConfiguration(classes = TigrAppContext.class)
+@TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
 public class WorkerDaoTest extends AbstractTestNGSpringContextTests{
+
     @PersistenceContext
     private EntityManager entityManager;
     
@@ -30,7 +35,7 @@ public class WorkerDaoTest extends AbstractTestNGSpringContextTests{
     private Worker worker2;
     private Worker worker3;
     
-    @BeforeMethod
+    @BeforeClass
     public void createTestData() {
         worker1 = new Worker();
         worker2 = new Worker();
@@ -40,9 +45,31 @@ public class WorkerDaoTest extends AbstractTestNGSpringContextTests{
         worker1.setEmail("worker1@dreamteam.com");
         worker1.setPasswordHash("unbreakable");
         
+        worker2.setAdministrator(true);
+        worker2.setEmail("worker2@dreamteam.com");
+        worker2.setPasswordHash("unbreakable");
+        
+        worker3.setAdministrator(true);
+        worker3.setEmail("worker3@dreamteam.com");
+        worker3.setPasswordHash("unbreakable");
+        
         workerDao.create(worker1);
         workerDao.create(worker2);
         workerDao.create(worker3);
+    }
+    
+    @AfterClass
+    public void clearTestData() {
+        workerDao.delete(worker1);
+        workerDao.delete(worker2);
+        workerDao.delete(worker3);
+    }
+    
+    @Test
+    public void testCreate() {
+        List<Worker> result = entityManager.createQuery("select w from Worker w", Worker.class).getResultList();
+        Assert.assertNotNull(result);
+        Assert.assertEquals(result.size(), 3);
     }
     
     @Test
@@ -53,29 +80,53 @@ public class WorkerDaoTest extends AbstractTestNGSpringContextTests{
     
     @Test
     public void testFindById() {
-        //Worker result = workerDao.findById(worker1.getId());
+        Worker result = workerDao.findById(worker1.getId());
+        Assert.assertNotNull(result);
+        Assert.assertEquals(result.getEmail(), worker1.getEmail());
+        
+        result = workerDao.findById(worker1.getId() + worker2.getId() + worker3.getId());
+        Assert.assertNull(result);
+    }
+    
+    @Test(expectedExceptions = RuntimeException.class)
+    public void testFindByIdWithNullParameter() {
+        workerDao.findById(null);
     }
     
     @Test
     public void testFindByEmail() {
         Worker result = workerDao.findWorkerByEmail(worker1.getEmail());
-        Assert.assertEquals(result, worker1);
+        Assert.assertNotNull(result);
+        Assert.assertEquals(result.getEmail(), worker1.getEmail());
+        
         result = workerDao.findWorkerByEmail("invalidEmail");
         Assert.assertNull(result);
     }
     
+    @Test(expectedExceptions = RuntimeException.class)
+    public void testFindByEmailWithNullParameter(){
+        workerDao.findWorkerByEmail(null);
+    }
+    
     @Test
     public void testUpdate() {
-        //TODO getId()
-        Worker result = workerDao.findById(1L);
+        Worker result = workerDao.findById(worker1.getId());
+        Assert.assertEquals(result.getEmail(), "worker1@dreamteam.com");
+        worker1.setEmail("updated@dreamteam.com");
         
+        workerDao.update(worker1);
+        result = workerDao.findById(worker1.getId());
+        Assert.assertEquals(result.getEmail(), "updated@dreamteam.com");
+        Assert.assertNotEquals(result.getEmail(), "worker1@dreamteam.com");
     }
     
     @Test
     public void testDelete() {
-        //TODO getId()
-        
+        Worker result = workerDao.findById(worker1.getId());
+        Assert.assertNotNull(result);
+        workerDao.delete(worker1);
+        result = workerDao.findById(worker1.getId());
+        Assert.assertNull(result);        
     }
-    
     
 }

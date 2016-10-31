@@ -19,6 +19,7 @@ public class Animal{
     private Long id;
 
     @NotNull
+    @Column
     private String name;
 
     @NotNull
