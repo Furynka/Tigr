@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.util.Collections;
+import javax.persistence.Column;
 import javax.persistence.ManyToMany;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Jiri Oliva
  */
 @Entity
-@Transactional
 public class Animal{
 
     @Id
@@ -26,6 +26,7 @@ public class Animal{
     private Long id;
 
     @NotNull
+    @Column
     private String name;
 
     @NotNull
