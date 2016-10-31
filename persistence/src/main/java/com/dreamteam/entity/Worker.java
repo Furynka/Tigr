@@ -10,13 +10,12 @@ import javax.validation.constraints.Pattern;
  * @author Daniil Khudiakov
  */
 @Entity
-@Table(name="Workers")
 public class Worker{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable=false,unique=true)
+    @Column(nullable=false)
     @Pattern(regexp=".+@.+\\....?")
     @NotNull
     private String email;
