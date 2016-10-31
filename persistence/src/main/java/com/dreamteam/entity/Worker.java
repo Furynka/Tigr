@@ -25,14 +25,30 @@ public class Worker{
 
     private boolean administrator;
 
-    public void setEmail(String email) { this.email = email; }
-    public String getEmail() { return email; }
+    public Long getId() {
+        return id;
+    }
 
-    public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
-    public String getPasswordHash() { return this.passwordHash; }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public String getEmail() {
+        return email;
+    }
 
-    public void setAdministrator(boolean administrator) { this.administrator = administrator; }
-    public boolean isAdministrator() { return this.administrator; }
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+    public String getPasswordHash() {
+        return this.passwordHash;
+    }
+
+    public void setAdministrator(boolean administrator) {
+        this.administrator = administrator;
+    }
+    public boolean isAdministrator() {
+        return this.administrator;
+    }
 
     @Override
     public int hashCode() {
