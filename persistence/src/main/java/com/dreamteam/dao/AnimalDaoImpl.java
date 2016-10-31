@@ -31,8 +31,8 @@ public class AnimalDaoImpl implements AnimalDao{
     }
 
     @Override
-    public void update(Animal animal) {
-        entityManager.merge(animal);
+    public Animal update(Animal animal) {
+        return entityManager.merge(animal);
     }
 
     @Override

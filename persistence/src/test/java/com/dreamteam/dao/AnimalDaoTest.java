@@ -78,9 +78,10 @@ public class AnimalDaoTest extends AbstractTestNGSpringContextTests {
 
     @AfterClass
     public void deleteObjects(){
-        animalDao.delete(eagle);
-        animalDao.delete(swallow);
         animalDao.delete(fly);
+        animalDao.delete(swallow);
+        animalDao.delete(eagle);
+
         envDao.delete(woodland);
     }
 
@@ -90,4 +91,50 @@ public class AnimalDaoTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(animals.size(), 3);
     }
 
+    @Test()
+    public void findById() {
+        Animal found = animalDao.findById(eagle.getId());
+        Assert.assertNotNull(found);
+        Assert.assertEquals(found.getName(), eagle.getName());
+    }
+
+    @Test()
+    public void findByName() {
+        Animal found = animalDao.findByName(eagle.getName());
+        Assert.assertNotNull(found);
+        Assert.assertEquals(found.getId(), eagle.getId());
+    }
+
+    @Test()
+    public void update() {
+        swallow.setName("Swallow_Updated");
+        animalDao.update(swallow);
+
+        Animal found = animalDao.findById(swallow.getId());
+        Assert.assertNotNull(found);
+        Assert.assertEquals(found.getName(), "Swallow_Updated");
+    }
+
+    @Test()
+    public void delete() {
+        Animal tmpA = new Animal();
+        tmpA.setName("Animal_Tmp");
+        tmpA.setDescription("description");
+        tmpA.addEnvironment(woodland);
+        tmpA.setSpecies("Bicolor");
+
+        animalDao.create(tmpA);
+
+        int before = animalDao.getAll().size();
+
+        animalDao.delete(tmpA);
+        int after = animalDao.getAll().size();
+
+        Assert.assertEquals(before - after, 1);
+    }
+
+    @Test
+    public void returnsNullIfNonexistingID() {
+        Assert.assertNull(animalDao.findById(11111111111l));
+    }
 }
