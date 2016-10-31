@@ -41,6 +41,10 @@ public class Environment {
         this.name = name;
     }
 
+    public String getDescription() { return description; }
+
+    public void setDescription(String description) { this.description = description; }
+
     public void addAnimal(Animal animal) {
         this.animalsLiving.add(animal);
     }
