@@ -24,7 +24,7 @@ public class Environment {
     @NotNull
     private String description;
 
-    @ManyToMany(mappedBy="environment")
+    @ManyToMany(mappedBy="environments")
     private Set<Animal> animalsLiving = new HashSet<>();
 
     public Environment() {}

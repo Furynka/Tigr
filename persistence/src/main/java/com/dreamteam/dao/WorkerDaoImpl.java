@@ -10,23 +10,32 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
 import com.dreamteam.entity.Worker;
+import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * @author Daniil Khudiakov
+ */
 @Repository
+@Transactional
 public class WorkerDaoImpl implements WorkerDao {
 
     @PersistenceContext
-    private EntityManager em;
+    private EntityManager entityManager;
 
     @Override
     public void create(Worker w) {
-        em.persist(w);
+        entityManager.persist(w);
     }
 
     @Override
-    public void update(Worker w) { em.merge(w); }
+    public void update(Worker w) {
+        entityManager.merge(w);
+    }
 
     @Override
-    public void delete(Worker w) { em.remove(w); }
+    public void delete(Worker w) {
+        entityManager.remove(w);
+    }
 
     @Override
     public Worker findWorkerByEmail(String email) {
@@ -34,7 +43,7 @@ public class WorkerDaoImpl implements WorkerDao {
             throw new IllegalArgumentException("Cannot search for null e-mail");
 
         try {
-            return em
+            return entityManager
                     .createQuery("select w from Worker w where email=:email",
                             Worker.class).setParameter("email", email)
                     .getSingleResult();
@@ -45,12 +54,12 @@ public class WorkerDaoImpl implements WorkerDao {
 
     @Override
     public Worker findById(Long id) {
-        return em.find(Worker.class, id);
+        return entityManager.find(Worker.class, id);
     }
 
     @Override
     public List<Worker> all() {
-        TypedQuery<Worker> query = em.createQuery("SELECT w FROM Worker w",
+        TypedQuery<Worker> query = entityManager.createQuery("SELECT w FROM Worker w",
                 Worker.class);
         return (List<Worker>) query.getResultList();
     }

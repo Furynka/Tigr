@@ -4,6 +4,9 @@ import com.dreamteam.entity.Worker;
 
 import java.util.List;
 
+/**
+ * @author Daniil Khudiakov
+ */
 public interface WorkerDao {
     void create(Worker w);
     void update(Worker w);
