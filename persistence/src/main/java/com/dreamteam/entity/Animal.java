@@ -10,7 +10,6 @@ import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import javax.persistence.Column;
 import javax.persistence.ManyToMany;
-import org.springframework.transaction.annotation.Transactional;
 
 
 /**
