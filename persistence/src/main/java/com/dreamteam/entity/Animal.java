@@ -1,15 +1,10 @@
 package com.dreamteam.entity;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collections;
-import javax.persistence.ManyToMany;
-
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Entity class representing animals.
@@ -32,14 +27,22 @@ public class Animal{
     @NotNull
     private String description;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name="animal_predator",
+            joinColumns=@JoinColumn(name="first_id",nullable = true, updatable = true),
+            inverseJoinColumns=@JoinColumn(name="second_id",nullable = true, updatable = true)
+    )
     private final Set<Animal> predators = new HashSet<>();
 
-    @ManyToMany
-    private final Set<Animal> preys = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name="animal_prey",
+            joinColumns=@JoinColumn(name="first_id",nullable = true, updatable = true),
+            inverseJoinColumns=@JoinColumn(name="second_id",nullable = true, updatable = true)
+    )
+    private Set<Animal> preys = new HashSet<>();
 
     @ManyToMany
-    private final Set<Environment> environments = new HashSet<>();
+    private Set<Environment> environments = new HashSet<>();
 
     public Long getId() {
         return id;

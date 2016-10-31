@@ -26,7 +26,7 @@ public interface AnimalDao {
      * Updates existing Animal entity;
      * @param animal Animal entity to update
      */
-    public void update(Animal animal);
+    public Animal update(Animal animal);
     
     /**
      * Finds Animal entity by its Id.
