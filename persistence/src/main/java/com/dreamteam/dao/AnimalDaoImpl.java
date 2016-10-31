@@ -7,12 +7,14 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Access class for Animal entities.
  * @author Jiri Oliva
  */
 @Repository
+@Transactional
 public class AnimalDaoImpl implements AnimalDao{
 
     @PersistenceContext
@@ -25,7 +27,7 @@ public class AnimalDaoImpl implements AnimalDao{
 
     @Override
     public void delete(Animal animal) {
-        entityManager.remove(animal);
+        entityManager.remove(findById(animal.getId()));
     }
 
     @Override
