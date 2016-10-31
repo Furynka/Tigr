@@ -90,4 +90,28 @@ public class AnimalDaoTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(animals.size(), 3);
     }
 
+    @Test()
+    public void findById() {
+        Animal found = animalDao.findById(eagle.getId());
+        Assert.assertNotNull(found);
+        Assert.assertEquals(found.getName(), eagle.getName());
+    }
+
+    @Test()
+    public void findByName() {
+        Animal found = animalDao.findByName(eagle.getName());
+        Assert.assertNotNull(found);
+        Assert.assertEquals(found.getId(), eagle.getId());
+    }
+
+    @Test()
+    public void update() {
+        eagle.setName("Eagle_Updated");
+        animalDao.update(eagle);
+
+        Animal found = animalDao.findById(eagle.getId());
+        Assert.assertNotNull(found);
+        Assert.assertEquals(found.getName(), eagle.getName());
+    }
+
 }
