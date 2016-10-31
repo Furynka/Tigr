@@ -2,6 +2,7 @@ package com.dreamteam.dao;
 
 import com.dreamteam.entity.Environment;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -12,6 +13,7 @@ import java.util.List;
  * @author Eva Ambrusova
  */
 @Repository
+@Transactional
 public class EnvironmentDaoImpl implements EnvironmentDao {
 
     @PersistenceContext
@@ -30,8 +32,8 @@ public class EnvironmentDaoImpl implements EnvironmentDao {
     @Override
     public Environment findByName(String name) {
         try{
-            return em.createQuery("SELECT e FROM Environment e WHERE name = :name", Environment.class)
-                    .setParameter(":name", name).getSingleResult();
+            return em.createQuery("SELECT e FROM Environment e WHERE name=:name", Environment.class)
+                    .setParameter("name", name).getSingleResult();
         } catch (NoResultException ex){
             return null;
         }
@@ -49,6 +51,6 @@ public class EnvironmentDaoImpl implements EnvironmentDao {
 
     @Override
     public void delete(Environment e) {
-        em.remove(e);
+        em.remove(findById(e.getEnvironmentId()));
     }
 }

@@ -34,7 +34,7 @@ public class WorkerDaoImpl implements WorkerDao {
 
     @Override
     public void delete(Worker w) {
-        entityManager.remove(w);
+        entityManager.remove(findById(w.getId()));
     }
 
     @Override
