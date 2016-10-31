@@ -3,8 +3,6 @@ package com.dreamteam.dao;
 import com.dreamteam.TigrAppContext;
 import com.dreamteam.entity.Worker;
 import java.util.List;
-//import javax.persistence.EntityManager;
-//import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -44,6 +42,14 @@ public class WorkerDaoTest extends AbstractTestNGSpringContextTests{
         worker1.setEmail("worker1@dreamteam.com");
         worker1.setPasswordHash("unbreakable");
         
+        worker2.setAdministrator(true);
+        worker2.setEmail("worker2@dreamteam.com");
+        worker2.setPasswordHash("unbreakable");
+        
+        worker3.setAdministrator(true);
+        worker3.setEmail("worker3@dreamteam.com");
+        worker3.setPasswordHash("unbreakable");
+        
         workerDao.create(worker1);
         workerDao.create(worker2);
         workerDao.create(worker3);
@@ -70,9 +76,11 @@ public class WorkerDaoTest extends AbstractTestNGSpringContextTests{
         
         result = workerDao.findById(worker1.getId() + worker2.getId() + worker3.getId());
         Assert.assertNull(result);
-        
-        result = workerDao.findById(null);
-        Assert.assertNull(result);
+    }
+    
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void testFindByIdWithNullParameter() {
+        workerDao.findById(null);
     }
     
     @Test
@@ -83,9 +91,11 @@ public class WorkerDaoTest extends AbstractTestNGSpringContextTests{
         
         result = workerDao.findWorkerByEmail("invalidEmail");
         Assert.assertNull(result);
-        
-        result = workerDao.findWorkerByEmail(null);
-        Assert.assertNull(result);
+    }
+    
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void testFindByEmailWithNullParameter() {
+        workerDao.findWorkerByEmail(null);
     }
     
     @Test
