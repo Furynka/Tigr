@@ -12,6 +12,9 @@ import org.springframework.stereotype.Repository;
 import com.dreamteam.entity.Worker;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * @author Daniil Khudiakov
+ */
 @Repository
 @Transactional
 public class WorkerDaoImpl implements WorkerDao {
