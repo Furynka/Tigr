@@ -55,6 +55,7 @@ public class Environment {
 
     public void removeAnimal(Animal animalLiving) { this.animalsLiving.remove(animalLiving); }
 
+
     @Override
     public boolean equals(Object o){
         if (o == this) {
