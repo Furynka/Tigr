@@ -28,18 +28,10 @@ public class Animal{
     @NotNull
     private String description;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name="animal_predator",
-            joinColumns=@JoinColumn(name="first_id",nullable = true, updatable = true),
-            inverseJoinColumns=@JoinColumn(name="second_id",nullable = true, updatable = true)
-    )
-    private final Set<Animal> predators = new HashSet<>();
+    @ManyToMany(mappedBy="preys")
+    private Set<Animal> predators = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name="animal_prey",
-            joinColumns=@JoinColumn(name="first_id",nullable = true, updatable = true),
-            inverseJoinColumns=@JoinColumn(name="second_id",nullable = true, updatable = true)
-    )
+    @ManyToMany
     private Set<Animal> preys = new HashSet<>();
 
     @ManyToMany
