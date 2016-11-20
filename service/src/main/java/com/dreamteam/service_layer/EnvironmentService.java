@@ -1,4 +1,4 @@
-package com.dreamteam.service;
+package com.dreamteam.service_layer;
 
 /**
  * @author Eva Ambrusova
