@@ -2,6 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+
     <parent>
         <groupId>com.dreamteam</groupId>
         <artifactId>tigr-parent</artifactId>
@@ -17,7 +18,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties> -->
-    
+
     <build>
         <pluginManagement>
             <plugins>
@@ -30,10 +31,10 @@
                     </configuration>
                 </plugin>
                 <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>
-            </plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.19.1</version>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
@@ -42,13 +43,11 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <scope>test</scope>
             <version>RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
-            <scope>test</scope>
             <version>RELEASE</version>
         </dependency>
         <dependency>
@@ -66,6 +65,7 @@
             <artifactId>spring-data-jpa</artifactId>
             <version>RELEASE</version>
         </dependency>
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
@@ -102,21 +102,6 @@
             <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>
             <version>RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>5.2.4.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.3.11.Final</version>
         </dependency>
     </dependencies>
 </project>
