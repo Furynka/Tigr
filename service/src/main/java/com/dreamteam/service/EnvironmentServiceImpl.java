@@ -1,4 +1,4 @@
-package com.dreamteam.service_layer;
+package com.dreamteam.service;
 
 import com.dreamteam.dao.EnvironmentDao;
 import com.dreamteam.entity.Environment;

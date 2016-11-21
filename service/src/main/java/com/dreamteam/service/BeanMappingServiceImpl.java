@@ -1,4 +1,4 @@
-package com.dreamteam.service_layer;
+package com.dreamteam.service;
 
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;

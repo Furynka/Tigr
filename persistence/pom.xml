@@ -5,7 +5,7 @@
 
     <parent>
         <groupId>com.dreamteam</groupId>
-        <artifactId>tigr-parent</artifactId>
+        <artifactId>parent</artifactId>
         <version>1.0</version>
     </parent>
 
