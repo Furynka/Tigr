@@ -6,22 +6,23 @@ import com.dreamteam.entity.Worker;
 import com.dreamteam.facade.WorkerFacade;
 import com.dreamteam.service.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.dreamteam.service.BeanMappingService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 
 /**
  * Created by khudiakov on 21.11.2016.
 */
+@Service
+@Transactional
 public class WorkerFacadeImpl implements WorkerFacade {
-    private final WorkerService workerService;
-
-    private final BeanMappingService beanMappingService;
+    @Autowired
+    private WorkerService workerService;
 
     @Autowired
-    public WorkerFacadeImpl(WorkerService workerService, BeanMappingService beanMappingService) {
-        this.workerService = workerService;
-        this.beanMappingService = beanMappingService;
-    }
+    private BeanMappingService beanMappingService;
 
     public void registerWorker(WorkerDTO w, String unencryptedPassword) {
         Worker workerEntity = beanMappingService.mapTo(w, Worker.class);
