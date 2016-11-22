@@ -1,9 +1,8 @@
-package com.dreamteam.service_layer.facade;
-
+package com.dreamteam.service.facade;
 
 import com.dreamteam.facade.EnvironmentFacade;
-import com.dreamteam.service_layer.BeanMappingService;
-import com.dreamteam.service_layer.EnvironmentService;
+import com.dreamteam.service.BeanMappingService;
+import com.dreamteam.service.EnvironmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class EnvironmentFacadeImpl implements EnvironmentFacade{
+public class EnvironmentFacadeImpl implements EnvironmentFacade {
 
     @Autowired
     private BeanMappingService beanMappingService;

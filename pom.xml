@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.dreamteam</groupId>
-    <artifactId>tigr-parent</artifactId>
+    <artifactId>parent</artifactId>
     <packaging>pom</packaging>
     <version>1.0</version>
     <name>Tigr Parent</name>
@@ -13,8 +13,28 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
+    <!-- defines compatible versions of many libraries -->
+    <!-- see http://docs.spring.io/platform/docs/current/reference/htmlsingle/#getting-started-using-spring-io-platform-maven -->
+    <parent>
+        <groupId>io.spring.platform</groupId>
+        <artifactId>platform-bom</artifactId>
+        <version>Athens-RELEASE</version>
+        <relativePath/>
+    </parent>
+    <!-- specifies versions not defined by the Spring platform-bom -->
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>2.0.2-beta</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>net.sf.dozer</groupId>
+                <artifactId>dozer</artifactId>
+                <version>5.5.1</version>
+            </dependency>
             <dependency>
                 <groupId>io.spring.platform</groupId>
                 <artifactId>platform-bom</artifactId>
@@ -51,8 +71,8 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <configuration>
-                        <source>1.8</source>
-                        <target>1.8</target>
+                        <source>8</source>
+                        <target>8</target>
                     </configuration>
                 </plugin>
             </plugins>
@@ -60,11 +80,8 @@
     </build>
 
     <modules>
+        <module>api</module>
         <module>persistence</module>
         <module>service</module>
-        <module>tigr-api</module>
     </modules>
-
-    <dependencies></dependencies>
-
 </project>
