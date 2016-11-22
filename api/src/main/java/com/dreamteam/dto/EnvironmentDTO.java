@@ -1,5 +1,9 @@
 package com.dreamteam.dto;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * @author Eva Ambrusova
  */
@@ -7,6 +11,7 @@ public class EnvironmentDTO {
     private int id;
     private String name;
     private String description;
+    private Set<AnimalDTO> animalsLiving = new HashSet<>();
 
     public int getId() {
         return id;
@@ -25,7 +30,6 @@ public class EnvironmentDTO {
         this.name = name;
     }
 
-
     public String getDescription() {
         return description;
     }
@@ -33,6 +37,16 @@ public class EnvironmentDTO {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public void addAnimal(AnimalDTO animal) {
+        this.animalsLiving.add(animal);
+    }
+
+    public Set<AnimalDTO> getAnimals() {
+        return Collections.unmodifiableSet(animalsLiving);
+    }
+
+    public void removeAnimal(AnimalDTO animalLiving) { this.animalsLiving.remove(animalLiving); }
 
     @Override
     public int hashCode() {
