@@ -3,11 +3,13 @@ package com.dreamteam.dao;
 import com.dreamteam.TigrAppContext;
 import com.dreamteam.entity.Animal;
 import com.dreamteam.entity.Environment;
+import com.dreamteam.entity.Species;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -31,6 +33,9 @@ public class AnimalDaoTest extends AbstractTestNGSpringContextTests {
     @Autowired
     public EnvironmentDao envDao;
 
+    @Autowired
+    public SpeciesDao speDao;
+
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -38,9 +43,19 @@ public class AnimalDaoTest extends AbstractTestNGSpringContextTests {
     private Animal swallow;
     private Animal fly;
     private Environment woodland;
+    private Species golden;
+    private Species bicolor;
+    private Species common;
 
     @BeforeClass
     public void createObjects(){
+        golden = new Species("Golden");
+        bicolor = new Species("Bicolor");
+        common = new Species("Common");
+        speDao.create(golden);
+        speDao.create(bicolor);
+        speDao.create(common);
+
         woodland = new Environment();
         woodland.setName("Woodland");
         woodland.setDescription("40% trees, 20% mud, 30% air, 10% water");
@@ -48,21 +63,21 @@ public class AnimalDaoTest extends AbstractTestNGSpringContextTests {
 
         eagle = new Animal();
         eagle.setName("Eagle");
-        eagle.setSpecies("Golden");
+        eagle.setSpecies(golden);
         eagle.setDescription("Eagle lives in woodland and eats swallows.");
         eagle.addEnvironment(woodland);
         animalDao.create(eagle);
 
         swallow = new Animal();
         swallow.setName("Swallow");
-        swallow.setSpecies("Bicolor");
+        swallow.setSpecies(bicolor);
         swallow.setDescription("Swallow lives in woodland and eats flies.");
         swallow.addEnvironment(woodland);
         animalDao.create(swallow);
 
         fly = new Animal();
         fly.setName("Fly");
-        fly.setSpecies("Common");
+        fly.setSpecies(common);
         fly.setDescription("Fly lives in woodland and is eaten by swallows.");
         swallow.addEnvironment(woodland);
         animalDao.create(fly);
@@ -116,7 +131,7 @@ public class AnimalDaoTest extends AbstractTestNGSpringContextTests {
         tmpA.setName("Animal_Tmp");
         tmpA.setDescription("description");
         tmpA.addEnvironment(woodland);
-        tmpA.setSpecies("Bicolor");
+        tmpA.setSpecies(bicolor);
 
         animalDao.create(tmpA);
 
