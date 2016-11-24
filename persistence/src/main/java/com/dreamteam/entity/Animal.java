@@ -22,8 +22,8 @@ public class Animal{
     @Column
     private String name;
 
-    @NotNull
-    private String species;
+    @ManyToOne
+    private Species species;
 
     @NotNull
     private String description;
@@ -53,11 +53,11 @@ public class Animal{
         this.name = name;
     }
 
-    public String getSpecies() {
+    public Species getSpecies() {
         return species;
     }
 
-    public void setSpecies(String species) {
+    public void setSpecies(Species species) {
         this.species = species;
     }
 
@@ -104,7 +104,7 @@ public class Animal{
     public void removeEnvironment(Environment environment) {
         environments.remove(environment);
     }
-    
+
     @Override
     public int hashCode() {
         final int prime = 31;
