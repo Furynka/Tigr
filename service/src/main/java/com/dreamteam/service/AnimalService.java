@@ -2,6 +2,7 @@
 package com.dreamteam.service;
 
 import com.dreamteam.entity.Animal;
+
 import java.util.List;
 
 /**
@@ -48,4 +49,11 @@ public interface AnimalService {
      * @return List filled with existing Animal entities.
      */
     public List<Animal> getAll();
+
+    /**
+     * Returns Searches for 5 most endangered animals in specified environment.
+     * @param env
+     * @return List of five most endangered animals.
+     */
+//    public List<Animal> getTopFiveEndangeredAnimals(Environment env);
 }

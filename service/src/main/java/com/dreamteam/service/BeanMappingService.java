@@ -1,7 +1,6 @@
 package com.dreamteam.service;
 
 import org.dozer.Mapper;
-import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
@@ -9,7 +8,6 @@ import java.util.List;
 /**
  * @author Eva Ambrusova
  */
-@Service
 public interface BeanMappingService {
     <T> List<T> mapTo(Collection<?> objects, Class<T> mapToClass);
 

@@ -14,6 +14,7 @@ public class AnimalDTO {
     private String name;
     private String species;
     private String description;
+    private int count;
     private Set<AnimalDTO> preys = new HashSet<>();
     private Set<AnimalDTO> predators = new HashSet<>();
     private Set<EnvironmentDTO> environments = new HashSet<>();
@@ -49,6 +50,10 @@ public class AnimalDTO {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public void setCount(int count) { this.count = count; }
+
+    public int getCount() { return this.count; }
 
     public Set<AnimalDTO> getPreys() {
         return preys;
