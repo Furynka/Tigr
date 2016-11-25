@@ -24,6 +24,11 @@ public class WorkerServiceImpl implements WorkerService {
         workerDao.create(w);
     }
 
+    public void changePassword(Worker w, String unencryptedPassword) {
+        w.setPasswordHash(BCrypt.hashpw(unencryptedPassword, BCrypt.gensalt()));
+        workerDao.update(w);
+    }
+
     public boolean authenticate(Worker w, String password) {
         return BCrypt.checkpw(password, w.getPasswordHash());
     }

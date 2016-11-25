@@ -3,7 +3,7 @@ package com.dreamteam.dto;
 /**
  * Created by khudiakov on 21.11.2016.
 */
-public class WorkerAuthenticateDTO {
+public class WorkerIdPasswordDTO {
     private Long id;
     private String password;
 
