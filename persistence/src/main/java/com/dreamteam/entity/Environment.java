@@ -2,9 +2,8 @@ package com.dreamteam.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Entity class representing environment.
@@ -25,7 +24,7 @@ public class Environment {
     private String description;
 
     @ManyToMany(mappedBy="environments")
-    private Set<Animal> animalsLiving = new HashSet<>();
+    private List<Animal> animalsLiving = new ArrayList<>();
 
     public Environment() {}
 
@@ -49,8 +48,8 @@ public class Environment {
         this.animalsLiving.add(animal);
     }
 
-    public Set<Animal> getAnimals() {
-        return Collections.unmodifiableSet(animalsLiving);
+    public List<Animal> getAnimals() {
+        return this.animalsLiving;
     }
 
     public void removeAnimal(Animal animalLiving) { this.animalsLiving.remove(animalLiving); }

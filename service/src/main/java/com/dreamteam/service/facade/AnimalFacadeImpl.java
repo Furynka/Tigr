@@ -2,11 +2,21 @@
 package com.dreamteam.service.facade;
 
 import com.dreamteam.dto.AnimalDTO;
+import com.dreamteam.dto.EnvironmentDTO;
+import com.dreamteam.dto.SpeciesDTO;
+import com.dreamteam.entity.Animal;
+import com.dreamteam.entity.Environment;
+import com.dreamteam.entity.Species;
 import com.dreamteam.facade.AnimalFacade;
+import com.dreamteam.service.AnimalService;
+import com.dreamteam.service.BeanMappingService;
 import com.dreamteam.service.config.ServiceConfig;
+import java.util.ArrayList;
 import org.springframework.test.context.ContextConfiguration;
 
 import java.util.List;
+import javax.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Implementation class for Animal facade layer. 
@@ -15,40 +25,109 @@ import java.util.List;
  */
 @ContextConfiguration(classes = ServiceConfig.class)
 public class AnimalFacadeImpl implements AnimalFacade{
+    
+    @Inject
+    private AnimalService animalService;
+    
+    @Autowired
+    private BeanMappingService beanMappingService;
 
     @Override
     public void createAnimal(AnimalDTO animal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void deleteAnimal(AnimalDTO animal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void changeAnimalName(AnimalDTO animal, String newName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void changeAnimalDescription(AnimalDTO animal, String description) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Animal newAnimal = beanMappingService.mapTo(animal, Animal.class);
+        animalService.create(newAnimal);
     }
 
     @Override
     public AnimalDTO findAnimalById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Animal found = animalService.findById(id);
+        return found == null ? null : beanMappingService.mapTo(found, AnimalDTO.class);
     }
 
     @Override
     public AnimalDTO findAnimalByName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Animal found = animalService.findByName(name);
+        return found == null ? null : beanMappingService.mapTo(found, AnimalDTO.class);
     }
 
     @Override
     public List<AnimalDTO> getAllAnimals() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Animal> foundAnimals = animalService.getAll();
+        List<AnimalDTO> result = new ArrayList<>();
+        for (Animal animal : foundAnimals)
+        {
+            result.add(beanMappingService.mapTo(animal, AnimalDTO.class));
+        }
+        return result;
+    }
+
+    @Override
+    public void deleteAnimal(long id) {
+        Animal found = animalService.findById(id);
+        animalService.delete(found);
+    }
+
+    @Override
+    public void changeAnimalName(long id, String newName) {
+        Animal found = animalService.findById(id);
+        found.setName(newName);
+        animalService.update(found);
+    }
+
+    @Override
+    public void changeAnimalDescription(long id, String description) {
+        Animal found = animalService.findById(id);
+        found.setDescription(description);
+        animalService.update(found);
+    }
+
+    @Override
+    public void changeAnimalSpecies(long id, SpeciesDTO species) {
+        Animal found = animalService.findById(id);
+        found.setSpecies(beanMappingService.mapTo(species, Species.class));
+        animalService.update(found);
+    }
+
+    @Override
+    public void addAnimalPredator(long id, AnimalDTO predator) {
+        Animal found = animalService.findById(id);
+        found.addPredator(beanMappingService.mapTo(predator, Animal.class));
+        animalService.update(found);
+    }
+
+    @Override
+    public void addAnimalPrey(long id, AnimalDTO prey) {
+        Animal found = animalService.findById(id);
+        found.addPrey(beanMappingService.mapTo(prey, Animal.class));
+        animalService.update(found);
+    }
+
+    @Override
+    public void addAnimalEnvironment(long id, EnvironmentDTO environment) {
+        Animal found = animalService.findById(id);
+        found.addEnvironment(beanMappingService.mapTo(environment, Environment.class));
+        animalService.update(found);
+    }
+
+    @Override
+    public void removeAnimalPredator(long id, AnimalDTO predator) {
+        Animal found = animalService.findById(id);
+        found.removePredator(beanMappingService.mapTo(predator, Animal.class));
+        animalService.update(found);
+    }
+
+    @Override
+    public void removeAnimalPrey(long id, AnimalDTO prey) {
+        Animal found = animalService.findById(id);
+        found.removePrey(beanMappingService.mapTo(prey, Animal.class));
+        animalService.update(found);
+    }
+
+    @Override
+    public void removeAnimalEnvironment(long id, EnvironmentDTO environment) {
+        Animal found = animalService.findById(id);
+        found.removeEnvironment(beanMappingService.mapTo(environment, Environment.class));
+        animalService.update(found);
     }
     
 }

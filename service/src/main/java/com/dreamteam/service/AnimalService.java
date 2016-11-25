@@ -2,6 +2,7 @@
 package com.dreamteam.service;
 
 import com.dreamteam.entity.Animal;
+
 import java.util.List;
 
 /**
@@ -48,4 +49,8 @@ public interface AnimalService {
      * @return List filled with existing Animal entities.
      */
     public List<Animal> getAll();
+
+
+
+
 }

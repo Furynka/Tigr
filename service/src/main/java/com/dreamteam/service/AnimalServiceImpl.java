@@ -2,10 +2,12 @@
 package com.dreamteam.service;
 
 import com.dreamteam.dao.AnimalDao;
+import com.dreamteam.dao.EnvironmentDao;
 import com.dreamteam.entity.Animal;
-import java.util.List;
-import javax.inject.Inject;
 import org.springframework.stereotype.Service;
+
+import javax.inject.Inject;
+import java.util.List;
 
 /**
  *  Implementation class for {@link AnimalService}
@@ -17,7 +19,10 @@ public class AnimalServiceImpl implements AnimalService{
 
     @Inject
     private AnimalDao animalDao;
-        
+
+    @Inject
+    private EnvironmentDao envDao;
+
     @Override
     public void create(Animal animal) {
         animalDao.create(animal);
@@ -47,5 +52,5 @@ public class AnimalServiceImpl implements AnimalService{
     public List<Animal> getAll() {
         return animalDao.getAll();
     }
-    
+
 }
