@@ -71,7 +71,7 @@ public class AnimalFacadeTest extends AbstractTransactionalTestNGSpringContextTe
     @AfterMethod
     public void deleteEntities(){
         if (animalFacade.getAllAnimals().contains(eagle)){
-            animalFacade.deleteAnimal(eagle);
+            animalFacade.deleteAnimal(eagle.getId());
             assertFalse((animalFacade.getAllAnimals()).contains(eagle));
         }
     }
@@ -103,20 +103,20 @@ public class AnimalFacadeTest extends AbstractTransactionalTestNGSpringContextTe
 
     @Test
     public void testUpdateName() throws Exception{
-        animalFacade.changeAnimalName(eagle, "NewEagle");
+        animalFacade.changeAnimalName(eagle.getId(), "NewEagle");
         assertEquals(eagle.getName(), "NewEagle");
     }
 
     @Test
     public void testUpdateDescription() throws Exception{
-        animalFacade.changeAnimalDescription(eagle, "NewEagleDescription");
+        animalFacade.changeAnimalDescription(eagle.getId(), "NewEagleDescription");
         assertEquals(eagle.getDescription(), "NewEagleDescription");
     }
 
     @Test
     public void testDelete() throws Exception{
         assertNotNull(animalFacade.findAnimalById(eagle.getId()));
-        animalFacade.deleteAnimal(eagle);
+        animalFacade.deleteAnimal(eagle.getId());
         assertFalse(animalFacade.getAllAnimals().contains(eagle));
     }
 
