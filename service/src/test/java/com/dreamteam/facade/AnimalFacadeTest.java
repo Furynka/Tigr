@@ -1,8 +1,21 @@
 package com.dreamteam.facade;
 
+import com.dreamteam.dto.AnimalDTO;
+import com.dreamteam.service.AnimalService;
+import com.dreamteam.service.EnvironmentService;
 import com.dreamteam.service.config.ServiceConfig;
+import com.dreamteam.service.facade.AnimalFacadeImpl;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import static org.testng.AssertJUnit.*;
 
 /**
  * Tests for AnimalFacade class.
@@ -11,7 +24,7 @@ import org.springframework.test.context.testng.AbstractTransactionalTestNGSpring
  */
 @ContextConfiguration(classes=ServiceConfig.class)
 public class AnimalFacadeTest extends AbstractTransactionalTestNGSpringContextTests {
-/*
+
     @InjectMocks
     private AnimalFacade animalFacade = new AnimalFacadeImpl();
 
@@ -20,12 +33,6 @@ public class AnimalFacadeTest extends AbstractTransactionalTestNGSpringContextTe
 
     @Mock
     private EnvironmentService envService;
-
-   // @Spy
-   // @Inject
-   // private final BeanMappingService beanMappingService = new BeanMappingServiceImpl();
-
-
 
     private AnimalDTO eagle;
     private AnimalDTO swallow;
@@ -42,19 +49,16 @@ public class AnimalFacadeTest extends AbstractTransactionalTestNGSpringContextTe
         swallow = new AnimalDTO();
         swallow.setId(4L);
         swallow.setName("Swallow");
-        //  swallow.setSpecies();
         swallow.setDescription("swallowDTO description");
 
         eagle = new AnimalDTO();
         eagle.setId(3L);
         eagle.setName("Eagle");
-      //  eagle.setSpecies();
         eagle.setDescription("eagleDTO description");
 
         animalToCreate = new AnimalDTO();
         animalToCreate.setId(2L);
         animalToCreate.setName("New animal");
-        //animalToCreate.setSpecies();
         animalToCreate.setDescription("New animal description");
 
         animalFacade.createAnimal(swallow);
@@ -67,7 +71,7 @@ public class AnimalFacadeTest extends AbstractTransactionalTestNGSpringContextTe
     @AfterMethod
     public void deleteEntities(){
         if (animalFacade.getAllAnimals().contains(eagle)){
-            animalFacade.deleteAnimal(eagle);
+            animalFacade.deleteAnimal(eagle.getId());
             assertFalse((animalFacade.getAllAnimals()).contains(eagle));
         }
     }
@@ -99,21 +103,21 @@ public class AnimalFacadeTest extends AbstractTransactionalTestNGSpringContextTe
 
     @Test
     public void testUpdateName() throws Exception{
-        animalFacade.changeAnimalName(eagle, "NewEagle");
+        animalFacade.changeAnimalName(eagle.getId(), "NewEagle");
         assertEquals(eagle.getName(), "NewEagle");
     }
 
     @Test
     public void testUpdateDescription() throws Exception{
-        animalFacade.changeAnimalDescription(eagle, "NewEagleDescription");
+        animalFacade.changeAnimalDescription(eagle.getId(), "NewEagleDescription");
         assertEquals(eagle.getDescription(), "NewEagleDescription");
     }
 
     @Test
     public void testDelete() throws Exception{
         assertNotNull(animalFacade.findAnimalById(eagle.getId()));
-        animalFacade.deleteAnimal(eagle);
+        animalFacade.deleteAnimal(eagle.getId());
         assertFalse(animalFacade.getAllAnimals().contains(eagle));
     }
-*/
+
 }

@@ -1,13 +1,11 @@
 package com.dreamteam.service;
 
-import com.dreamteam.dao.AnimalDao;
 import com.dreamteam.dao.EnvironmentDao;
 import com.dreamteam.entity.Animal;
 import com.dreamteam.entity.Environment;
 import com.dreamteam.service.config.ServiceConfig;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -25,12 +23,8 @@ import java.util.List;
  */
 @ContextConfiguration(classes=ServiceConfig.class)
 public class EnvironmentServiceTest extends AbstractTransactionalTestNGSpringContextTests {
-
-    @Mock
-    private AnimalDao animalDao;
-
+    
     @Autowired
-    @InjectMocks
     private EnvironmentDao envDao;
 
     @Autowired
@@ -63,7 +57,6 @@ public class EnvironmentServiceTest extends AbstractTransactionalTestNGSpringCon
         eagle.setName("Eagle");
         eagle.setDescription("Eagle description");
         eagle.setCount(10);
-        //eagle.setSpecies();
         eagle.addEnvironment(forest);
 
         swallow = new Animal();
