@@ -7,7 +7,7 @@ public class WorkerDTO {
     private Long id;
     private String email;
     private String passwordHash;
-    private boolean administrator;
+    private Boolean administrator;
 
     public void setId(Long id) {
         this.id = id;
@@ -30,10 +30,10 @@ public class WorkerDTO {
         return this.passwordHash;
     }
 
-    public void setAdministrator(boolean administrator) {
+    public void setAdministrator(Boolean administrator) {
         this.administrator = administrator;
     }
-    public boolean isAdministrator() {
+    public Boolean isAdministrator() {
         return this.administrator;
     }
 
