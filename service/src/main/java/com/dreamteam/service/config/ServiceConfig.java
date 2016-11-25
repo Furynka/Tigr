@@ -1,12 +1,15 @@
 package com.dreamteam.service.config;
 
 import com.dreamteam.TigrAppContext;
-import com.dreamteam.dto.EnvironmentDTO;
-import com.dreamteam.entity.Environment;
+import com.dreamteam.dto.AnimalDTO;
+import com.dreamteam.entity.Animal;
+import com.dreamteam.service.AnimalServiceImpl;
+import com.dreamteam.service.facade.AnimalFacadeImpl;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.dozer.loader.api.BeanMappingBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -15,7 +18,7 @@ import org.springframework.context.annotation.Import;
  */
 @Configuration
 @Import(TigrAppContext.class)
-//@ComponentScan(basePackageClasses={EnvironmentServiceImpl.clas})
+@ComponentScan(basePackageClasses={AnimalServiceImpl.class, AnimalFacadeImpl.class})
 public class ServiceConfig {
     @Bean
     public Mapper dozer() {
@@ -24,15 +27,10 @@ public class ServiceConfig {
         return dozer;
     }
 
-    /**
-     * Custom config for Dozer if needed
-     * @author nguyen
-     *
-     */
     public class TigrDozerConfig extends BeanMappingBuilder {
         @Override
         protected void configure() {
-            mapping(Environment.class, EnvironmentDTO.class);
+            mapping(Animal.class, AnimalDTO.class);
         }
     }
 

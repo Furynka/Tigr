@@ -28,6 +28,9 @@ public class Animal{
     @NotNull
     private String description;
 
+    @Column
+    private int count;
+
     @ManyToMany(mappedBy="preys")
     private Set<Animal> predators = new HashSet<>();
 
@@ -68,6 +71,10 @@ public class Animal{
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public void setCount(int count) { this.count = count; }
+
+    public int getCount() { return this.count; }
 
     public Set<Animal> getPredators() {
         return Collections.unmodifiableSet(predators);
