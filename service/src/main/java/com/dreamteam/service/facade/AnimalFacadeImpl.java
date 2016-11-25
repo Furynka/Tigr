@@ -3,6 +3,9 @@ package com.dreamteam.service.facade;
 
 import com.dreamteam.dto.AnimalDTO;
 import com.dreamteam.facade.AnimalFacade;
+import com.dreamteam.service.config.ServiceConfig;
+import org.springframework.test.context.ContextConfiguration;
+
 import java.util.List;
 
 /**
@@ -10,6 +13,7 @@ import java.util.List;
  * 
  * @author Jiri Oliva
  */
+@ContextConfiguration(classes = ServiceConfig.class)
 public class AnimalFacadeImpl implements AnimalFacade{
 
     @Override
