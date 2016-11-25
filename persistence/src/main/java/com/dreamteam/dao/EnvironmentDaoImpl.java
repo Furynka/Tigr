@@ -31,8 +31,12 @@ public class EnvironmentDaoImpl implements EnvironmentDao {
 
     @Override
     public Environment findByName(String name) {
+
+        if (name == null || name.isEmpty())
+            throw new IllegalArgumentException("Cannot search for null name");
+
         try{
-            return em.createQuery("SELECT e FROM Environment e WHERE name=:name", Environment.class)
+            return em.createQuery("SELECT e FROM Environment e WHERE name = :name", Environment.class)
                     .setParameter("name", name).getSingleResult();
         } catch (NoResultException ex){
             return null;

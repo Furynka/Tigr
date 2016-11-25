@@ -50,10 +50,7 @@ public interface AnimalService {
      */
     public List<Animal> getAll();
 
-    /**
-     * Returns Searches for 5 most endangered animals in specified environment.
-     * @param env
-     * @return List of five most endangered animals.
-     */
-//    public List<Animal> getTopFiveEndangeredAnimals(Environment env);
+
+
+
 }
