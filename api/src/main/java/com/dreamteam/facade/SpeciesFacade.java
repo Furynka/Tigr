@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Facade layer for data about specieses.
- * <p>
+ *
  * Created by jan.novak
  */
 public interface SpeciesFacade {
