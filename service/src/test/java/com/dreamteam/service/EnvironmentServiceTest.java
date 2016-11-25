@@ -97,7 +97,7 @@ public class EnvironmentServiceTest extends AbstractTransactionalTestNGSpringCon
     }
 
     @Test
-    public void testtest(){
+    public void testgetTopThreeEndangeredAnimals(){
         List<Animal> compareList = new ArrayList<>();
         compareList.add(fly);
         compareList.add(mouse);
