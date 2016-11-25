@@ -3,12 +3,15 @@ package com.dreamteam.service;
 
 import com.dreamteam.dao.WorkerDao;
 import com.dreamteam.entity.Worker;
+import com.dreamteam.service.config.ServiceConfig;
 import java.util.List;
 import javax.inject.Inject;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -18,7 +21,8 @@ import org.testng.annotations.Test;
  * 
  * @author Jiri Oliva
  */
-public class WorkerServiceTest {
+@ContextConfiguration(classes=ServiceConfig.class)
+public class WorkerServiceTest extends AbstractTransactionalTestNGSpringContextTests{
     
     @Mock
     private WorkerDao workerDao;
@@ -44,19 +48,6 @@ public class WorkerServiceTest {
         worker2.setEmail("worker2@dreamteam.com");
         worker2.setPasswordHash("password2");
     }
-    
-    /*@BeforeMethod
-    public void prepare() {
-        worker = new Worker();
-        worker.setAdministrator(true);
-        worker.setEmail("worker@dreamteam.com");
-        worker.setPasswordHash("password");
-    }
-    
-    @AfterMethod
-    public void reset() {
-        Mockito.reset(workerDao);
-    }*/
     
     @Test
     public void testRegisterWorker() {
