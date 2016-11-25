@@ -1,13 +1,14 @@
 package com.dreamteam.service.facade;
 
+import com.dreamteam.dto.AnimalDTO;
 import com.dreamteam.dto.SpeciesDTO;
 import com.dreamteam.entity.Animal;
 import com.dreamteam.entity.Species;
 import com.dreamteam.exceptions.TigrAPIException;
 import com.dreamteam.facade.SpeciesFacade;
 import com.dreamteam.service.AnimalService;
+import com.dreamteam.service.BeanMappingService;
 import com.dreamteam.service.SpeciesService;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,8 @@ public class SpeciesFacadeImpl implements SpeciesFacade {
     private SpeciesService speciesService;
     @Inject
     private AnimalService animalService;
+    @Inject
+    private BeanMappingService mappingService;
 
     @Override
     public void createSpecies(SpeciesDTO speciesDTO) {
@@ -117,7 +120,7 @@ public class SpeciesFacadeImpl implements SpeciesFacade {
         species.setId(dto.getId());
         species.setName(dto.getName());
         species.setDescription(dto.getDescription());
-        //todo species.setAnimals();
+        species.setAnimals(mappingService.mapTo(dto.getAnimals(), Animal.class));
         species.setInDanger(dto.isInDanger());
         return species;
     }
@@ -127,7 +130,7 @@ public class SpeciesFacadeImpl implements SpeciesFacade {
         dto.setId(species.getId());
         dto.setName(species.getName());
         dto.setDescription(species.getDescription());
-        //todo dto.setAnimals(species);
+        dto.setAnimals(mappingService.mapTo(species.getAnimals(), AnimalDTO.class));
         dto.setInDanger(species.isInDanger());
         return dto;
     }
