@@ -1,36 +1,18 @@
-package com.dreamteam.entity;
+package com.dreamteam.dto;
 
-import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by jan.novak
  */
-@Entity
-public class Species {
+public class SpeciesDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false, unique = true)
     private String name;
-
     private String description;
-
-    @OneToMany(mappedBy = "species")
-    private List<Animal> animals = new ArrayList<>();
-
+    private List<AnimalDTO> animals = new ArrayList<>();
     private boolean inDanger;
-
-    public Species() {
-    }
-
-    public Species(String name) {
-        this.name = name;
-    }
 
     public Long getId() {
         return id;
@@ -56,11 +38,11 @@ public class Species {
         this.description = description;
     }
 
-    public List<Animal> getAnimals() {
-        return Collections.unmodifiableList(animals);
+    public List<AnimalDTO> getAnimals() {
+        return animals;
     }
 
-    public void setAnimals(List<Animal> animals) {
+    public void setAnimals(List<AnimalDTO> animals) {
         this.animals = animals;
     }
 
@@ -72,27 +54,19 @@ public class Species {
         this.inDanger = inDanger;
     }
 
-    public void addAnimal(Animal animal) {
-        animals.add(animal);
-    }
-
-    public void removeAnimal(Animal animal) {
-        animals.remove(animal);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Species)) return false;
+        if (!(o instanceof SpeciesDTO)) return false;
 
-        Species species = (Species) o;
+        SpeciesDTO that = (SpeciesDTO) o;
 
-        if (isInDanger() != species.isInDanger()) return false;
-        if (getId() != null ? !getId().equals(species.getId()) : species.getId() != null) return false;
-        if (!getName().equals(species.getName())) return false;
-        if (getDescription() != null ? !getDescription().equals(species.getDescription()) : species.getDescription() != null)
+        if (isInDanger() != that.isInDanger()) return false;
+        if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) return false;
+        if (!getName().equals(that.getName())) return false;
+        if (getDescription() != null ? !getDescription().equals(that.getDescription()) : that.getDescription() != null)
             return false;
-        return getAnimals() != null ? getAnimals().equals(species.getAnimals()) : species.getAnimals() == null;
+        return getAnimals() != null ? getAnimals().equals(that.getAnimals()) : that.getAnimals() == null;
 
     }
 
@@ -104,5 +78,16 @@ public class Species {
         result = 31 * result + (getAnimals() != null ? getAnimals().hashCode() : 0);
         result = 31 * result + (isInDanger() ? 1 : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "SpeciesDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", animals=" + animals +
+                ", inDanger=" + inDanger +
+                '}';
     }
 }
