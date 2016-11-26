@@ -1,7 +1,7 @@
 package com.dreamteam.facade;
 
-import com.dreamteam.dto.WorkerAuthenticateDTO;
 import com.dreamteam.dto.WorkerDTO;
+import com.dreamteam.dto.WorkerIdPasswordDTO;
 
 import java.util.Collection;
 
@@ -11,7 +11,9 @@ import java.util.Collection;
 public interface WorkerFacade {
     void registerWorker(WorkerDTO w, String unencryptedPassword);
 
-    boolean authenticate(WorkerAuthenticateDTO w);
+    void changePassword(WorkerIdPasswordDTO w);
+
+    boolean authenticate(WorkerIdPasswordDTO w);
 
     boolean isAdmin(WorkerDTO w);
 

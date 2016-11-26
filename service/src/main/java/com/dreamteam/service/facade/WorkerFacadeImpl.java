@@ -1,6 +1,6 @@
 package com.dreamteam.service.facade;
 
-import com.dreamteam.dto.WorkerAuthenticateDTO;
+import com.dreamteam.dto.WorkerIdPasswordDTO;
 import com.dreamteam.dto.WorkerDTO;
 import com.dreamteam.entity.Worker;
 import com.dreamteam.facade.WorkerFacade;
@@ -30,7 +30,11 @@ public class WorkerFacadeImpl implements WorkerFacade {
         w.setId(workerEntity.getId());
     }
 
-    public boolean authenticate(WorkerAuthenticateDTO w) {
+    public void changePassword(WorkerIdPasswordDTO w) {
+        workerService.changePassword(workerService.findWorkerById(w.getId()), w.getPassword());
+    }
+
+    public boolean authenticate(WorkerIdPasswordDTO w) {
         return workerService.authenticate(
                 workerService.findWorkerById(w.getId()), w.getPassword());
     }

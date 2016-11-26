@@ -23,7 +23,7 @@ public class Worker{
     @NotNull
     private String passwordHash;
 
-    private boolean administrator;
+    private Boolean administrator;
 
     public Long getId() {
         return id;
@@ -43,10 +43,10 @@ public class Worker{
         return this.passwordHash;
     }
 
-    public void setAdministrator(boolean administrator) {
+    public void setAdministrator(Boolean administrator) {
         this.administrator = administrator;
     }
-    public boolean isAdministrator() {
+    public Boolean isAdministrator() {
         return this.administrator;
     }
 
