@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *  Implementation class for {@link AnimalService}
@@ -51,6 +52,13 @@ public class AnimalServiceImpl implements AnimalService{
     @Override
     public List<Animal> getAll() {
         return animalDao.getAll();
+    }
+
+    @Override
+    public List<Animal> getTopOfFoodChain() {
+        List<Animal> topChain = animalDao.getAll().stream().filter(animal -> animal.getPredators().size() == 0).collect(Collectors.toList());
+        topChain.sort((a1, a2) -> a2.getPreys().size()-a1.getPreys().size());
+        return topChain;
     }
 
 }
