@@ -8,6 +8,7 @@ import com.dreamteam.service.config.ServiceConfig;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -158,6 +159,45 @@ public class AnimalServiceTest extends AbstractTransactionalTestNGSpringContextT
         Animal result = animalService.findByName(swallow.getName());
         Assert.assertNotNull(result);
         Assert.assertEquals(result.getName(),swallow.getName());
+    }
+
+    @Test
+    public void getTopOfFoodChain() {
+        Animal dominator = new Animal();
+        dominator.setName("Alfa");
+        dominator.setDescription("just crazy!");
+
+        Animal beta = new Animal();
+        beta.setName("Beta");
+        beta.setDescription("how are you today, Alfa?");
+
+        Animal dangerousFood = new Animal();
+        dangerousFood.setName("DangerousFood");
+        dangerousFood.setDescription("just try...");
+
+        Animal food = new Animal();
+        food.setName("Food");
+        food.setDescription("please nooo");
+
+        dominator.addPrey(dangerousFood);
+        dominator.addPrey(food);
+        beta.addPrey(food);
+
+        dangerousFood.addPredator(dominator);
+        food.addPredator(dominator);
+        food.addPredator(beta);
+
+        List<Animal> allAnimals = new ArrayList<>();
+        allAnimals.add(dominator);
+        allAnimals.add(beta);
+        allAnimals.add(dangerousFood);
+        allAnimals.add(food);
+
+        Mockito.when(animalDao.getAll()).thenReturn(allAnimals);
+        List<Animal> topChain = animalService.getTopOfFoodChain();
+        Assert.assertEquals(topChain.size(), 2);
+        Assert.assertEquals(topChain.get(0), dominator);
+        Assert.assertEquals(topChain.get(1), beta);
     }
 
 
