@@ -9,11 +9,14 @@ import javax.inject.Inject;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
@@ -37,7 +40,10 @@ public class WorkerServiceTest extends AbstractTransactionalTestNGSpringContextT
     @BeforeClass
     public void setup() throws ServiceException {
         MockitoAnnotations.initMocks(this);
-        
+    }
+    
+    @BeforeMethod
+    public void prepare(){
         worker1 = new Worker();
         worker1.setAdministrator(true);
         worker1.setEmail("worker1@dreamteam.com");
@@ -49,14 +55,20 @@ public class WorkerServiceTest extends AbstractTransactionalTestNGSpringContextT
         worker2.setPasswordHash("password2");
     }
     
+    @AfterMethod
+    public void clear(){
+        Mockito.reset(workerDao);
+    }
+    
     @Test
     public void testRegisterWorker() {
         workerService.registerWorker(worker1, "password1");
-        Assert.assertEquals(workerDao.all().size(), 1);
+        Assert.assertEquals(workerService.getAllWorkers().size(), 1);
     }
     
     @Test
     public void testAuthenticateWorker() {
+        workerService.registerWorker(worker1, "password1");
         boolean result = workerService.authenticate(worker1, "password1");
         Assert.assertEquals(result, true);
         
@@ -66,6 +78,8 @@ public class WorkerServiceTest extends AbstractTransactionalTestNGSpringContextT
     
     @Test
     public void testIsAdmin() {
+        workerService.registerWorker(worker1, "password1");
+        workerService.registerWorker(worker2, "password2");
         boolean result = workerService.isAdmin(worker1);
         Assert.assertEquals(result, true);
         
@@ -86,15 +100,17 @@ public class WorkerServiceTest extends AbstractTransactionalTestNGSpringContextT
     
     @Test
     public void testFindWorkerById() {
+        workerService.registerWorker(worker1, "password1");
         Worker found = workerService.findWorkerById(worker1.getId());
         Assert.assertNotNull(found);
         
-        found = workerService.findWorkerById(worker1.getId() + worker2.getId());
+        found = workerService.findWorkerById(worker1.getId()* 2);
         Assert.assertNull(found);        
     }
     
     @Test
     public void testFindWorkerByEmail() {
+        workerService.registerWorker(worker1, "password1");
         Worker found = workerService.findWorkerByEmail(worker1.getEmail());
         Assert.assertNotNull(found);
         
