@@ -32,7 +32,7 @@ public class SpeciesDaoImpl implements SpeciesDao {
 
     @Override
     public void delete(Species s) {
-        entityManager.remove(s);
+        entityManager.remove(findById(s.getId()));
     }
 
     @Override

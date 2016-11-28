@@ -50,7 +50,7 @@ public interface AnimalService {
      */
     public List<Animal> getAll();
 
-
+    public List<Animal> getTopOfFoodChain();
 
 
 }

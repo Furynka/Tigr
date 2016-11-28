@@ -12,6 +12,8 @@ import com.dreamteam.entity.Worker;
 public interface WorkerService {
     void registerWorker(Worker w, String unencryptedPassword);
 
+    void changePassword(Worker w, String password);
+
     boolean authenticate(Worker w, String password);
 
     boolean isAdmin(Worker w);
