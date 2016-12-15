@@ -74,6 +74,11 @@
             <artifactId>mockito-all</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.dreamteam</groupId>
+            <artifactId>api</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
 
