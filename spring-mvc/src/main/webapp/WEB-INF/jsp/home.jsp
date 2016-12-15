@@ -1,3 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<my:basetemplate nav="home">
+<jsp:attribute name="content">
 <!-- Created by Eva Ambrusova -->
 <div class="container-fluid">
 <header class="navigation hide-for-small-only large" [hidden]="!submitted">
@@ -58,3 +64,5 @@
         </div>
 </div>
 </div>
+</jsp:attribute>
+</my:basetemplate>
