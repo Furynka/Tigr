@@ -12,6 +12,11 @@
             <artifactId>spring-web</artifactId>
             <version>4.1.8.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>4.1.8.RELEASE</version>
+        </dependency>
     </dependencies>
     <name>Tigr Parent</name>
 
