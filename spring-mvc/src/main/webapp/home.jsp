@@ -1,4 +1,11 @@
 <!-- Created by Eva Ambrusova -->
+<head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <title>Tigr</title>
+</head>
+<body style="background-color: #404040;">
 <div class="container-fluid">
 <header class="navigation hide-for-small-only large" [hidden]="!submitted">
         <div class="page-width site-navigation">
@@ -58,3 +65,4 @@
         </div>
 </div>
 </div>
+</body>
