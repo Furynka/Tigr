@@ -6,7 +6,7 @@
 <jsp:attribute name="content">
 <!-- Created by Eva Ambrusova -->
 <div class="container-fluid">
-<header class="navigation hide-for-small-only large" [hidden]="!submitted">
+<header class="navigation hide-for-small-only large">
         <div class="page-width site-navigation">
                 <ul class="static-links">
                         <li><a href="#">Why to use Tigr?</a></li>
@@ -19,13 +19,15 @@
                 <ul class="nav-item menu-items inline-list">
                         <li><a href="#">Animal</a></li>
                         <li><a href="#">Environment</a></li>
+                        <li><a href="#">Species</a></li>
+                        <!--TODO: Users are visible only for admin-->
                         <li><a href="#">Users</a></li>
                         <li><a href="#">About Tigr</a></li>
                 </ul>
         </nav>
 </header>
 <div class="row">
-        <div [hidden]="!submitted">
+        <div>
                 <div class="content">
                         <section class="environment-section page-width">
                                 <h2 class="section-header">Manage your environments</h2>
