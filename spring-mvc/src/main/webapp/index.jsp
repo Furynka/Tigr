@@ -1,3 +1,5 @@
+<!-- Created by Eva Ambrusova -->
+
 <!DOCTYPE html>
 <html lang="${pageContext.request.locale}">
 <head>
@@ -24,8 +26,9 @@
                             <div class="form-group">
                                 <input type="password" class="form-control" placeholder="Enter Your Password" required>
                             </div>
+                            <!--TODO: redirect page through controller -->
+                            <a href="${pageContext.request.contextPath}/home.jsp">Sign in</a>
 
-                            <button type="submit" class="btn btn-primary">Sign in</button>
                         </form>
                     </div>
                 </div>
