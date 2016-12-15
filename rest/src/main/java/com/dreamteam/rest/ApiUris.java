@@ -1,4 +1,4 @@
-package com.dreamteam;
+package com.dreamteam.rest;
 
 /**
  * @author Eva Ambrusova
