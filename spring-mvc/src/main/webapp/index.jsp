@@ -20,13 +20,14 @@
                     <div class="sign-in">
                         <div class="icon-user"></div>
                         <form novalidate>
+                            <!--TODO: validate password and user-->
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Enter Your Login" required>
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-control" placeholder="Enter Your Password" required>
                             </div>
-                            <!--TODO: redirect page through controller -->
+                            <!--TODO: redirect page through controller? -->
                             <a href="${pageContext.request.contextPath}/home.jsp">Sign in</a>
 
                         </form>
@@ -35,5 +36,7 @@
             </div>
         </div>
     </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
 </html>
