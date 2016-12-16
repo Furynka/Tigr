@@ -10,7 +10,6 @@
 
     <artifactId>service</artifactId>
     <packaging>jar</packaging>
-    <version>1.0</version>
 
     <name>Service</name>
 
@@ -60,12 +59,12 @@
         <dependency>
             <groupId>com.dreamteam</groupId>
             <artifactId>api</artifactId>
-            <version>1.0</version>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>com.dreamteam</groupId>
             <artifactId>persistence</artifactId>
-            <version>1.0</version>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>

@@ -1,6 +1,8 @@
 package com.dreamteam.mvc.interceptors;
 
 import com.dreamteam.dto.WorkerDTO;
+import com.dreamteam.facade.WorkerFacade;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -12,22 +14,29 @@ import javax.servlet.http.HttpServletResponse;
  * Created by khudiakov on 15.12.2016.
  */
 public class AuthenticationInterceptor extends HandlerInterceptorAdapter  {
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        WorkerDTO worker = new WorkerDTO();
-        worker.setEmail("test@test.test");
-        worker.setId(1L);
-        worker.setAdministrator(true);
+    @Autowired
+    private WorkerFacade workerFacade;
 
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        if (request.getCookies()==null) {
+            return true;
+        }
+        Long workerId = null;
         for (Cookie cookie:request.getCookies()) {
             if (cookie.getName().equals("worker")) {
-                try {
-                    Long workerId = Long.parseLong(cookie.getValue());
-                } catch (NumberFormatException ignored) {
-                    break;
+                if (!cookie.getValue().isEmpty()) {
+                    try {
+                        workerId = Long.parseLong(cookie.getValue());
+                    } catch (NumberFormatException ignored) {
+                        response.addCookie(new Cookie("worker", ""));
+                    }
                 }
-                request.setAttribute("worker", worker);
                 break;
             }
+        }
+        if (workerId != null) {
+            WorkerDTO worker = workerFacade.findWorkerById(workerId);
+            request.setAttribute("worker", worker);
         }
         return true;
     }
