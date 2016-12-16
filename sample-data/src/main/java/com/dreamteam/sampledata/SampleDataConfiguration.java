@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Import;
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 
+/**
+ * Created by khudiakov on 15.12.2016.
+ */
 @Configuration
 @Import(ServiceConfig.class)
 @ComponentScan(basePackageClasses = {SampleDataLoadingFacadeImpl.class})

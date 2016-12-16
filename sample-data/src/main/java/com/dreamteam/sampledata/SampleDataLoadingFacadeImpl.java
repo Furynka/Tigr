@@ -9,9 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Loads some sample data to populate the eshop database.
- *
- * @author Martin Kuba makub@ics.muni.cz
+ * Created by khudiakov on 15.12.2016.
  */
 @Component
 @Transactional //transactions are handled on facade layer
@@ -26,6 +24,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     @SuppressWarnings("unused")
     public void loadData() {
         worker("test@test.ru", "password", true);
+		worker("test1@test.ru", "password", false);
 
 		species("Species1", "Species1Descrition", true);
 		species("Species2", "Species2Descrition", false);
