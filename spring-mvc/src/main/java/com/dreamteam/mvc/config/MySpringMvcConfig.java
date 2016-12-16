@@ -28,9 +28,14 @@ import javax.validation.Validator;
 @ComponentScan(basePackages = "com.dreamteam.mvc.controllers")
 public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
 
+    @Bean
+    public AuthenticationInterceptor authenticationInterceptor() {
+        return new AuthenticationInterceptor();
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new AuthenticationInterceptor());
+        registry.addInterceptor(authenticationInterceptor());
     }
 
     /**
