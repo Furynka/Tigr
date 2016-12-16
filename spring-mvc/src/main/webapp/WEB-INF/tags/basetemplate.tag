@@ -1,19 +1,17 @@
 <%@ tag pageEncoding="utf-8" dynamic-attributes="dynattrs" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ attribute name="content" fragment="true" required="true" %>
 <%@ attribute name="nav" required="true" %>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <spring:url value="/resources/css/bootstrap.min.css" var="bootstrapCss" />
     <spring:url value="/resources/img/logo.png" var="logoImg" />
-
-    <spring:url value="/resources/js/jquery-2.1.4.min.js" var="jqueryJs" />
-    <spring:url value="/resources/js/bootstrap.min.js" var="bootstrapJs" />
-
-    <link rel="stylesheet" href="${bootstrapCss}">
+    <link rel="stylesheet" href="${contextPath}/css/bootstrap.min.css"/>
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -30,9 +28,11 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="<c:if test="${nav == 'animals'}">active</c:if>"><a href="#">Animals</a></li>
-                <li class="<c:if test="${nav == 'species'}">active</c:if>"><a href="#">Species</a></li>
+                <li class="<c:if test="${nav == 'species'}">active</c:if>"><a href="${contextPath}/species">Species</a>
+                </li>
                 <li class="<c:if test="${nav == 'environments'}">active</c:if>"><a href="#">Environments</a></li>
-                <li class="<c:if test="${nav == 'workers'}">active</c:if>"><a href="${pageContext.request.contextPath}/workers/">Workers</a></li>
+                <li class="<c:if test="${nav == 'workers'}">active</c:if>"><a href="${contextPath}/workers/">Workers</a>
+                </li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -82,7 +82,7 @@
     </div>
 </div>
 
-<script src="${jqueryJs}"></script>
-<script src="${bootstrapJs}"></script>
+<script type="javascript" href="${contextPath}/js/jquery-2.1.4.min.js"></script>
+<script type="javascript" href="${contextPath}/js/bootstrap.min.js"></script>
 </body>
 </html>
