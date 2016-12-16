@@ -24,7 +24,7 @@ public class SpeciesController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Model model) {
 		model.addAttribute("speciesList", speciesFacade.getAllSpecieses());
-		return "species/list";
+		return "species/species";
 	}
 
 }

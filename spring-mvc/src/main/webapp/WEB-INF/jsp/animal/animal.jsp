@@ -6,7 +6,11 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tigr" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<my:basetemplate nav="animals">
+<tigr:basetemplate
+        nav="animals"
+        headHeader="Manage your animals"
+        headDescription="TODO oliva"
+        tabHeader="Animals">
 <jsp:attribute name="content">
     <div class="panel panel-default">
         <table class="table">
@@ -25,4 +29,4 @@
         </table>
     </div>
 </jsp:attribute>
-</my:basetemplate>
+</tigr:basetemplate>
