@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -26,9 +27,14 @@ public class WorkerController {
     private WorkerFacade workerFacade;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String workers(Model model, HttpServletRequest request) {
-        model.addAttribute("workers", workerFacade.getAllWorkers());
-        return "worker/workers";
+    public ModelAndView workers(HttpServletRequest request) {
+        WorkerDTO worker = (WorkerDTO) request.getAttribute("worker");
+        if (worker == null || !worker.getAdministrator()) {
+            return new ModelAndView("redirect:/");
+        }
+        ModelAndView mav = new ModelAndView("/worker/workers");
+        mav.addObject("workers", workerFacade.getAllWorkers());
+        return mav;
     }
 
 
@@ -37,17 +43,23 @@ public class WorkerController {
                      @RequestParam(value="email") String email,
                      @RequestParam(value="password") String password) {
         WorkerDTO worker = workerFacade.findWorkerByEmail(email);
-        WorkerIdPasswordDTO workerIdPasswordDTO = new WorkerIdPasswordDTO();
-        workerIdPasswordDTO.setId(worker.getId());
-        workerIdPasswordDTO.setPassword(password);
-        if (workerFacade.authenticate(workerIdPasswordDTO)) {
-            response.addCookie(new Cookie("worker", worker.getId().toString()));
+        if (worker != null) {
+            WorkerIdPasswordDTO workerIdPasswordDTO = new WorkerIdPasswordDTO();
+            workerIdPasswordDTO.setId(worker.getId());
+            workerIdPasswordDTO.setPassword(password);
+            if (workerFacade.authenticate(workerIdPasswordDTO)) {
+                Cookie cookie = new Cookie("worker", worker.getId().toString());
+                cookie.setPath("/pa165/");
+                response.addCookie(cookie);
+            }
         }
-        return new RedirectView("/pa165/workers/");
+        return new RedirectView("/pa165/");
     }
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public View logout(Model model, HttpServletResponse response) {
-        response.addCookie(new Cookie("worker", ""));
-        return new RedirectView("/pa165/workers/");
+        Cookie cookie = new Cookie("worker","");
+        cookie.setPath("/pa165/");
+        response.addCookie(cookie);
+        return new RedirectView("/pa165/");
     }
 }

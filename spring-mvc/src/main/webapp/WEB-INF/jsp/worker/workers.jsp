@@ -30,7 +30,7 @@
                 <tr>
                     <td><c:out value="${srcWorker.id}"/></td>
                     <td><a href="mailto:<c:out value="${srcWorker.email}"/>"><c:out value="${srcWorker.email}"/></a></td>
-                    <td><c:out value="${srcWorker.isAdministrator()?'yes':'no'}"/></td>
+                    <td><c:out value="${srcWorker.administrator?'yes':'no'}"/></td>
                 </tr>
             </c:forEach>
             </tbody>

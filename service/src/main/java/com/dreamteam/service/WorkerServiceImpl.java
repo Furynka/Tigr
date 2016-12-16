@@ -30,7 +30,7 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     public boolean isAdmin(Worker w) {
-        return w.isAdministrator();
+        return w.getAdministrator();
     }
 
     public Worker findWorkerById(Long workerId) {
