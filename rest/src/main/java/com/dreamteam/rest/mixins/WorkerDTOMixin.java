@@ -8,6 +8,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * @author Jiri Oliva
  */
 @JsonIgnoreProperties({ "passwordHash"})
-public class UserDTOMixin {
+public class WorkerDTOMixin {
     
 }
