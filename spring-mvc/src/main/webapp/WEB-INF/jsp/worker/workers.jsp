@@ -6,10 +6,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="tigr" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<my:basetemplate nav="workers">
+<tigr:basetemplate
+        nav="workers"
+        headHeader="Manage your workers"
+        headDescription="To change this description edit tag call"
+        tabHeader="Workers">
 <jsp:attribute name="content">
     <div class="panel panel-default">
         <!-- Table -->
@@ -33,4 +37,4 @@
         </table>
     </div>
 </jsp:attribute>
-</my:basetemplate>
+</tigr:basetemplate>
