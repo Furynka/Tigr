@@ -18,6 +18,7 @@
 
     <script src="${contextPath}/js/jquery-2.1.4.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.8/validator.min.js"></script>
     <script src="${contextPath}/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="${contextPath}/css/bootstrap.min.css"/>
@@ -106,12 +107,14 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <form method="post" action="${contextPath}/workers/login">
+                <form method="post" action="${contextPath}/workers/login" data-toggle="validator">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="email" name="email" value="admin@test.com" placeholder="Login">
+                        <input type="email" class="form-control" id="email" name="email" value="admin@test.com" placeholder="Login" required>
+                        <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" id="password" name="password" value="password" placeholder="Password">
+                        <input data-minlength="6" type="password" class="form-control" id="password" name="password" value="password" placeholder="Password" required>
+                        <div class="help-block with-errors"></div>
                     </div>
                     <button type="submit" class="btn btn-primary">Login</button>
                 </form>
