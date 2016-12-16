@@ -3,6 +3,7 @@ package com.dreamteam.rest.controllers;
 import com.dreamteam.dto.WorkerDTO;
 import com.dreamteam.facade.WorkerFacade;
 import com.dreamteam.rest.ApiUris;
+import com.dreamteam.rest.exceptions.ResourceNotFoundException;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,7 +54,7 @@ public class WorkerController {
         if (workerDTO != null) {
             return workerDTO;
         } else {
-            throw new IllegalArgumentException();
+            throw new ResourceNotFoundException();
         }
 
     }
@@ -71,7 +72,7 @@ public class WorkerController {
         if (workerDTO != null) {
             return workerDTO;
         } else {
-            throw new IllegalArgumentException();
+            throw new ResourceNotFoundException();
         }
 
     }
