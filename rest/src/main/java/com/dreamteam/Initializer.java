@@ -3,6 +3,11 @@ package com.dreamteam;
 import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+/**
+ * Initializer
+ * 
+ * @author Jiri Oliva
+ */
 public class Initializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override

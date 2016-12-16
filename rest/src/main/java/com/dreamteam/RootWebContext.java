@@ -6,6 +6,11 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+/**
+ * MVC adapter
+ * 
+ * @author Jiri Oliva
+ */
 @EnableWebMvc
 @Configuration
 //@Import({ServiceConfig.class})
