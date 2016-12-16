@@ -35,7 +35,7 @@
             <artifactId>spring-security-web</artifactId>
             <version>RELEASE</version>
         </dependency>
-        <!-- For embedded usage -->
+         <!--For embedded usage-->
         <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>
@@ -45,11 +45,6 @@
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
             <version>1</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
-            <version>1.2</version>
         </dependency>
         <dependency>
             <groupId>net.sf.dozer</groupId>
