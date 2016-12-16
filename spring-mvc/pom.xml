@@ -20,7 +20,11 @@
     </developers>
 
     <dependencies>
-        <!--TODO: dependency on sample data -->
+        <dependency>
+            <groupId>com.dreamteam</groupId>
+            <artifactId>sample-data</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.tomcat</groupId>
@@ -73,11 +77,6 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.dreamteam</groupId>
-            <artifactId>api</artifactId>
-            <version>1.0</version>
         </dependency>
     </dependencies>
 
