@@ -9,11 +9,6 @@ import org.springframework.context.annotation.Import;
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 
-/**
- * Takes ServiceConfiguration and adds the SampleDataLoadingFacade bean.
- *
- * @author Martin Kuba makub@ics.muni.cz
- */
 @Configuration
 @Import(ServiceConfig.class)
 @ComponentScan(basePackageClasses = {SampleDataLoadingFacadeImpl.class})
