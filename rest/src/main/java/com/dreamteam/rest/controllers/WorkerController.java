@@ -32,7 +32,7 @@ public class WorkerController {
 
     /**
      * Get collection of Workers
-     * Should be available on http://localhost:8080/pa165/rest/worker
+     * http://localhost:8080/pa165/rest/worker
      *
      * @return Collection<WorkerDTO>
      */
@@ -43,7 +43,9 @@ public class WorkerController {
     }
 
     /**
-     *
+     * Get Product by identifier id curl -i -X GET
+     * http://localhost:8080/pa165/rest/worker/1
+     * 
      * @param id id of Worker
      * @return WorkerDTO
      * @throws IllegalArgumentException
@@ -52,24 +54,6 @@ public class WorkerController {
     public final WorkerDTO getWorkerById(@PathVariable("id") long id) throws Exception {
         LOG.debug("REST call - get worker by id = " + id);
         WorkerDTO workerDTO = workerFacade.findWorkerById(id);
-        if (workerDTO != null) {
-            return workerDTO;
-        } else {
-            throw new ResourceNotFoundException();
-        }
-
-    }
-
-    /**
-     *
-     * @param email email of Worker
-     * @return WorkerDTO
-     * @throws IllegalArgumentException
-     */
-    @RequestMapping(value = "/{email}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final WorkerDTO getWorkerByEmail(@PathVariable("email") String email) throws Exception {
-        LOG.debug("REST call - get worker by email = " + email);
-        WorkerDTO workerDTO = workerFacade.findWorkerByEmail(email);
         if (workerDTO != null) {
             return workerDTO;
         } else {
