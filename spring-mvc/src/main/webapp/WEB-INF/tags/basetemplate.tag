@@ -106,7 +106,6 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <img src="${contextPath}/img/user-grey.png"/>
                 <form method="post" action="${contextPath}/workers/login">
                     <div class="form-group">
                         <input type="text" class="form-control" id="email" name="email" placeholder="Login">
