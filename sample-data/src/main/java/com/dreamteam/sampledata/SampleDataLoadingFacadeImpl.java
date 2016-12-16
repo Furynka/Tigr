@@ -1,9 +1,9 @@
 package com.dreamteam.sampledata;
 
 import com.dreamteam.dto.SpeciesDTO;
-import com.dreamteam.entity.Worker;
+import com.dreamteam.dto.WorkerDTO;
 import com.dreamteam.facade.SpeciesFacade;
-import com.dreamteam.service.WorkerService;
+import com.dreamteam.facade.WorkerFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
     @Autowired
-    private WorkerService workerService;
+    private WorkerFacade workerFacade;
 	@Autowired
 	private SpeciesFacade speciesFacade;
 
@@ -40,9 +40,9 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 	}
 
     private void worker(String email, String password, boolean admin) {
-        Worker worker = new Worker();
-        worker.setEmail(email);
-        worker.setAdministrator(admin);
-        workerService.registerWorker(worker, password);
+        WorkerDTO workerDTO = new WorkerDTO();
+        workerDTO.setEmail(email);
+        workerDTO.setAdministrator(admin);
+        workerFacade.registerWorker(workerDTO, password);
     }
 }

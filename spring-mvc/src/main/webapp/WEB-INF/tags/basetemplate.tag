@@ -31,7 +31,9 @@
                 <li class="<c:if test="${nav == 'species'}">active</c:if>"><a href="${contextPath}/species">Species</a>
                 </li>
                 <li class="<c:if test="${nav == 'environments'}">active</c:if>"><a href="#">Environments</a></li>
-                <li class="<c:if test="${nav == 'workers'}">active</c:if>"><a href="${contextPath}/workers/">Workers</a>
+                <c:if test="${not empty worker && worker.administrator}">
+                    <li class="<c:if test="${nav == 'workers'}">active</c:if>"><a href="${contextPath}/workers/">Workers</a>
+                </c:if>
                 </li>
 
             </ul>
