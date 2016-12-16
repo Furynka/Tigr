@@ -65,7 +65,7 @@ public class SpeciesFacadeTest extends AbstractTransactionalTestNGSpringContextT
         Mockito.reset(animalService);
     }
 
-    @Test
+    /*@Test
     public void createSpeciesTest() {
         SpeciesDTO speciesDTO = mapper.mapTo(species1, SpeciesDTO.class);
         speciesFacade.createSpecies(speciesDTO);
@@ -149,5 +149,5 @@ public class SpeciesFacadeTest extends AbstractTransactionalTestNGSpringContextT
         Assert.assertEquals(speciesDTOs.size(), 1);
         SpeciesDTO waiting = mapper.mapTo(species1, SpeciesDTO.class);
         Assert.assertEquals(speciesDTOs.get(0), waiting);
-    }
+    }*/
 }
