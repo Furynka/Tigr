@@ -23,8 +23,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     @Override
     @SuppressWarnings("unused")
     public void loadData() {
-        worker("test@test.ru", "password", true);
-		worker("test1@test.ru", "password", false);
+        worker("admin@test.com", "password", true);
+		worker("worker@test.com", "password", false);
 
 		species("Species1", "Species1Descrition", true);
 		species("Species2", "Species2Descrition", false);
