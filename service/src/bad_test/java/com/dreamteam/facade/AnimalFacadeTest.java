@@ -76,7 +76,7 @@ public class AnimalFacadeTest extends AbstractTransactionalTestNGSpringContextTe
         }
     }
 
-    @Test
+    /*@Test
     public void testFindById() throws Exception{
         assertNotNull(eagle);
         assertEquals(animalFacade.findAnimalById(eagle.getId()), eagle);
@@ -118,6 +118,6 @@ public class AnimalFacadeTest extends AbstractTransactionalTestNGSpringContextTe
         assertNotNull(animalFacade.findAnimalById(eagle.getId()));
         animalFacade.deleteAnimal(eagle.getId());
         assertFalse(animalFacade.getAllAnimals().contains(eagle));
-    }
+    }*/
 
 }

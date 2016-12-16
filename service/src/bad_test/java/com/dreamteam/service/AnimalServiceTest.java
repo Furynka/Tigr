@@ -100,7 +100,7 @@ public class AnimalServiceTest extends AbstractTransactionalTestNGSpringContextT
     }
 
 
-    @Test
+    /*@Test
     public void testgetAllAnimals () throws Exception {
         Assert.assertEquals(animalService.getAll().size(), 4);
     }
@@ -198,7 +198,7 @@ public class AnimalServiceTest extends AbstractTransactionalTestNGSpringContextT
         Assert.assertEquals(topChain.size(), 2);
         Assert.assertEquals(topChain.get(0), dominator);
         Assert.assertEquals(topChain.get(1), beta);
-    }
+    }*/
 
 
 }
