@@ -1,10 +1,8 @@
-package com.dreamteam.controllers;
+package com.dreamteam.rest.controllers;
 
-import com.dreamteam.ApiUris;
 import com.dreamteam.dto.WorkerDTO;
 import com.dreamteam.facade.WorkerFacade;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.dreamteam.rest.ApiUris;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +20,6 @@ import java.util.Collection;
 @RestController
 @RequestMapping(ApiUris.ROOT_URI_WORKER)
 public class WorkerController {
-
-    final static Logger logger = LoggerFactory.getLogger(WorkerController.class);
-
     @Inject
     private WorkerFacade workerFacade;
 
@@ -36,7 +31,6 @@ public class WorkerController {
      */
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final Collection<WorkerDTO> getWorkers(){
-        //logger.debug("rest getWorkers()");
         return workerFacade.getAllWorkers();
     }
 
@@ -49,8 +43,6 @@ public class WorkerController {
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final WorkerDTO getWorkerById(@PathVariable("id") long id) throws Exception {
-        //logger.debug("rest getWorkerById({})", id);
-
         WorkerDTO workerDTO = workerFacade.findWorkerById(id);
         if (workerDTO != null) {
             return workerDTO;
@@ -68,8 +60,6 @@ public class WorkerController {
      */
     @RequestMapping(value = "/{email}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final WorkerDTO getWorkerByEmail(@PathVariable("email") String email) throws Exception {
-        //logger.debug("rest getWorkerByEmail({})", email);
-
         WorkerDTO workerDTO = workerFacade.findWorkerByEmail(email);
         if (workerDTO != null) {
             return workerDTO;

@@ -1,9 +1,11 @@
 package com.dreamteam.mvc.config;
 
 import com.dreamteam.mvc.interceptors.AuthenticationInterceptor;
+import com.dreamteam.sampledata.SampleDataConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
@@ -22,6 +24,7 @@ import javax.validation.Validator;
 
 @EnableWebMvc
 @Configuration
+@Import({SampleDataConfiguration.class})
 @ComponentScan(basePackages = "com.dreamteam.mvc.controllers")
 public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
 

@@ -4,7 +4,6 @@ import com.dreamteam.TigrAppContext;
 import com.dreamteam.dto.AnimalDTO;
 import com.dreamteam.entity.Animal;
 import com.dreamteam.service.AnimalServiceImpl;
-import com.dreamteam.service.WorkerServiceImpl;
 import com.dreamteam.service.facade.AnimalFacadeImpl;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
@@ -19,8 +18,7 @@ import org.springframework.context.annotation.Import;
  */
 @Configuration
 @Import(TigrAppContext.class)
-@ComponentScan(basePackageClasses={AnimalServiceImpl.class, AnimalFacadeImpl.class, 
-    WorkerServiceImpl.class})
+@ComponentScan(basePackageClasses={AnimalServiceImpl.class, AnimalFacadeImpl.class})
 public class ServiceConfig {
     @Bean
     public Mapper dozer() {
