@@ -27,6 +27,12 @@
             <groupId>com.dreamteam</groupId>
             <artifactId>sample-data</artifactId>
             <version>${project.parent.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.el</groupId> <!-- Exclude Project-E from Project-B -->
+                    <artifactId>javax.el-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>

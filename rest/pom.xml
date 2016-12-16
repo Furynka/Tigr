@@ -27,6 +27,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.dreamteam</groupId>
+            <artifactId>sample-data</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-api</artifactId>
             <version>${tomcat.version}</version>
