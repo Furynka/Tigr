@@ -21,6 +21,6 @@ public class AnimalController {
     @RequestMapping(method = RequestMethod.GET)
     public String list(Model model) {
             model.addAttribute("animalList", animalFacade.getAllAnimals());
-            return "animals/animalList";
-    }
+		return "animal/animal";
+	}
 }
