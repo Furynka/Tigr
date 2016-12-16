@@ -108,10 +108,10 @@
             <div class="modal-body">
                 <form method="post" action="${contextPath}/workers/login">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="email" name="email" placeholder="Login">
+                        <input type="text" class="form-control" id="email" name="email" value="admin@test.com" placeholder="Login">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                        <input type="password" class="form-control" id="password" name="password" value="password" placeholder="Password">
                     </div>
                     <button type="submit" class="btn btn-primary">Login</button>
                 </form>

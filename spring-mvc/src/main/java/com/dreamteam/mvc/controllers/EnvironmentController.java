@@ -1,25 +1,26 @@
+
 package com.dreamteam.mvc.controllers;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.dreamteam.facade.EnvironmentFacade;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * Created by jan.novak
+ *
+ * @author Eva Ambrušová
  */
 @Controller
 @RequestMapping("/environments")
 public class EnvironmentController {
-
-	private static final Logger LOG = LoggerFactory.getLogger(EnvironmentController.class);
-
+	@Autowired
+	private EnvironmentFacade environmentFacade;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String list() {
+	public String list(Model model) {
+		model.addAttribute("environmentList", environmentFacade.getAllEnvironments());
 		return "environment/environment";
 	}
-
 }
-

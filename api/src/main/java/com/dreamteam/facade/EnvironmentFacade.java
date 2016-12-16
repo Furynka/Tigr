@@ -21,7 +21,7 @@ public interface EnvironmentFacade {
 
     EnvironmentDTO findEnvironmentByName(String name);
 
-    public void addAnimal(AnimalDTO animal, EnvironmentDTO e);
+    public void addAnimal(int environmentId, Long animalId);
 
     public Set<AnimalDTO> getAllAnimals(EnvironmentDTO e);
 
