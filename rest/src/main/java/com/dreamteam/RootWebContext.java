@@ -2,6 +2,8 @@ package com.dreamteam;
 
 import com.dreamteam.dto.WorkerDTO;
 import com.dreamteam.rest.mixins.WorkerDTOMixin;
+import com.dreamteam.sampledata.SampleDataConfiguration;
+import com.dreamteam.service.config.ServiceConfig;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,6 +14,7 @@ import java.util.Locale;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -27,7 +30,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @EnableWebMvc
 @Configuration
-@Import({ServiceConfig.class, TigrSampleDataConfiguration.class})
+@Import({ServiceConfig.class, SampleDataConfiguration.class})
 @ComponentScan(basePackages = {"com.dreamteam.rest.controllers"})
 public class RootWebContext extends WebMvcConfigurerAdapter {
 
