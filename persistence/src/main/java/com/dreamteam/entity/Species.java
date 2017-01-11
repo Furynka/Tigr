@@ -20,8 +20,8 @@ public class Species {
 
     private String description;
 
-    @OneToMany(mappedBy = "species")
-    private List<Animal> animals = new ArrayList<>();
+	@OneToMany(mappedBy = "species", fetch = FetchType.EAGER)
+	private List<Animal> animals = new ArrayList<>();
 
     private boolean inDanger;
 
@@ -60,10 +60,6 @@ public class Species {
         return Collections.unmodifiableList(animals);
     }
 
-    public void setAnimals(List<Animal> animals) {
-        this.animals = animals;
-    }
-
     public boolean isInDanger() {
         return inDanger;
     }
@@ -92,7 +88,10 @@ public class Species {
         if (!getName().equals(species.getName())) return false;
         if (getDescription() != null ? !getDescription().equals(species.getDescription()) : species.getDescription() != null)
             return false;
-        return getAnimals() != null ? getAnimals().equals(species.getAnimals()) : species.getAnimals() == null;
+		return getAnimals() != null ?
+				getAnimals().size() == species.getAnimals().size()
+						&& getAnimals().containsAll(species.getAnimals())
+				: species.getAnimals() == null;
 
     }
 

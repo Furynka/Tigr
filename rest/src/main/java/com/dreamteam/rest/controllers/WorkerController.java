@@ -5,17 +5,13 @@ import com.dreamteam.facade.WorkerFacade;
 import com.dreamteam.rest.ApiUris;
 import com.dreamteam.rest.exceptions.ResourceAlreadyExistingException;
 import com.dreamteam.rest.exceptions.ResourceNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.Collection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * REST controller for Worker
@@ -25,10 +21,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @RequestMapping(ApiUris.ROOT_URI_WORKER)
 public class WorkerController {
-    @Inject
+	private static final Logger LOG = LoggerFactory.getLogger(WorkerController.class);
+	@Inject
     private WorkerFacade workerFacade;
-    
-    private static final Logger LOG = LoggerFactory.getLogger(WorkerController.class);
 
     /**
      * Get collection of Workers
@@ -38,8 +33,8 @@ public class WorkerController {
      */
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final Collection<WorkerDTO> getWorkers(){
-        LOG.debug("REST call - get all workers");
-        return workerFacade.getAllWorkers();
+		LOG.debug("REST call - get findAll workers");
+		return workerFacade.getAllWorkers();
     }
 
     /**

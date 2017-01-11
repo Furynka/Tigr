@@ -3,6 +3,8 @@
 
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tigr" %>
 
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
 <tigr:basetemplate
         nav="species"
         headHeader="Manage your species"
@@ -11,11 +13,11 @@
         tabHeader="Species">
 <jsp:attribute name="content">
 
-    NEW
+
+    <a href="${contextPath}/species/create">NEW</a>
 
     <table class="table table-hover">
         <tr>
-            <th>ID</th>
             <th>Name</th>
             <th>Description</th>
             <th>Animals</th>
@@ -24,13 +26,13 @@
         </tr>
         <c:forEach items="${speciesList}" var="species">
             <tr>
-                <td><c:out value="${species.id}"/></td>
                 <td><c:out value="${species.name}"/></td>
                 <td><c:out value="${species.description}"/></td>
                 <td><c:out value="${species.animals}"/></td>
                 <td><c:out value="${species.inDanger}"/></td>
                 <td>
-                    EDIT DELETE
+                    <a href="${contextPath}/species/edit/${species.id}">EDIT</a>
+                    <a href="${contextPath}/species/delete/${species.id}">DELETE</a>
                 </td>
             </tr>
     </c:forEach>

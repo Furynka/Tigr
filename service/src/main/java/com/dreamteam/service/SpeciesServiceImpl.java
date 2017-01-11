@@ -38,6 +38,6 @@ public class SpeciesServiceImpl implements SpeciesService {
 
     @Override
     public List<Species> getAllSpecieses() {
-        return speciesDao.all();
-    }
+		return speciesDao.findAll();
+	}
 }

@@ -32,7 +32,7 @@ public class SpeciesFacadeImpl implements SpeciesFacade {
 
     @Override
     public void createSpecies(SpeciesDTO speciesDTO) {
-        speciesService.createSpecies(convertDtoToSpecies(speciesDTO));
+        speciesService.createSpecies(convertDtoToSpeciesForInitSave(speciesDTO));
     }
 
     @Override
@@ -115,12 +115,11 @@ public class SpeciesFacadeImpl implements SpeciesFacade {
         return species;
     }
 
-    private Species convertDtoToSpecies(SpeciesDTO dto) {
+    private Species convertDtoToSpeciesForInitSave(SpeciesDTO dto) {
         Species species = new Species();
         species.setId(dto.getId());
         species.setName(dto.getName());
         species.setDescription(dto.getDescription());
-        species.setAnimals(mappingService.mapTo(dto.getAnimals(), Animal.class));
         species.setInDanger(dto.isInDanger());
         return species;
     }
