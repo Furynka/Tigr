@@ -23,7 +23,7 @@ import java.util.Collection;
 public class WorkerController {
 	private static final Logger LOG = LoggerFactory.getLogger(WorkerController.class);
 	@Inject
-    private WorkerFacade workerFacade;
+	private WorkerFacade workerFacade;
 
     /**
      * Get collection of Workers
@@ -33,9 +33,9 @@ public class WorkerController {
      */
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final Collection<WorkerDTO> getWorkers(){
-		LOG.debug("REST call - get findAll workers");
+		LOG.debug("REST call - get all workers");
 		return workerFacade.getAllWorkers();
-    }
+	}
 
     /**
      * Get Product by identifier id curl -i -X GET

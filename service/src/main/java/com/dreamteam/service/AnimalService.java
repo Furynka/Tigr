@@ -45,8 +45,8 @@ public interface AnimalService {
     public Animal findByName(String name);
     
     /**
-	 * Returns findAll existing Animal entities.
-	 * @return List filled with existing Animal entities.
+     * Returns all existing Animal entities.
+     * @return List filled with existing Animal entities.
      */
     public List<Animal> getAll();
 
