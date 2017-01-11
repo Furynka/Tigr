@@ -9,7 +9,9 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,6 +22,7 @@ import java.util.List;
  */
 @ContextConfiguration(classes = TigrAppContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
+@Transactional
 public class EnvironmentDaoTest extends AbstractTestNGSpringContextTests {
     @Autowired
     public EnvironmentDao environmentDao;
@@ -29,18 +32,18 @@ public class EnvironmentDaoTest extends AbstractTestNGSpringContextTests {
 
     private Environment env1;
 
-    @BeforeClass
-    public void createEnvironment(){
-        env1 = new Environment();
+	@BeforeMethod
+	public void createEnvironment() {
+		env1 = new Environment();
         env1.setName("env1");
         env1.setDescription("description");
 
         environmentDao.create(env1);
     }
 
-    @AfterClass
-    public void deleteEnvironment(){
-        environmentDao.delete(env1);
+	@AfterMethod
+	public void deleteEnvironment() {
+		environmentDao.delete(env1);
     }
 
     @Test()

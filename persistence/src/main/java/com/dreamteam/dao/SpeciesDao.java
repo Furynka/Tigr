@@ -16,7 +16,7 @@ public interface SpeciesDao {
 
     Species findById(Long id);
 
-    List<Species> all();
+	List<Species> findAll();
 
     List<Species> findAllInDanger();
 }

@@ -2,9 +2,6 @@ package com.dreamteam.dao;
 
 import com.dreamteam.TigrAppContext;
 import com.dreamteam.entity.Worker;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -12,9 +9,13 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.List;
 
 /**
  * Tests for Worker DAO class.
@@ -34,8 +35,8 @@ public class WorkerDaoTest extends AbstractTestNGSpringContextTests{
     private Worker worker1;
     private Worker worker2;
     private Worker worker3;
-    
-    @BeforeClass
+
+    @BeforeMethod
     public void createTestData() {
         worker1 = new Worker();
         worker2 = new Worker();
@@ -57,8 +58,8 @@ public class WorkerDaoTest extends AbstractTestNGSpringContextTests{
         workerDao.create(worker2);
         workerDao.create(worker3);
     }
-    
-    @AfterClass
+
+    @AfterMethod
     public void clearTestData() {
         workerDao.delete(worker1);
         workerDao.delete(worker2);
