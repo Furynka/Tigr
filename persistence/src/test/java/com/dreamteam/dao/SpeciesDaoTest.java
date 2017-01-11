@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -27,7 +28,7 @@ import java.util.List;
 public class SpeciesDaoTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
-    private SpeciesDao speciesDao;
+	private SpeciesDao dao;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -55,7 +56,7 @@ public class SpeciesDaoTest extends AbstractTestNGSpringContextTests {
     @Test
     public void findAll(){
         Collection<Species> allFromEntityManager = getAllSpeciesFromEntityManager();
-        List<Species> allFromDAO = speciesDao.findAll();
+		List<Species> allFromDAO = dao.findAll();
 
         Assert.assertTrue(allFromDAO.size() == allFromEntityManager.size());
         Assert.assertTrue(allFromDAO.containsAll(allFromEntityManager));
@@ -64,8 +65,8 @@ public class SpeciesDaoTest extends AbstractTestNGSpringContextTests {
     @Test
     public void findById() {
         for (Species species : getAllSpeciesFromEntityManager()) {
-            Assert.assertEquals(species, speciesDao.findById(species.getId()));
-        }
+			Assert.assertEquals(species, dao.findById(species.getId()));
+		}
     }
 
     @Test
@@ -74,8 +75,8 @@ public class SpeciesDaoTest extends AbstractTestNGSpringContextTests {
         species1.setName("second");
 
         int sizeBeforeSave = getAllSpeciesFromEntityManager().size();
-        speciesDao.create(species1);
-        Assert.assertTrue(getAllSpeciesFromEntityManager().size() == sizeBeforeSave + 1);
+		dao.create(species1);
+		Assert.assertTrue(getAllSpeciesFromEntityManager().size() == sizeBeforeSave + 1);
     }
 
     @Test
@@ -84,27 +85,44 @@ public class SpeciesDaoTest extends AbstractTestNGSpringContextTests {
         int remaining = allSpeciesFromEntityManager.size();
 
         for (Species species : allSpeciesFromEntityManager) {
-            speciesDao.delete(species);
-            Assert.assertTrue(--remaining == getAllSpeciesFromEntityManager().size());
+			dao.delete(species);
+			Assert.assertTrue(--remaining == getAllSpeciesFromEntityManager().size());
         }
     }
 
     @Test
     public void update() {
-        Collection<Species> allSpeciesFromEntityManager = getAllSpeciesFromEntityManager();
-
-        for (Species species : allSpeciesFromEntityManager) {
-            Species species1 = new Species();
+		for (Species species : getAllSpeciesFromEntityManager()) {
+			Species species1 = new Species();
             species1.setId(species.getId());
             species1.setName(species.getName() + "newNameSuffix");
             species1.setDescription(species.getDescription() + "newDescriptionSuffix");
             species1.setInDanger(!species.isInDanger());
 
-            speciesDao.update(species1);
+			dao.update(species1);
 
             Assert.assertEquals(species1, entityManager.find(Species.class, species1.getId()));
         }
-    }
+	}
+
+	@Test
+	public void findAllInDanger() {
+		deleteSpecies();
+
+		Species species1 = new Species("name1", "description1", true);
+		Species species2 = new Species("name2", "description2", true);
+		Species species3 = new Species("name3", "description3", false);
+		Species species4 = new Species("name4", "description4", false);
+		entityManager.persist(species1);
+		entityManager.persist(species2);
+		entityManager.persist(species3);
+		entityManager.persist(species4);
+
+		List<Species> allInDanger = dao.findAllInDanger();
+
+		Assert.assertTrue(allInDanger.size() == 2);
+		Assert.assertTrue(allInDanger.containsAll(Arrays.asList(species1, species2)));
+	}
 
     private Collection<Species> getAllSpeciesFromEntityManager() {
         return entityManager.createQuery("SELECT s FROM Species s", Species.class).getResultList();

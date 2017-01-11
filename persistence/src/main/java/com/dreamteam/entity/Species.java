@@ -32,6 +32,12 @@ public class Species {
         this.name = name;
     }
 
+	public Species(String name, String description, boolean inDanger) {
+		this.name = name;
+		this.description = description;
+		this.inDanger = inDanger;
+	}
+
     public Long getId() {
         return id;
     }
