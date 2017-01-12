@@ -21,7 +21,7 @@
     <link rel="stylesheet" type="text/css" href="${contextPath}/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="${contextPath}/css/styles.css">
 
-    <title>Tigr</title>
+    <title><spring:message code="tigr-message-page-title"/></title>
 </head>
 <body>
 <nav class="navbar navbar-default">
