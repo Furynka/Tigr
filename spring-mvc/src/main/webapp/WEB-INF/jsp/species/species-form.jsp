@@ -8,20 +8,31 @@
 <jsp:attribute name="content">
     <form:form modelAttribute="data" method="post" action="${continueLink}">
 
-        <label><spring:message code="tigr-message-species-name"/><form:input path="name"/></label><br>
-        <label><spring:message code="tigr-message-species-description"/><form:input path="description"/></label><br>
-        <label><spring:message code="tigr-message-species-in-danger"/><form:checkbox path="inDanger"/></label><br>
+        <div class="form-group">
+            <label for="name"><spring:message code="tigr-message-species-name"/></label>
+            <form:input path="name" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="description"><spring:message code="tigr-message-species-description"/></label>
+            <form:input path="description" class="form-control"/>
+        </div>
 
-        <button type="submit"><spring:message code="${buttonLabelCode}"/></button>
+        <div class="checkbox">
+            <label><form:checkbox path="inDanger"/> <b><spring:message
+                    code="tigr-message-species-in-danger"/></b></label>
+        </div>
+
+        <button type="submit" class="tigr-form-button">
+            <spring:message code="${buttonLabelCode}"/>
+        </button>
 
         <form:hidden path="id"/>
     </form:form>
 
-    <button class="tigr-button"
+    <button class="js-button tigr-form-button back-button"
             link="/pa165/species">
         <spring:message code="tigr-message-back"/>
     </button>
-
 
 </jsp:attribute>
 </tigr:crud-template>
