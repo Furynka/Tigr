@@ -23,6 +23,9 @@ import javax.validation.Validator;
 @ComponentScan(basePackages = "com.dreamteam.mvc.controllers")
 public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
 
+	//two weeks - in seconds
+	public static final int COOKIE_MAX_AGE = 14 * 24 * 60 * 60;
+
 	//Interceptors
 	@Bean
     public AuthenticationInterceptor authenticationInterceptor() {
@@ -87,7 +90,11 @@ public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
 	@Bean("localeResolver")
 	public CookieLocaleResolver cookieLocaleResolver() {
 		//do NOT set default locale - spring will take default from request
-		return new CookieLocaleResolver();
+		CookieLocaleResolver localeResolver = new CookieLocaleResolver();
+		localeResolver.setCookiePath("/pa165/");
+		localeResolver.setCookieMaxAge(COOKIE_MAX_AGE);
+		localeResolver.setCookieName("locale");
+		return localeResolver;
 	}
 
 }
