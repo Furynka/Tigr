@@ -1,8 +1,6 @@
-package com.dreamteam.controllers;
+package com.dreamteam.rest.controllers;
 
-import com.dreamteam.ApiUris;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.dreamteam.rest.ApiUris;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,13 +15,8 @@ import java.util.Map;
  */
 @RestController
 public class MainController {
-
-    final static Logger logger = LoggerFactory.getLogger(MainController.class);
-
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final Map<String, String> getResources() {
-        logger.debug("rest getWorkers()");
-
         Map<String,String> resourcesMap = new HashMap<>();
 
         resourcesMap.put("worker_uri", ApiUris.ROOT_URI_WORKER);

@@ -5,13 +5,14 @@ import com.dreamteam.dto.EnvironmentDTO;
 import com.dreamteam.entity.Animal;
 import com.dreamteam.entity.Environment;
 import com.dreamteam.facade.EnvironmentFacade;
+import com.dreamteam.service.AnimalService;
 import com.dreamteam.service.BeanMappingService;
 import com.dreamteam.service.EnvironmentService;
-import org.dozer.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.inject.Inject;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
@@ -25,6 +26,8 @@ public class EnvironmentFacadeImpl implements EnvironmentFacade {
 
     @Inject
     private EnvironmentService envService;
+    @Inject
+    private AnimalService animalService;
 
     @Autowired
     private BeanMappingService beanMappingService;
@@ -73,11 +76,11 @@ public class EnvironmentFacadeImpl implements EnvironmentFacade {
     }
 
     @Override
-    public void addAnimal(AnimalDTO animal, EnvironmentDTO e) {
-        Environment mappedEnv = beanMappingService.mapTo(e, Environment.class);
-        Animal mappedAnimal = beanMappingService.mapTo(animal, Animal.class);
-        mappedEnv.addAnimal(mappedAnimal);
-        envService.update(mappedEnv);
+    public void addAnimal(int environmentId, Long animalId) {
+        Environment mappedEnv = envService.findById(environmentId);
+        Animal mappedAnimal = animalService.findById(animalId);
+        mappedAnimal.addEnvironment(mappedEnv);
+        animalService.update(mappedAnimal);
     }
 
     @Override

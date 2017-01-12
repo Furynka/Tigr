@@ -12,12 +12,8 @@ import java.util.List;
 */
 @Service
 public class WorkerServiceImpl implements WorkerService {
-    private final WorkerDao workerDao;
-
     @Autowired
-    public WorkerServiceImpl(WorkerDao workerDao) {
-        this.workerDao = workerDao;
-    }
+    private WorkerDao workerDao;
 
     public void registerWorker(Worker w, String unencryptedPassword) {
         w.setPasswordHash(BCrypt.hashpw(unencryptedPassword, BCrypt.gensalt()));
@@ -34,7 +30,7 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     public boolean isAdmin(Worker w) {
-        return w.isAdministrator();
+        return w.getAdministrator();
     }
 
     public Worker findWorkerById(Long workerId) {

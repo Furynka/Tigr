@@ -2,7 +2,6 @@ package com.dreamteam.dao;
 
 import com.dreamteam.entity.Environment;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -13,7 +12,6 @@ import java.util.List;
  * @author Eva Ambrusova
  */
 @Repository
-@Transactional
 public class EnvironmentDaoImpl implements EnvironmentDao {
 
     @PersistenceContext

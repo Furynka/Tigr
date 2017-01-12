@@ -1,14 +1,12 @@
 package com.dreamteam.service;
 
-import org.springframework.stereotype.Service;
-import java.util.List;
-
 import com.dreamteam.entity.Worker;
+
+import java.util.List;
 
 /**
  * Created by khudiakov on 21.11.2016.
 */
-@Service
 public interface WorkerService {
     void registerWorker(Worker w, String unencryptedPassword);
 

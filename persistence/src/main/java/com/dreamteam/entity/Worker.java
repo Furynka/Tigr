@@ -46,7 +46,7 @@ public class Worker{
     public void setAdministrator(Boolean administrator) {
         this.administrator = administrator;
     }
-    public Boolean isAdministrator() {
+    public Boolean getAdministrator() {
         return this.administrator;
     }
 

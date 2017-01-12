@@ -11,8 +11,8 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import javax.persistence.EntityManager;
@@ -26,6 +26,7 @@ import java.util.List;
  */
 @ContextConfiguration(classes = TigrAppContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
+@Transactional
 public class AnimalDaoTest extends AbstractTestNGSpringContextTests {
     @Autowired
     public AnimalDao animalDao;
@@ -47,9 +48,9 @@ public class AnimalDaoTest extends AbstractTestNGSpringContextTests {
     private Species bicolor;
     private Species common;
 
-    @BeforeClass
-    public void createObjects(){
-        golden = new Species("Golden");
+	@BeforeMethod
+	public void createObjects() {
+		golden = new Species("Golden");
         bicolor = new Species("Bicolor");
         common = new Species("Common");
         speDao.create(golden);
@@ -86,9 +87,9 @@ public class AnimalDaoTest extends AbstractTestNGSpringContextTests {
         swallow.addPrey(fly);
     }
 
-    @AfterClass
-    public void deleteObjects(){
-        animalDao.delete(swallow);
+	@AfterMethod
+	public void deleteObjects() {
+		animalDao.delete(swallow);
         animalDao.delete(eagle);
         animalDao.delete(fly);
 

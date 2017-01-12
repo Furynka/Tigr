@@ -10,20 +10,21 @@ import com.dreamteam.entity.Species;
 import com.dreamteam.facade.AnimalFacade;
 import com.dreamteam.service.AnimalService;
 import com.dreamteam.service.BeanMappingService;
-import com.dreamteam.service.config.ServiceConfig;
-import java.util.ArrayList;
-import org.springframework.test.context.ContextConfiguration;
-
-import java.util.List;
-import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Implementation class for Animal facade layer. 
  * 
  * @author Jiri Oliva
  */
-@ContextConfiguration(classes = ServiceConfig.class)
+@Service
+@Transactional
 public class AnimalFacadeImpl implements AnimalFacade{
     
     @Inject

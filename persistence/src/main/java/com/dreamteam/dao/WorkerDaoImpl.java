@@ -1,22 +1,18 @@
 package com.dreamteam.dao;
 
-import java.util.List;
+import com.dreamteam.entity.Worker;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-
-import org.springframework.stereotype.Repository;
-
-import com.dreamteam.entity.Worker;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 
 /**
  * @author Daniil Khudiakov
  */
 @Repository
-@Transactional
 public class WorkerDaoImpl implements WorkerDao {
 
     @PersistenceContext

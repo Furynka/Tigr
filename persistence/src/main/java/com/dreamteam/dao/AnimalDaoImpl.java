@@ -1,20 +1,19 @@
 package com.dreamteam.dao;
 
 import com.dreamteam.entity.Animal;
-import java.util.List;
+import org.springframework.stereotype.Repository;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 
 /**
  * Access class for Animal entities.
  * @author Jiri Oliva
  */
 @Repository
-@Transactional
 public class AnimalDaoImpl implements AnimalDao{
 
     @PersistenceContext

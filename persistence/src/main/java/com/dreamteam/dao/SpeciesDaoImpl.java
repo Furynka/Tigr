@@ -2,7 +2,6 @@ package com.dreamteam.dao;
 
 import com.dreamteam.entity.Species;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -14,7 +13,6 @@ import java.util.List;
  * Created by jan.novak
  */
 @Repository
-@Transactional
 public class SpeciesDaoImpl implements SpeciesDao {
 
     @PersistenceContext
@@ -48,7 +46,7 @@ public class SpeciesDaoImpl implements SpeciesDao {
     }
 
     @Override
-    public List<Species> all() {
+    public List<Species> findAll() {
         List<Species> resultList = entityManager.createQuery("SELECT s FROM Species s", Species.class).getResultList();
         return resultList != null ? resultList : new ArrayList<>();
     }

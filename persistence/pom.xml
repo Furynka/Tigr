@@ -11,7 +11,6 @@
 
     <artifactId>persistence</artifactId>
     <packaging>jar</packaging>
-    <version>1.0</version>
     <name>Persistence</name>
 
     <!--<properties>
@@ -100,6 +99,11 @@
         <dependency>
             <groupId>org.eclipse.jetty.orbit</groupId>
             <artifactId>com.sun.el</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
             <version>RELEASE</version>
         </dependency>
         <dependency>

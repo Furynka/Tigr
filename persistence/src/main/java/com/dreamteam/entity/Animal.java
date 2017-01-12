@@ -61,8 +61,12 @@ public class Animal{
     }
 
     public void setSpecies(Species species) {
+		if (this.species != null)
+			this.species.removeAnimal(this);
+
         this.species = species;
-    }
+		species.addAnimal(this);
+	}
 
     public String getDescription() {
         return description;
@@ -72,9 +76,11 @@ public class Animal{
         this.description = description;
     }
 
-    public void setCount(int count) { this.count = count; }
-
     public int getCount() { return this.count; }
+
+	public void setCount(int count) {
+		this.count = count;
+	}
 
     public Set<Animal> getPredators() {
         return Collections.unmodifiableSet(predators);

@@ -4,33 +4,40 @@ h1 {
     font-size: 250%;
     font-weight: bold;
 }
+
 h2, h3 {
     color: #444;
     font-family: Roboto, Arial, Helvetica, sans-serif;
     font-weight: lighter;
 }
-body{
+
+body {
     background-color: #404040;
 }
+
 body, p, ul li {
-    font-family: Roboto,Helvetica,Arial,sans-serif;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
     font-size: 1em;
     font-weight: 400;
     color: #404040;
 }
-p{
+
+p {
     margin: 1.25em;
 }
+
 body, input[text], button {
     color: #888;
     font-family: Cambria, Georgia;
 }
+
 a {
     cursor: pointer;
     cursor: hand;
 }
+
 button {
-    font-family: Roboto,Helvetica,Arial,sans-serif;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
     border: none;
     padding: 5px 10px;
     border-radius: 4px;
@@ -38,14 +45,17 @@ button {
     cursor: hand;
     color: #ffffff;
 }
+
 button:hover {
     background-color: #369;
 }
+
 button:disabled {
     background-color: #7C8CB7;
     color: #eee;
     cursor: auto;
 }
+
 h1.component-header {
     text-transform: uppercase;
     border-bottom: thin solid #ddd;
@@ -54,22 +64,26 @@ h1.component-header {
     margin-top: 2.5rem;
     font-size: 28px;
 }
+
 h1.component-header > span.underline {
     border-bottom: medium solid #009cde;
     display: inline-block;
     margin-bottom: -1.5px;
 }
-h2.section-header{
+
+h2.section-header {
     text-transform: uppercase;
     text-align: center;
     margin-left: 1.5rem;
     margin-top: 4rem;
 }
-p.section-header{
+
+p.section-header {
     text-align: center;
     margin-left: 1.5rem;
     margin-right: 1.5rem;
 }
+
 ul.link-strips li {
     font-size: 1em;
     padding: 1.25rem 1.25rem 1rem .625rem;
@@ -78,31 +92,37 @@ ul.link-strips li {
     -ms-flex-align: stretch;
     align-items: stretch;
 }
-ul.static-links li{
+
+ul.static-links li {
     color: white;
 }
-li.list-item:hover{
+
+li.list-item:hover {
     background-color: whitesmoke;
     text-decoration: none;
 }
+
 li span {
     padding-left: 10px;
     padding-right: 10px;
     margin-right: 10px;
     margin-left: auto;
 }
+
 /*navigation bar*/
 header.navigation.large .user, header.navigation.large nav {
     height: 5.15rem;
     min-height: 3.5rem;
 
 }
-header.navigation{
+
+header.navigation {
     background-color: white;
-    box-shadow:0px 1px 1px grey;
+    box-shadow: 0px 1px 1px grey;
     margin-right: -20px;
     margin-left: -20px;
 }
+
 header.navigation nav {
     width: 100%;
     max-width: 62.5rem;
@@ -122,9 +142,11 @@ header.navigation.large nav .logo-container {
     margin-right: 1rem;
     float: left;
 }
+
 header.navigation nav .nav-item.menu-items {
     margin-bottom: 0;
 }
+
 ul.inline-list {
     display: -ms-flexbox;
     display: flex;
@@ -136,22 +158,26 @@ ul.inline-list {
     justify-content: flex-start;
     list-style-type: none;
 }
+
 header.navigation nav .nav-item.menu-items li {
     transition: none;
     margin-bottom: 1em;
 }
+
 ul.inline-list li {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-item-align: center;
     align-self: center;
 }
-ul.inline-list li a{
+
+ul.inline-list li a {
     border-radius: 0;
     background-color: transparent;
     text-transform: uppercase;
 }
-ul.inline-list li a:hover{
+
+ul.inline-list li a:hover {
     color: #009cde;
     border-bottom: medium solid #009cde;
     margin-bottom: -3px;
@@ -160,9 +186,11 @@ ul.inline-list li a:hover{
 ul.link-strips li:not(:last-of-type) {
     border-bottom: thin solid #ddd;
 }
+
 header.navigation.large {
     height: 7.05rem;
 }
+
 header.navigation .static-links {
     width: 100%;
     max-width: 62.5rem;
@@ -170,9 +198,11 @@ header.navigation .static-links {
     color: white;
     text-decoration: none;
 }
+
 header.navigation .site-navigation {
     background-color: #333;
 }
+
 ul.static-links {
     display: -ms-flexbox;
     display: flex;
@@ -187,17 +217,21 @@ ul.static-links {
     padding: .2rem 0;
     margin-top: 0;
 }
+
 ul.static-links li:not(:last-of-type) {
     margin-right: 1rem;
 }
+
 ul.static-links li.right {
     margin-left: auto;
 }
-ul.static-links li a{
+
+ul.static-links li a {
     color: whitesmoke;
     text-decoration: none;
 }
-ul.static-links li:hover{
+
+ul.static-links li:hover {
     background-color: #3e4147;
     text-decoration: none;
 }
@@ -212,23 +246,27 @@ nav a {
     background-color: #eee;
     border-radius: 4px;
 }
+
 nav a:hover {
     color: #039be5;
     background-color: #CFD8DC;
 }
+
 nav a.active {
     color: #039be5;
 }
+
 .row {
     margin-left: auto;
     margin-right: auto;
 }
+
 .container-fluid {
     background-color: #eee;
-    min-height: 650px;
+    /*min-height: 650px;*/
 }
 
-.sign-in{
+.sign-in {
     position: relative;
     overflow: hidden;
     width: 274px;
@@ -239,11 +277,12 @@ nav a.active {
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
     margin: auto;
 }
+
 .icon-user {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 10px;
-    background-image: url("img/user-grey.png");
+    background-image: url("../imgimg/user-grey.png");
     width: 50px;
     height: 50px;
     background-repeat: no-repeat;
@@ -252,35 +291,40 @@ nav a.active {
     background-size: 96px;
 }
 
-
-.environment-section.page-width{
+.environment-section.page-width {
     max-width: 1000px;
     margin: 0 auto;
     position: relative;
     padding: 0 20px;
 }
+
 .environment-section.sidebar {
     width: 25%;
     float: right;
 }
+
 .environment-section.entity-list-panel {
     float: left;
     width: 100%;
 }
+
 .search-add {
     margin-left: 15px;
 }
+
 .add {
     font-weight: bold;
     margin-left: auto;
 }
-.panel{
+
+.panel {
     margin-right: auto;
     clear: both;
     overflow: auto;
     min-height: 400px;
     margin-bottom: 100px;
 }
+
 .center {
     display: -ms-flexbox;
     display: flex;
@@ -292,6 +336,7 @@ nav a.active {
     justify-content: center;
     margin: 1rem 0;
 }
+
 .panel ul.link-strips {
     margin-left: 0;
     margin-right: 0;
@@ -302,7 +347,12 @@ nav a.active {
 *, *::after, *::before {
     box-sizing: border-box;
 }
+
 * {
     font-family: Roboto, Arial, Helvetica, sans-serif;
     color: #404040;
+}
+
+.template-body-content {
+    padding: 15px;
 }

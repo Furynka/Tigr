@@ -7,11 +7,15 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -19,65 +23,90 @@ import java.util.List;
  */
 @ContextConfiguration(classes = TigrAppContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
+@Transactional
 public class SpeciesDaoTest extends AbstractTestNGSpringContextTests {
+
     @Autowired
-    public SpeciesDao speciesDao;
+    private SpeciesDao speciesDao;
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    private Species spec1;
+    private static Species getDummySpecies1() {
+        Species species = new Species();
+        species.setName("env1");
+        species.setDescription("description");
+        species.setInDanger(true);
+        return species;
+    }
 
-    @BeforeClass
+    @BeforeMethod
     public void createSpecies(){
-        spec1 = new Species();
-        spec1.setName("env1");
-        spec1.setDescription("description");
-        spec1.setInDanger(true);
-
-        speciesDao.create(spec1);
+        entityManager.persist(getDummySpecies1());
     }
 
-    @AfterClass
+    @AfterMethod
     public void deleteSpecies(){
-        speciesDao.delete(spec1);
+        for (Species species : getAllSpeciesFromEntityManager()) {
+            entityManager.remove(species);
+        }
     }
 
-    @Test()
+    @Test
     public void findAll(){
-        List<Species> res = speciesDao.all();
-        //Assert.assertEquals(res.size(), 1);
+        Collection<Species> allFromEntityManager = getAllSpeciesFromEntityManager();
+        List<Species> allFromDAO = speciesDao.findAll();
+
+        Assert.assertTrue(allFromDAO.size() == allFromEntityManager.size());
+        Assert.assertTrue(allFromDAO.containsAll(allFromEntityManager));
     }
 
-    @Test()
+    @Test
     public void findById() {
-        Species res = speciesDao.findById(spec1.getId());
-        Assert.assertNotNull(res);
-        Assert.assertEquals(res.getName(), spec1.getName());
+        for (Species species : getAllSpeciesFromEntityManager()) {
+            Assert.assertEquals(species, speciesDao.findById(species.getId()));
+        }
     }
 
-    @Test()
-    public void update() {
-        spec1.setName("spec1 u");
-        speciesDao.update(spec1);
+    @Test
+    public void create() {
+        Species species1 = getDummySpecies1();
+        species1.setName("second");
 
-        Species res = speciesDao.findById(spec1.getId());
-        Assert.assertNotNull(res);
-        Assert.assertEquals(res.getName(), spec1.getName());
+        int sizeBeforeSave = getAllSpeciesFromEntityManager().size();
+        speciesDao.create(species1);
+        Assert.assertTrue(getAllSpeciesFromEntityManager().size() == sizeBeforeSave + 1);
     }
 
-    @Test()
+    @Test
     public void delete() {
-        Species tmpSpec = new Species();
-        tmpSpec.setName("temp");
-        tmpSpec.setDescription("temp");
+        Collection<Species> allSpeciesFromEntityManager = getAllSpeciesFromEntityManager();
+        int remaining = allSpeciesFromEntityManager.size();
 
-        speciesDao.create(tmpSpec);
-        int before = speciesDao.all().size();
+        for (Species species : allSpeciesFromEntityManager) {
+            speciesDao.delete(species);
+            Assert.assertTrue(--remaining == getAllSpeciesFromEntityManager().size());
+        }
+    }
 
-        speciesDao.delete(tmpSpec);
-        int after = speciesDao.all().size();
+    @Test
+    public void update() {
+        Collection<Species> allSpeciesFromEntityManager = getAllSpeciesFromEntityManager();
 
-        Assert.assertEquals(before-after, 1);
+        for (Species species : allSpeciesFromEntityManager) {
+            Species species1 = new Species();
+            species1.setId(species.getId());
+            species1.setName(species.getName() + "newNameSuffix");
+            species1.setDescription(species.getDescription() + "newDescriptionSuffix");
+            species1.setInDanger(!species.isInDanger());
+
+            speciesDao.update(species1);
+
+            Assert.assertEquals(species1, entityManager.find(Species.class, species1.getId()));
+        }
+    }
+
+    private Collection<Species> getAllSpeciesFromEntityManager() {
+        return entityManager.createQuery("SELECT s FROM Species s", Species.class).getResultList();
     }
 }

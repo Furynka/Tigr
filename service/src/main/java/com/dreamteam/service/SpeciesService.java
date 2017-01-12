@@ -40,9 +40,9 @@ public interface SpeciesService {
     Species getSpeciesById(long id);
 
     /**
-     * Returns all existing specieses.
-     *
-     * @return List with all existing specieses.
-     */
-    List<Species> getAllSpecieses();
+	 * Returns all existing specieses.
+	 *
+	 * @return List with all existing specieses.
+	 */
+	List<Species> getAllSpecieses();
 }
