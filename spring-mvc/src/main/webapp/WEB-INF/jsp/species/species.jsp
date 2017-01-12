@@ -1,42 +1,65 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@ taglib tagdir="/WEB-INF/tags" prefix="tigr" %>
+<%@include file="../init.jspf" %>
 
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-
-<tigr:basetemplate
-        nav="species"
-        headHeader="Manage your species"
-        headDescription="In this page, you can add, delete or edit all food chain species. Use
-                            the search bar for easier work!"
-        tabHeader="Species">
+<tigr:crud-template nav="species">
 <jsp:attribute name="content">
 
 
-    <a href="${contextPath}/species/create">NEW</a>
+    <button link="${contextPath}/species/create" class="new-button tigr-button">
+        <spring:message code="tigr-message-crud-new"/>
+    </button>
 
     <table class="table table-hover">
         <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Animals</th>
-            <th>inDanger</th>
-            <th>Actions</th>
+            <th><spring:message code="tigr-message-species-name"/></th>
+            <th><spring:message code="tigr-message-species-description"/></th>
+            <th><spring:message code="tigr-message-species-animals"/></th>
+            <th><spring:message code="tigr-message-species-in-danger"/></th>
+            <th><spring:message code="tigr-message-species-actions"/></th>
         </tr>
         <c:forEach items="${speciesList}" var="species">
             <tr>
                 <td><c:out value="${species.name}"/></td>
                 <td><c:out value="${species.description}"/></td>
-                <td><c:out value="${species.animals}"/></td>
-                <td><c:out value="${species.inDanger}"/></td>
                 <td>
-                    <a href="${contextPath}/species/edit/${species.id}">EDIT</a>
-                    <a href="${contextPath}/species/delete/${species.id}">DELETE</a>
+                        <%--animals--%>
+                    <c:if test="${empty species.animals}">
+                        <spring:message code="tigr-message-species-no-animal"/>
+                    </c:if>
+                    <c:if test="${not empty species.animals}">
+                        <c:forEach items="${species.animals}" var="animal">
+                            <c:out value="${animal}"/>
+                        </c:forEach>
+                    </c:if>
+                </td>
+                <td>
+                        <%--inDanger--%>
+                    <c:set var="dangerCode" value="tigr-message-no"/>
+                    <c:if test="${species.inDanger}">
+                        <c:set var="dangerCode" value="tigr-message-yes"/>
+                    </c:if>
+                    <spring:message code="${dangerCode}"/>
+                </td>
+                <td>
+                    <spring:message var="confirmMessage"
+                                    code="tigr-message-del-confirm-species"
+                                    arguments="${species.name}"/>
+
+                    <button class="edit-button tigr-button"
+                            link="${contextPath}/species/edit/${species.id}">
+                        <spring:message code="tigr-message-crud-edit"/>
+                    </button>
+                    <button class="del-button"
+                            link="${contextPath}/species/delete/${species.id}"
+                            confirmMessage="${confirmMessage}">
+                        <spring:message code="tigr-message-crud-delete"/>
+                    </button>
                 </td>
             </tr>
     </c:forEach>
     </table>
 
 </jsp:attribute>
-</tigr:basetemplate>
+</tigr:crud-template>
+

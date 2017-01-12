@@ -1,19 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: khudiakov
-  Date: 15.12.2016
-  Time: 13:52
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib tagdir="/WEB-INF/tags" prefix="tigr" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<tigr:basetemplate
-        nav="workers"
-        headHeader="Manage your workers"
-        headDescription="To change this description edit tag call"
-        tabHeader="Workers">
+<%@include file="../init.jspf" %>
+
+<tigr:crud-template nav="workers">
 <jsp:attribute name="content">
     <div class="panel panel-default">
         <!-- Table -->
@@ -37,4 +26,4 @@
         </table>
     </div>
 </jsp:attribute>
-</tigr:basetemplate>
+</tigr:crud-template>

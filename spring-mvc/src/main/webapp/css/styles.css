@@ -1,3 +1,7 @@
+html, body {
+    height: 100%;
+}
+
 h1 {
     color: #369;
     font-family: Roboto, Arial, Helvetica, sans-serif;
@@ -321,8 +325,7 @@ nav a.active {
     margin-right: auto;
     clear: both;
     overflow: auto;
-    min-height: 400px;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 
 .center {
@@ -355,4 +358,31 @@ nav a.active {
 
 .template-body-content {
     padding: 15px;
+}
+
+.container {
+    margin-bottom: 60px;
+}
+
+.footer {
+    border: 0px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.footer img {
+    height: 30px;
+}
+
+.container button {
+    background-color: rgb(64, 64, 64);
+}
+
+.container button:hover {
+    background-color: rgb(51, 102, 153);
+}
+
+.container .new-button {
+    margin-bottom: 15px;
 }
