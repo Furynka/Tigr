@@ -6,7 +6,7 @@
 <jsp:attribute name="content">
 
 
-    <button link="${contextPath}/species/create" class="new-button tigr-button">
+    <button link="${contextPath}/species/create" class="new-button js-button">
         <spring:message code="tigr-message-crud-new"/>
     </button>
 
@@ -46,7 +46,7 @@
                                     code="tigr-message-del-confirm-species"
                                     arguments="${species.name}"/>
 
-                    <button class="edit-button tigr-button"
+                    <button class="edit-button js-button"
                             link="${contextPath}/species/edit/${species.id}">
                         <spring:message code="tigr-message-crud-edit"/>
                     </button>

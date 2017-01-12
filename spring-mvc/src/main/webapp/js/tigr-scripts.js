@@ -5,8 +5,8 @@ $(document).ready(function () {
             window.location.href = $(this).attr("link");
     })
 
-    $(".tigr-button").unbind("click");
-    $(".tigr-button").on("click", function () {
+    $(".js-button").unbind("click");
+    $(".js-button").on("click", function () {
         window.location.href = $(this).attr("link");
     })
 
