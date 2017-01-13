@@ -28,9 +28,27 @@
                 <td><c:out value="${environment.id}"/></td>
                 <td><c:out value="${environment.name}"/></td>
                 <td><c:out value="${environment.description}"/></td>
-                <td><c:out value="${environment.animals}"/></td>
                 <td>
-                    EDIT DELETE
+                    <c:if test="${empty environment.animals}">
+                        <spring:message code="tigr-message-species-no-animal"/>
+                    </c:if>
+                    <c:if test="${not empty environment.animals}">
+                        <c:forEach items="${environment.animals}" var="animal">
+                            <c:out value="${animal}"/>
+                        </c:forEach>
+                    </c:if>
+                </td>
+                <td>
+                    <spring:message var="confirmMessage"
+                                    code="tigr-message-del-confirm-species"
+                                    arguments="${environment.name}"/>
+                    EDIT
+
+                    <button class="del-button"
+                            link="${contextPath}/environments/delete/${environment.id}"
+                            confirmMessage="${confirmMessage}">
+                        <spring:message code="tigr-message-crud-delete"/>
+                    </button>
                 </td>
             </tr>
         </c:forEach>
