@@ -38,13 +38,13 @@
     $().ready(function () {
         $("#loginForm").validate({
             rules: {
-                password: {
-                    required: true,
-                    minlength: 5
-                },
                 email: {
                     required: true,
                     email: true
+                },
+                password: {
+                    required: true,
+                    minlength: 5
                 }
             },
             messages: {
