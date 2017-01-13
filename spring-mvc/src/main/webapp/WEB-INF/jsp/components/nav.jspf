@@ -15,21 +15,27 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
             <ul class="nav navbar-nav">
+                <c:if test="${not empty worker}">
                 <li class="<c:if test="${nav == 'animals'}">active</c:if>">
                     <a href="${contextPath}/animals">
                         <spring:message code="tigr-message-page-menu-tab-animals"/>
                     </a>
                 </li>
+                </c:if>
+                <c:if test="${not empty worker}">
                 <li class="<c:if test="${nav == 'species'}">active</c:if>">
                     <a href="${contextPath}/species">
                         <spring:message code="tigr-message-page-menu-tab-species"/>
                     </a>
                 </li>
+                </c:if>
+                <c:if test="${not empty worker}">
                 <li class="<c:if test="${nav == 'environments'}">active</c:if>">
                     <a href="${contextPath}/environments">
                         <spring:message code="tigr-message-page-menu-tab-environments"/>
                     </a>
                 </li>
+                </c:if>
                 <c:if test="${not empty worker && worker.administrator}">
                     <li class="<c:if test="${nav == 'workers'}">active</c:if>">
                         <a href="${contextPath}/workers/">
