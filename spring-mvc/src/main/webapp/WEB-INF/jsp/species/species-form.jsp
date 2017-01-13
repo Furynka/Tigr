@@ -17,9 +17,9 @@
             <form:input path="description" class="form-control"/>
         </div>
 
-        <div class="checkbox">
-            <label><form:checkbox path="inDanger"/> <b><spring:message
-                    code="tigr-message-species-in-danger"/></b></label>
+        <div class="form-group left-checkbox">
+            <label><form:checkbox path="inDanger"/>
+                <b><spring:message code="tigr-message-species-in-danger"/></b></label>
         </div>
 
         <button type="submit" class="tigr-form-button">

@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$().ready(function () {
 
     $(".del-button").on("click", function () {
         if (confirm($(this).attr("confirmMessage")))
