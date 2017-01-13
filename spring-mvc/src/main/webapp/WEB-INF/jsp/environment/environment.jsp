@@ -8,7 +8,10 @@
 
 <tigr:crud-template nav="environments">
 <jsp:attribute name="content">
-    NEW
+        <button link="${contextPath}/environments/create" class="new-button js-button">
+            <spring:message code="tigr-message-crud-new"/>
+        </button>
+
     <table class="table table-hover">
         <thead>
         <tr>
