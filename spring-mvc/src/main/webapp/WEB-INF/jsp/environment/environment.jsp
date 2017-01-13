@@ -3,14 +3,10 @@
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib tagdir="/WEB-INF/tags" prefix="tigr" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<tigr:basetemplate
-        nav="environments"
-        headHeader="Manage your environments"
-        headDescription="TODO eva"
-        tabHeader="Environments">
+<%@include file="../init.jspf" %>
+
+<tigr:crud-template nav="environments">
 <jsp:attribute name="content">
     NEW
     <table class="table table-hover">
@@ -38,4 +34,4 @@
         </tbody>
     </table>
 </jsp:attribute>
-</tigr:basetemplate>
+</tigr:crud-template>

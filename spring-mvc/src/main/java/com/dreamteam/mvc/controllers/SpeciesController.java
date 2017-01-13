@@ -23,15 +23,16 @@ import java.io.IOException;
 @RequestMapping("/species")
 public class SpeciesController {
 
-	private static final Logger LOG = LoggerFactory.getLogger(SpeciesController.class);
-
+	public static final String VIEW_LIST = "species/species";
+	public static final String MODEL_ATTR_SPECIES_LIST = "speciesList";
+	private static final Logger log = LoggerFactory.getLogger(SpeciesController.class);
 	@Autowired
 	private SpeciesFacade speciesFacade;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String list(Model model) {
-		model.addAttribute("speciesList", speciesFacade.getAllSpecieses());
-		return "species/species";
+	public String list(HttpServletRequest request, Model model) {
+		model.addAttribute(MODEL_ATTR_SPECIES_LIST, speciesFacade.getAllSpecieses());
+		return VIEW_LIST;
 	}
 
 	@RequestMapping("delete/{speciesId}")
@@ -44,18 +45,21 @@ public class SpeciesController {
 	public String edit(@PathVariable("speciesId") long speciesId, Model model) {
 		model.addAttribute("data", speciesFacade.getSpeciesById(speciesId));
 		model.addAttribute("continueLink", "/pa165/species/edit-action");
-		model.addAttribute("buttonLabel", "Aktualizovat");
+		model.addAttribute("buttonLabelCode", "tigr-message-crud-update");
 		return "species/species-form";
 	}
 
 	@RequestMapping(value = "edit-action", method = RequestMethod.POST)
-	public void edit(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		/*speciesFacade.changeSpeciesName(dto.getId(), dto.getName());
+	public void edit(@ModelAttribute("data") SpeciesDTO dto,
+					 HttpServletRequest request,
+					 HttpServletResponse response) throws IOException {
+
+		speciesFacade.changeSpeciesName(dto.getId(), dto.getName());
 		speciesFacade.changeSpeciesDescription(dto.getId(), dto.getDescription());
 		if(dto.isInDanger())
 			speciesFacade.setSpeciesInDanger(dto.getId());
 		else
-			speciesFacade.setSpeciesNotInDanger(dto.getId());*/
+			speciesFacade.setSpeciesNotInDanger(dto.getId());
 
 		response.sendRedirect("/pa165/species");
 	}
@@ -64,7 +68,7 @@ public class SpeciesController {
 	public String create(Model model) {
 		model.addAttribute("data", new SpeciesDTO());
 		model.addAttribute("continueLink", "/pa165/species/create-action");
-		model.addAttribute("buttonLabel", "Vytvořit");
+		model.addAttribute("buttonLabelCode", "tigr-message-crud-create");
 		return "species/species-form";
 	}
 

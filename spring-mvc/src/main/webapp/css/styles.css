@@ -1,3 +1,7 @@
+html, body {
+    height: 100%;
+}
+
 h1 {
     color: #369;
     font-family: Roboto, Arial, Helvetica, sans-serif;
@@ -321,8 +325,7 @@ nav a.active {
     margin-right: auto;
     clear: both;
     overflow: auto;
-    min-height: 400px;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 
 .center {
@@ -355,4 +358,78 @@ nav a.active {
 
 .template-body-content {
     padding: 15px;
+}
+
+.container {
+    margin-bottom: 60px;
+}
+
+.footer {
+    border: 0px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.footer img {
+    height: 30px;
+}
+
+.container button {
+    background-color: rgb(64, 64, 64);
+}
+
+.container button:hover {
+    background-color: rgb(51, 102, 153);
+}
+
+.container button.back-button {
+    background-color: rgb(221, 221, 221);
+}
+
+.container button.back-button:hover {
+    background-color: rgb(51, 102, 153);
+}
+
+.container .new-button {
+    margin-bottom: 15px;
+}
+
+.tigr-form-button {
+    float: left;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+section.panel {
+    padding-bottom: 20px;
+    margin-bottom: 35px;
+}
+
+.login-modal-body {
+    background-image: url(../img/computer-user-icon.png);
+    background-color: rgb(221, 221, 221);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 55%;
+    height: 350px;
+    padding: 120px 70px;
+}
+
+.login-modal-body input {
+    opacity: 0.5;
+}
+
+.login-modal-body input:focus {
+    opacity: 0.9;
+    border-color: rgb(4, 140, 13);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(4, 140, 13, 0.6);
+}
+
+.login-modal-body input:hover {
+    opacity: 0.9;
+}
+
+.modal-dialog {
+    margin-top: 100px;
 }
