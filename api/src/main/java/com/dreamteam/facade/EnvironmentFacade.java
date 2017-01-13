@@ -27,6 +27,8 @@ public interface EnvironmentFacade {
 
     Collection<EnvironmentDTO> getAllEnvironments();
 
+    public void deleteEnvironment(int envId);
+
 
     public void deleteAnimal(AnimalDTO animal, EnvironmentDTO e);
 

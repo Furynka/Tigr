@@ -104,4 +104,9 @@ public class EnvironmentFacadeImpl implements EnvironmentFacade {
         mappedEnv.removeAnimal(mappedAnimal);
         envService.update(mappedEnv);
     }
+
+    public void deleteEnvironment(int envId){
+        Environment found = envService.findById(envId);
+        envService.delete(found);
+    }
 }
