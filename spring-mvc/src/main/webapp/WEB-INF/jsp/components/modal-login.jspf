@@ -31,9 +31,9 @@
 </div>
 
 
-<spring:message var="errorEmail" code="tigr-message-species-error-email"/>
-<spring:message var="errorPassRequired" code="tigr-message-species-error-pass-required"/>
-<spring:message var="errorPasslength" code="tigr-message-species-error-pass-minlength"/>
+<spring:message var="errorEmail" code="tigr-message-login-error-email"/>
+<spring:message var="errorPassRequired" code="tigr-message-login-error-pass-required"/>
+<spring:message var="errorPasslength" code="tigr-message-login-error-pass-minlength"/>
 <script>
     $().ready(function () {
         $("#loginForm").validate({
