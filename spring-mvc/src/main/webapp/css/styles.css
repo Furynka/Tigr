@@ -407,11 +407,12 @@ section.panel {
 }
 
 .login-modal-body {
-    background-image: url(../img/computer-user-icon.png);
+    /*background-image: url(../img/computer-user-icon.png);*/
     background-color: rgb(221, 221, 221);
     background-repeat: no-repeat;
-    background-position: center;
-    background-size: 55%;
+    background-position-x: 270px;
+    background-position-y: center;
+    background-size: 30%;
     height: 350px;
     padding: 120px 70px;
 }
@@ -432,4 +433,18 @@ section.panel {
 
 .modal-dialog {
     margin-top: 100px;
+}
+
+#loginForm label.error {
+    padding-left: 10px;
+    font-weight: bold;
+}
+
+div.left-checkbox input {
+    margin-right: 7px;
+}
+
+div.left-checkbox b {
+    position: relative;
+    top: -4px;
 }
