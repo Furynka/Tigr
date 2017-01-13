@@ -23,7 +23,7 @@ public class EnvironmentDaoImpl implements EnvironmentDao {
     }
 
     @Override
-    public Environment findById(int id) {
+    public Environment findById(Long id) {
         return em.find(Environment.class, id);
     }
 
@@ -53,6 +53,6 @@ public class EnvironmentDaoImpl implements EnvironmentDao {
 
     @Override
     public void delete(Environment e) {
-        em.remove(findById(e.getEnvironmentId()));
+        em.remove(findById(e.getId()));
     }
 }

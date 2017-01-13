@@ -42,7 +42,11 @@
                     <spring:message var="confirmMessage"
                                     code="tigr-message-del-confirm-species"
                                     arguments="${environment.name}"/>
-                    EDIT
+
+                    <button class="edit-button js-button"
+                            link="${contextPath}/environments/edit/${environment.id}">
+                        <spring:message code="tigr-message-crud-edit"/>
+                    </button>
 
                     <button class="del-button"
                             link="${contextPath}/environments/delete/${environment.id}"

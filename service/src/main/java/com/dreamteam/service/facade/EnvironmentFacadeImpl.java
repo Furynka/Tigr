@@ -34,7 +34,9 @@ public class EnvironmentFacadeImpl implements EnvironmentFacade {
 
     @Override
     public void createEnvironment(EnvironmentDTO e) {
-        Environment mappedEnv = beanMappingService.mapTo(e, Environment.class);
+        //Environment mappedEnv = beanMappingService.mapTo(e, Environment.class);
+        Environment mappedEnv = new Environment(e.getId());
+
 
         mappedEnv.setName(e.getName());
         mappedEnv.setDescription(e.getDescription());
@@ -64,7 +66,7 @@ public class EnvironmentFacadeImpl implements EnvironmentFacade {
     }
 
     @Override
-    public EnvironmentDTO findEnvironmentById(int id) {
+    public EnvironmentDTO findEnvironmentById(Long id) {
         Environment envEntity = envService.findById(id);
         return (envEntity == null) ? null : beanMappingService.mapTo(envEntity, EnvironmentDTO.class);
     }
@@ -76,7 +78,7 @@ public class EnvironmentFacadeImpl implements EnvironmentFacade {
     }
 
     @Override
-    public void addAnimal(int environmentId, Long animalId) {
+    public void addAnimal(Long environmentId, Long animalId) {
         Environment mappedEnv = envService.findById(environmentId);
         Animal mappedAnimal = animalService.findById(animalId);
         mappedAnimal.addEnvironment(mappedEnv);
@@ -105,7 +107,7 @@ public class EnvironmentFacadeImpl implements EnvironmentFacade {
         envService.update(mappedEnv);
     }
 
-    public void deleteEnvironment(int envId){
+    public void deleteEnvironment(Long envId){
         Environment found = envService.findById(envId);
         envService.delete(found);
     }

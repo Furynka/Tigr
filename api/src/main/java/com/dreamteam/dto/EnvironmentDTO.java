@@ -8,16 +8,16 @@ import java.util.Set;
  * @author Eva Ambrusova
  */
 public class EnvironmentDTO {
-    private int id;
+    private Long id;
     private String name;
     private String description;
     private Set<AnimalDTO> animalsLiving = new HashSet<>();
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -50,40 +50,27 @@ public class EnvironmentDTO {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + id;
-
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + getName().hashCode();
+        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
+        result = 31 * result + (getAnimals() != null ? getAnimals().hashCode() : 0);
         return result;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-        if (o == null){
-            return false;
-        }
-        if (!(o instanceof EnvironmentDTO)){
-            return false;
-        }
+        if (this == o) return true;
+        if (!(o instanceof EnvironmentDTO)) return false;
 
-        EnvironmentDTO other = (EnvironmentDTO) o;
+        EnvironmentDTO env = (EnvironmentDTO) o;
 
-        if (name == null) {
-            if (other.name != null) {
-                return false;
-            }
-        } else if (!name.equals(other.getName())){
+        if (getId() != null ? !getId().equals(env.getId()) : env.getId() != null) return false;
+        if (!getName().equals(env.getName())) return false;
+        if (getDescription() != null ? !getDescription().equals(env.getDescription()) : env.getDescription() != null)
             return false;
-        }
-
-        if (id != other.id){
-            return false;
-        }
-        return true;
+        return getAnimals() != null ?
+                getAnimals().size() == env.getAnimals().size()
+                        && getAnimals().containsAll(env.getAnimals())
+                : env.getAnimals() == null;
     }
 }

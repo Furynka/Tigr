@@ -32,7 +32,7 @@ public class EnvironmentServiceImpl implements EnvironmentService{
     }
 
     @Override
-    public Environment findById(int id){
+    public Environment findById(Long id){
         return envDao.findById(id);
     }
 

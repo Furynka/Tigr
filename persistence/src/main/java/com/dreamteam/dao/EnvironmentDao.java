@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface EnvironmentDao {
     public void create(Environment e);
-    public Environment findById(int id);
+    public Environment findById(Long id);
     public Environment findByName(String name);
     public List<Environment> findAll();
     public Environment update (Environment e);

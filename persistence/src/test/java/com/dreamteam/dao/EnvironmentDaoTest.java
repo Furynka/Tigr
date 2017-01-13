@@ -54,7 +54,7 @@ public class EnvironmentDaoTest extends AbstractTestNGSpringContextTests {
 
     @Test()
     public void findById() {
-        Environment res = environmentDao.findById(env1.getEnvironmentId());
+        Environment res = environmentDao.findById(env1.getId());
         Assert.assertNotNull(res);
         Assert.assertEquals(res.getName(), env1.getName());
     }
@@ -71,7 +71,7 @@ public class EnvironmentDaoTest extends AbstractTestNGSpringContextTests {
         env1.setName("env1_u");
         environmentDao.update(env1);
 
-        Environment res = environmentDao.findById(env1.getEnvironmentId());
+        Environment res = environmentDao.findById(env1.getId());
         Assert.assertNotNull(res);
         Assert.assertEquals(res.getName(), env1.getName());
     }

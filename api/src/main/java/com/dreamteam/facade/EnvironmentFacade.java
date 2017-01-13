@@ -17,17 +17,17 @@ public interface EnvironmentFacade {
 
     public void changeDescription(String description, EnvironmentDTO e);
 
-    EnvironmentDTO findEnvironmentById(int id);
+    EnvironmentDTO findEnvironmentById(Long id);
 
     EnvironmentDTO findEnvironmentByName(String name);
 
-    public void addAnimal(int environmentId, Long animalId);
+    public void addAnimal(Long environmentId, Long animalId);
 
     public Set<AnimalDTO> getAllAnimals(EnvironmentDTO e);
 
     Collection<EnvironmentDTO> getAllEnvironments();
 
-    public void deleteEnvironment(int envId);
+    public void deleteEnvironment(Long envId);
 
 
     public void deleteAnimal(AnimalDTO animal, EnvironmentDTO e);
