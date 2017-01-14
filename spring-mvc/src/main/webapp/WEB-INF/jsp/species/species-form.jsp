@@ -17,25 +17,27 @@
         </div>
         <div class="form-group">
             <label for="description"><spring:message code="tigr-message-species-description"/></label>
-            <form:input path="description" class="form-control"/>
+            <form:textarea path="description" class="form-control"/>
         </div>
 
         <div class="form-group left-checkbox">
             <label><form:checkbox path="inDanger"/>
-                <b><spring:message code="tigr-message-species-in-danger"/></b></label>
+                <b><spring:message code="tigr-message-species-in-danger"/></b>
+            </label>
         </div>
 
-        <button type="submit" class="tigr-form-button">
-            <spring:message code="${buttonLabelCode}"/>
-        </button>
+
+        <div class="btn-group" role="group">
+            <a class="btn btn-default" href="/pa165/species">
+                <spring:message code="tigr-message-back"/>
+            </a>
+            <button type="submit" class="btn btn-success">
+                <spring:message code="${buttonLabelCode}"/>
+            </button>
+        </div>
 
         <form:hidden path="id"/>
     </form:form>
-
-    <button class="js-button tigr-form-button back-button"
-            link="/pa165/species">
-        <spring:message code="tigr-message-back"/>
-    </button>
 
 </jsp:attribute>
 </tigr:crud-template>
