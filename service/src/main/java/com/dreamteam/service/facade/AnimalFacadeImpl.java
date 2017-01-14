@@ -130,5 +130,9 @@ public class AnimalFacadeImpl implements AnimalFacade{
         found.removeEnvironment(beanMappingService.mapTo(environment, Environment.class));
         animalService.update(found);
     }
-    
+
+    @Override
+    public List<AnimalDTO> getTopOfFoodChain() {
+        return beanMappingService.mapTo(animalService.getTopOfFoodChain(), AnimalDTO.class);
+    }
 }

@@ -108,5 +108,5 @@ public interface AnimalFacade {
      */
     public List<AnimalDTO> getAllAnimals();
     
-    
+    public List<AnimalDTO> getTopOfFoodChain();
 }
