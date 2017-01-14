@@ -6,11 +6,11 @@
 <jsp:attribute name="content">
 
 
-    <button link="${contextPath}/species/create" class="new-button js-button">
+    <a href="${contextPath}/species/create" class="btn btn-success btn-new">
         <spring:message code="tigr-message-crud-new"/>
-    </button>
+    </a>
 
-    <table class="table table-hover">
+    <table class="table table-bordered">
         <tr>
             <th><spring:message code="tigr-message-species-name"/></th>
             <th><spring:message code="tigr-message-species-description"/></th>
@@ -45,16 +45,16 @@
                     <spring:message var="confirmMessage"
                                     code="tigr-message-del-confirm-species"
                                     arguments="${species.name}"/>
-
-                    <button class="edit-button js-button"
-                            link="${contextPath}/species/edit/${species.id}">
-                        <spring:message code="tigr-message-crud-edit"/>
-                    </button>
-                    <button class="del-button"
-                            link="${contextPath}/species/delete/${species.id}"
-                            confirmMessage="${confirmMessage}">
-                        <spring:message code="tigr-message-crud-delete"/>
-                    </button>
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-default" href="${contextPath}/species/edit/${species.id}">
+                            <spring:message code="tigr-message-crud-edit"/>
+                        </a>
+                        <c:if test="${not empty worker && worker.administrator}">
+                            <a class="btn btn-danger" href="${contextPath}/species/delete/${species.id}">
+                                <spring:message code="tigr-message-crud-delete"/>
+                            </a>
+                        </c:if>
+                    </div>
                 </td>
             </tr>
     </c:forEach>

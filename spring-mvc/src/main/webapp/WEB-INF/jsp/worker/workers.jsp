@@ -16,7 +16,7 @@
             </thead>
             <tbody>
             <c:forEach items="${workers}" var="srcWorker">
-                <tr>
+                <tr class="<c:out value="${srcWorker.administrator?'warning':''}"/>">
                     <td><c:out value="${srcWorker.id}"/></td>
                     <td><a href="mailto:<c:out value="${srcWorker.email}"/>"><c:out value="${srcWorker.email}"/></a></td>
                     <td><c:out value="${srcWorker.administrator?'yes':'no'}"/></td>

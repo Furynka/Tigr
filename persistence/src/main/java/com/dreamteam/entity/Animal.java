@@ -65,7 +65,8 @@ public class Animal{
 			this.species.removeAnimal(this);
 
         this.species = species;
-		species.addAnimal(this);
+        if (species != null)
+		    species.addAnimal(this);
 	}
 
     public String getDescription() {
