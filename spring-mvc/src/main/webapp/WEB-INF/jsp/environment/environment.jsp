@@ -8,9 +8,10 @@
 
 <tigr:crud-template nav="environments">
 <jsp:attribute name="content">
-        <button link="${contextPath}/environments/create" class="new-button js-button">
-            <spring:message code="tigr-message-crud-new"/>
-        </button>
+
+    <a href="${contextPath}/environments/create" class="btn btn-success btn-new">
+        <spring:message code="tigr-message-crud-new"/>
+    </a>
 
     <table class="table table-hover">
         <thead>
@@ -43,16 +44,17 @@
                                     code="tigr-message-del-confirm-species"
                                     arguments="${environment.name}"/>
 
-                    <button class="edit-button js-button"
-                            link="${contextPath}/environments/edit/${environment.id}">
-                        <spring:message code="tigr-message-crud-edit"/>
-                    </button>
 
-                    <button class="del-button"
-                            link="${contextPath}/environments/delete/${environment.id}"
-                            confirmMessage="${confirmMessage}">
-                        <spring:message code="tigr-message-crud-delete"/>
-                    </button>
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-default" href="${contextPath}/environments/edit/${environment.id}">
+                            <spring:message code="tigr-message-crud-edit"/>
+                        </a>
+                        <c:if test="${not empty worker && worker.administrator}">
+                            <a class="btn btn-danger" href="${contextPath}/environments/delete/${environment.id}">
+                                <spring:message code="tigr-message-crud-delete"/>
+                            </a>
+                        </c:if>
+                    </div>
                 </td>
             </tr>
         </c:forEach>
