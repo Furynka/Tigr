@@ -72,8 +72,8 @@ public class EnvironmentController {
                      HttpServletRequest request,
                      HttpServletResponse response) throws IOException {
 
-        //environmentFacade.changeName(..., dto);
-        //environmentFacade.changeSpeciesDescription(dto.getId(), dto.getDescription());
+        environmentFacade.changeName(dto.getName(), dto);
+        environmentFacade.changeDescription(dto.getDescription(), dto);
 
         response.sendRedirect("/pa165/environments");
     }
