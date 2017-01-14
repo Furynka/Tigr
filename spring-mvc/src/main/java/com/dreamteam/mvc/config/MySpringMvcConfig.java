@@ -44,15 +44,6 @@ public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
 	}
 
 	/**
-	 * Maps the main page to a specific view.
-	 */
-	@Override
-	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/").setViewName("home");
-	}
-
-
-	/**
 	 * Enables default Tomcat servlet that serves static files.
 	 */
 	@Override

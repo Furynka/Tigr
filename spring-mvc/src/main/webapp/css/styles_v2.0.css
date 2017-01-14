@@ -1,0 +1,14 @@
+.btn-new {
+    float: right;
+    margin-top: -40px;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+ }
+
+#footer .locales {
+    float: right;
+}

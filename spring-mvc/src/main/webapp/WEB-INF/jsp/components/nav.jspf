@@ -49,7 +49,8 @@
                 <c:if test="${not empty worker}">
                     <li>
                         <p class="navbar-text">
-                            Hello <c:out value="${worker.email}"/>!
+                            <spring:message code="tigr-message-page-login-hello"/>&nbsp;
+                            <c:out value="${worker.email}"/>
                         </p>
                     </li>
                     <li>

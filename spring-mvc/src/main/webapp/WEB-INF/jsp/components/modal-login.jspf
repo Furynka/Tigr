@@ -3,22 +3,57 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body login-modal-body">
-                <form method="post" action="${contextPath}/workers/login" data-toggle="validator">
+
+                <form id="loginForm"
+                      method="post"
+                      action="${contextPath}/workers/login">
+
                     <div class="form-group">
                         <input type="email" class="form-control" id="email" name="email" value="admin@test.com"
                                placeholder="Login" required>
                         <div class="help-block with-errors"></div>
                     </div>
+
                     <div class="form-group">
-                        <input data-minlength="6" type="password" class="form-control" id="password" name="password"
+                        <input minlength="6" type="password" class="form-control" id="password" name="password"
                                value="password" placeholder="Password" required>
                         <div class="help-block with-errors"></div>
                     </div>
+
                     <button type="submit" class="btn btn-primary">
                         <spring:message code="tigr-message-page-login"/>
                     </button>
                 </form>
+
             </div>
         </div>
     </div>
 </div>
+
+
+<spring:message var="errorEmail" code="tigr-message-login-error-email"/>
+<spring:message var="errorPassRequired" code="tigr-message-login-error-pass-required"/>
+<spring:message var="errorPasslength" code="tigr-message-login-error-pass-minlength"/>
+<script>
+    $().ready(function () {
+        $("#loginForm").validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                },
+                password: {
+                    required: true,
+                    minlength: 5
+                }
+            },
+            messages: {
+                email: "${errorEmail}",
+                password: {
+                    required: "${errorPassRequired}",
+                    minlength: "${errorPasslength}"
+                }
+            }
+        });
+    });
+</script>

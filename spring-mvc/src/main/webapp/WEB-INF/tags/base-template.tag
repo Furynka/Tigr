@@ -12,13 +12,16 @@
     <meta charset="utf-8">
 
     <script src="${contextPath}/js/jquery-2.1.4.min.js"></script>
+    <%--todo download libraries--%>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.8/validator.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
+    <%--<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.8/validator.min.js"></script>--%>
     <script src="${contextPath}/js/bootstrap.min.js"></script>
-    <script src="${contextPath}/js/tigr-scripts.js"></script>
+    <%--<script src="${contextPath}/js/tigr-scripts.js"></script>--%>
 
     <link rel="stylesheet" type="text/css" href="${contextPath}/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="${contextPath}/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/css/styles_v2.0.css"/>
+    <%--<link rel="stylesheet" type="text/css" href="${contextPath}/css/styles.css">--%>
 
     <title><spring:message code="tigr-message-page-title"/></title>
 </head>

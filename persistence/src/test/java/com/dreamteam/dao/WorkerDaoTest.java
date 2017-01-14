@@ -61,9 +61,15 @@ public class WorkerDaoTest extends AbstractTestNGSpringContextTests{
 
     @AfterMethod
     public void clearTestData() {
-        workerDao.delete(worker1);
-        workerDao.delete(worker2);
-        workerDao.delete(worker3);
+        if (workerDao.findById(worker1.getId()) != null) {
+            workerDao.delete(worker1);
+        }
+        if (workerDao.findById(worker2.getId()) != null) {
+            workerDao.delete(worker2);
+        }
+        if (workerDao.findById(worker3.getId()) != null) {
+            workerDao.delete(worker3);
+        }
     }
     
     @Test

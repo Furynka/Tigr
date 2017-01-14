@@ -54,7 +54,9 @@ public class Worker{
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((email == null) ? 0 : email.hashCode());
+        result = prime * result + getEmail().hashCode();
+        result = prime * result + getPasswordHash().hashCode();
+        result = prime * result + (getAdministrator()?1:0);
         return result;
     }
 
@@ -67,10 +69,10 @@ public class Worker{
         if (!(obj instanceof Worker))
             return false;
         Worker other = (Worker) obj;
-        if (email == null) {
+        if (getEmail() == null) {
             if (other.getEmail() != null)
                 return false;
-        } else if (!email.equals(other.getEmail()))
+        } else if (!getEmail().equals(other.getEmail()))
             return false;
         return true;
     }
@@ -78,10 +80,10 @@ public class Worker{
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", passwordHash='" + passwordHash + '\'' +
-                ", email='" + email + '\'' +
-                ", administrator='" + administrator + '\'' +
+                "id=" + getId() +
+                ", passwordHash='" + getPasswordHash() + '\'' +
+                ", email='" + getEmail() + '\'' +
+                ", administrator='" + getAdministrator() + '\'' +
                 '}';
     }
 }

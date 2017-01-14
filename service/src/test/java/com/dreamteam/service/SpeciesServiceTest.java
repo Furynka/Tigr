@@ -2,17 +2,24 @@ package com.dreamteam.service;
 
 import com.dreamteam.dao.SpeciesDao;
 import com.dreamteam.entity.Species;
+import com.dreamteam.service.SpeciesService;
 import com.dreamteam.service.config.ServiceConfig;
 import org.hibernate.service.spi.ServiceException;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,10 +27,11 @@ import java.util.List;
 */
 @ContextConfiguration(classes=ServiceConfig.class)
 public class SpeciesServiceTest extends AbstractTransactionalTestNGSpringContextTests {
-    @Autowired
+    @Mock
     private SpeciesDao speciesDao;
 
-    @Autowired
+    @Inject
+    @InjectMocks
     private SpeciesService speciesService;
 
     private Species species1;
@@ -36,20 +44,30 @@ public class SpeciesServiceTest extends AbstractTransactionalTestNGSpringContext
     @BeforeMethod
     public void createTestData() {
         species1 = new Species();
+        species1.setId(1L);
         species1.setName("species1");
         species1.setDescription("description of species1");
         species1.setInDanger(false);
-        speciesDao.create(species1);
+    }
+
+    @AfterMethod
+    public void mockitoReset() {
+        Mockito.reset(speciesDao);
     }
 
     @Test
     public void testGetSpeciesById() {
+        Mockito.when(speciesDao.findById(species1.getId())).thenReturn(species1);
         Species foundSpecies = speciesService.getSpeciesById(species1.getId());
         Assert.assertEquals(species1, foundSpecies);
     }
 
     @Test
     public void testGetAllSpecieses() {
+        List<Species> speciesList = new ArrayList<>();
+        speciesList.add(species1);
+
+        Mockito.when(speciesDao.findAll()).thenReturn(speciesList);
         List<Species> listOfFoundSpecies = speciesService.getAllSpecieses();
         Assert.assertEquals(listOfFoundSpecies.size(), 1);
         Assert.assertEquals(listOfFoundSpecies.get(0), species1);
@@ -57,20 +75,14 @@ public class SpeciesServiceTest extends AbstractTransactionalTestNGSpringContext
 
     @Test
     public void testUpdateSpecies() {
-        species1.setName("updated");
         speciesService.updateSpecies(species1);
-
-        Species dbSpecies = speciesService.getSpeciesById(species1.getId());
-        Assert.assertEquals(species1, dbSpecies);
+        Mockito.verify(speciesDao).update(species1);
     }
 
 
     @Test
     public void testDeleteSpecies() {
-        Assert.assertEquals(speciesService.getAllSpecieses().size(), 1);
-
         speciesService.deleteSpecies(species1);
-
-        Assert.assertEquals(speciesService.getAllSpecieses().size(), 0);
+        Mockito.verify(speciesDao).delete(species1);
     }
 }
