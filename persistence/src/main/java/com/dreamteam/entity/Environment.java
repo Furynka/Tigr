@@ -15,7 +15,7 @@ public class Environment {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @NotNull
     private String name;
@@ -28,9 +28,13 @@ public class Environment {
 
     public Environment() {}
 
-    public Environment(int envId){ this.id = envId; }
+    public Environment(Long envId){ this.id = envId; }
 
-    public int getEnvironmentId(){ return this.id; }
+    public Long getId(){ return this.id; }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -57,40 +61,27 @@ public class Environment {
 
     @Override
     public boolean equals(Object o){
-        if (o == this) {
-            return true;
-        }
-        if (o == null){
-            return false;
-        }
-        if (!(o instanceof Environment)){
-            return false;
-        }
+        if (this == o) return true;
+        if (!(o instanceof Environment)) return false;
 
-        Environment other = (Environment) o;
+        Environment env = (Environment) o;
 
-        if (name == null) {
-            if (other.name != null) {
-                return false;
-            }
-        } else if (!name.equals(other.getName())){
+        if (getId() != null ? !getId().equals(env.getId()) : env.getId() != null) return false;
+        if (!getName().equals(env.getName())) return false;
+        if (getDescription() != null ? !getDescription().equals(env.getDescription()) : env.getDescription() != null)
             return false;
-        }
-
-        if (id != other.getEnvironmentId()){
-            return false;
-        }
-        return true;
+        return getAnimals() != null ?
+                getAnimals().size() == env.getAnimals().size()
+                        && getAnimals().containsAll(env.getAnimals())
+                : env.getAnimals() == null;
     }
 
     @Override
     public int hashCode(){
-        final int prime = 31;
-        int result = 1;
-
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + id;
-
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + getName().hashCode();
+        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
+        result = 31 * result + (getAnimals() != null ? getAnimals().hashCode() : 0);
         return result;
     }
 

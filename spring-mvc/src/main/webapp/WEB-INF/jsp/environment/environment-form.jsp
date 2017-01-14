@@ -17,16 +17,17 @@
             <form:input path="description" class="form-control"/>
         </div>
 
-        <button type="submit" class="tigr-form-button">
-            <spring:message code="${buttonLabelCode}"/>
-        </button>
+
+        <div class="btn-group" role="group">
+            <a class="btn btn-default" href="/pa165/environments">
+                <spring:message code="tigr-message-back"/>
+            </a>
+            <button type="submit" class="btn btn-success">
+                <spring:message code="${buttonLabelCode}"/>
+            </button>
+        </div>
         <form:hidden path="id"/>
     </form:form>
-
-    <button class="js-button tigr-form-button back-button"
-            link="/pa165/environments">
-        <spring:message code="tigr-message-back"/>
-    </button>
 
 </jsp:attribute>
 </tigr:crud-template>

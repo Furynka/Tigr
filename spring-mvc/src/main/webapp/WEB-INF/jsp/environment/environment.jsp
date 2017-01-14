@@ -8,9 +8,10 @@
 
 <tigr:crud-template nav="environments">
 <jsp:attribute name="content">
-        <button link="${contextPath}/environments/create" class="new-button js-button">
-            <spring:message code="tigr-message-crud-new"/>
-        </button>
+
+    <a href="${contextPath}/environments/create" class="btn btn-success btn-new">
+        <spring:message code="tigr-message-crud-new"/>
+    </a>
 
     <table class="table table-hover">
         <thead>
@@ -28,9 +29,32 @@
                 <td><c:out value="${environment.id}"/></td>
                 <td><c:out value="${environment.name}"/></td>
                 <td><c:out value="${environment.description}"/></td>
-                <td><c:out value="${environment.animals}"/></td>
                 <td>
-                    EDIT DELETE
+                    <c:if test="${empty environment.animals}">
+                        <spring:message code="tigr-message-species-no-animal"/>
+                    </c:if>
+                    <c:if test="${not empty environment.animals}">
+                        <c:forEach items="${environment.animals}" var="animal">
+                            <c:out value="${animal}"/>
+                        </c:forEach>
+                    </c:if>
+                </td>
+                <td>
+                    <spring:message var="confirmMessage"
+                                    code="tigr-message-del-confirm-species"
+                                    arguments="${environment.name}"/>
+
+
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-default" href="${contextPath}/environments/edit/${environment.id}">
+                            <spring:message code="tigr-message-crud-edit"/>
+                        </a>
+                        <c:if test="${not empty worker && worker.administrator}">
+                            <a class="btn btn-danger" href="${contextPath}/environments/delete/${environment.id}">
+                                <spring:message code="tigr-message-crud-delete"/>
+                            </a>
+                        </c:if>
+                    </div>
                 </td>
             </tr>
         </c:forEach>

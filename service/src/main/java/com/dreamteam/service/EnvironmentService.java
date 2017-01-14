@@ -11,7 +11,7 @@ import java.util.List;
 public interface EnvironmentService {
     void create(Environment env);
     void delete(Environment env);
-    Environment findById(int id);
+    Environment findById(Long id);
     Environment findByName(String name);
     List<Environment> findAll();
     Environment update(Environment env);

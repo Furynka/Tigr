@@ -39,12 +39,14 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         long animalId = animalFacade.findAnimalByName("Animal1").getId();
 
         EnvironmentDTO environmentDTO = environment("Environment1", "Environment1Description");
-        environmentFacade.addAnimal(1, animalId);
+        environmentFacade.addAnimal((long) 1, animalId);
 		SpeciesDTO speciesDTO = species("Species1", "Species1Descrition", true);
         speciesFacade.addAnimalIntoSpecies(animalId,
                                            speciesFacade.getAllSpecieses().get(0).getId());
 		species("Species2", "Species2Descrition", false);
 		species("Species3", "Species3Descrition", true);
+
+        environment("Environment2", "Environment1Description 2");
 	}
 
 	private SpeciesDTO species(String name, String description, boolean inDanger) {
