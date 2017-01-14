@@ -5,7 +5,7 @@
 
 <tigr:crud-template nav="environments">
 <jsp:attribute name="content">
-    <form:form modelAttribute="data" method="post" action="${continueLink}">
+    <form:form modelAttribute="data" method="post" action="${continueLink}" cssClass="environment-form">
 
         <div class="form-group">
             <label for="name"> <b><spring:message
@@ -31,3 +31,31 @@
 
 </jsp:attribute>
 </tigr:crud-template>
+
+<spring:message var="errorNameRequired" code="tigr-message-species-error-name-required"/>
+<spring:message var="errorNameLength" code="tigr-message-species-error-name-minlength"/>
+<spring:message var="errorDescRequired" code="tigr-message-species-error-desc"/>
+<script>
+    $().ready(function () {
+        $(".environment-form").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 5
+                },
+                description: {
+                    required: true
+                }
+            },
+            messages: {
+                name: {
+                    required: "${errorNameRequired}",
+                    minlength: "${errorNameLength}"
+                },
+                description: {
+                    required: "${errorDescRequired}"
+                }
+            }
+        });
+    });
+</script>
