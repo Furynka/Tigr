@@ -13,9 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Eva Ambrusova
@@ -81,12 +79,16 @@ public class EnvironmentFacadeImpl implements EnvironmentFacade {
     public void addAnimal(Long environmentId, Long animalId) {
         Environment mappedEnv = envService.findById(environmentId);
         Animal mappedAnimal = animalService.findById(animalId);
+
+        mappedEnv.addAnimal(mappedAnimal);
+        envService.update(mappedEnv);
+
         mappedAnimal.addEnvironment(mappedEnv);
         animalService.update(mappedAnimal);
     }
 
     @Override
-    public Set<AnimalDTO> getAllAnimals(EnvironmentDTO e) {
+    public List<AnimalDTO> getAllAnimals(EnvironmentDTO e) {
         Environment mappedEnv = beanMappingService.mapTo(e, Environment.class);
 
         return e.getAnimals();
@@ -94,8 +96,20 @@ public class EnvironmentFacadeImpl implements EnvironmentFacade {
 
     @Override
     public Collection<EnvironmentDTO> getAllEnvironments() {
-        return beanMappingService.mapTo(envService.findAll(), EnvironmentDTO.class);
+        List<Environment>  envs = envService.findAll();
+        List<EnvironmentDTO> dtos = new ArrayList<>();
 
+        for (Environment env : envs) {
+            EnvironmentDTO dto = new EnvironmentDTO();
+            dto.setDescription(env.getDescription());
+            dto.setName(env.getName());
+            dto.setId(env.getId());
+            dto.setAnimals(beanMappingService.mapTo(env.getAnimals(), AnimalDTO.class));
+            dtos.add(dto);
+        }
+
+        //return beanMappingService.mapTo(envService.findAll(), EnvironmentDTO.class);
+        return dtos;
     }
 
     @Override
