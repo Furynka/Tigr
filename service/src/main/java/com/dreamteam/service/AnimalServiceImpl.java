@@ -26,26 +26,31 @@ public class AnimalServiceImpl implements AnimalService{
 
     @Override
     public void create(Animal animal) {
+        checkNullObject(animal);
         animalDao.create(animal);
     }
 
     @Override
     public void delete(Animal animal) {
+        checkNullObject(animal);
         animalDao.delete(animal);
     }
 
     @Override
     public Animal update(Animal animal) {
+        checkNullObject(animal);
         return animalDao.update(animal);
     }
 
     @Override
     public Animal findById(Long id) {
+        checkNullObject(id);
         return animalDao.findById(id);
     }
 
     @Override
     public Animal findByName(String name) {
+        checkNullObject(name);
         return animalDao.findByName(name);
     }
 
@@ -59,6 +64,12 @@ public class AnimalServiceImpl implements AnimalService{
         List<Animal> topChain = animalDao.getAll().stream().filter(animal -> animal.getPredators().size() == 0).collect(Collectors.toList());
         topChain.sort((a1, a2) -> a2.getPreys().size()-a1.getPreys().size());
         return topChain;
+    }
+    
+    private void checkNullObject(Object object){
+        if (object == null) {
+            throw new IllegalArgumentException();
+        }
     }
 
 }
