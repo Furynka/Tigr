@@ -39,6 +39,14 @@ public class Animal{
 
     @ManyToMany
     private Set<Environment> environments = new HashSet<>();
+    
+    public Animal(){
+        
+    }
+        
+    public Animal(String name){
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
@@ -123,7 +131,9 @@ public class Animal{
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + name.hashCode();
+        result = prime * result + getName().hashCode();
+        result = prime * result + getId().hashCode();
+        result = prime * result + getDescription().hashCode();
         return result;
     }
 
@@ -135,11 +145,18 @@ public class Animal{
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof Animal)){
             return false;
         }
-        final Animal other = (Animal) obj;
-        return this.name.equals(other.name);
+        Animal animalObj = (Animal) obj;
+        
+        if (getName() != null && !getName().equals(animalObj.getName())){
+            return false;
+        }
+        if (getId() != null && !getId().equals(animalObj.getId())){
+            return false;
+        }
+        return true;
     }
       
 }

@@ -16,14 +16,35 @@
             </thead>
             <tbody>
             <c:forEach items="${workers}" var="srcWorker">
-                <tr class="<c:out value="${srcWorker.administrator?'warning':''}"/>">
+                <tr>
                     <td><c:out value="${srcWorker.id}"/></td>
                     <td><a href="mailto:<c:out value="${srcWorker.email}"/>"><c:out value="${srcWorker.email}"/></a></td>
-                    <td><c:out value="${srcWorker.administrator?'yes':'no'}"/></td>
+                    <td>
+                        <input type="checkbox" onchange="changeRole(this)" name="<c:out value="${srcWorker.email}"/>" <c:if test="${srcWorker.administrator}">checked</c:if>/>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
     </div>
+
+    <script>
+        function changeRole(target) {
+            $.ajax({
+                type: "POST",
+                url: "/pa165/workers/changeRole",
+                data: {
+                    email: target.getAttribute("name"),
+                    admin: target.checked
+                },
+                error: function () {
+                    showMessage("Error!", "danger");
+                },
+                success: function () {
+                    showMessage("Success!", "success");
+                }
+            })
+        }
+    </script>
 </jsp:attribute>
 </tigr:crud-template>

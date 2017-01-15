@@ -13,6 +13,8 @@ public interface WorkerFacade {
 
     void changePassword(WorkerIdPasswordDTO w);
 
+    void changeRole(WorkerDTO w);
+
     boolean authenticate(WorkerIdPasswordDTO w);
 
     boolean isAdmin(WorkerDTO w);
