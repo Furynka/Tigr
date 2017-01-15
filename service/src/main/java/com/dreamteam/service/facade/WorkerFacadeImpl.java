@@ -34,6 +34,15 @@ public class WorkerFacadeImpl implements WorkerFacade {
         workerService.changePassword(workerService.findWorkerById(w.getId()), w.getPassword());
     }
 
+    public void changeRole(WorkerDTO w) {
+        Worker dbWorker = workerService.findWorkerByEmail(w.getEmail());
+        if (dbWorker == null) {
+            return;
+        }
+
+        workerService.changeRole(dbWorker, w.getAdministrator());
+    }
+
     public boolean authenticate(WorkerIdPasswordDTO w) {
         return workerService.authenticate(
                 workerService.findWorkerById(w.getId()), w.getPassword());

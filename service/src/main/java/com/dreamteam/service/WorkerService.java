@@ -12,6 +12,8 @@ public interface WorkerService {
 
     void changePassword(Worker w, String password);
 
+    void changeRole(Worker w, boolean admin);
+
     boolean authenticate(Worker w, String password);
 
     boolean isAdmin(Worker w);

@@ -25,6 +25,11 @@ public class WorkerServiceImpl implements WorkerService {
         workerDao.update(w);
     }
 
+    public void changeRole(Worker w, boolean admin) {
+        w.setAdministrator(admin);
+        workerDao.update(w);
+    }
+
     public boolean authenticate(Worker w, String password) {
         return BCrypt.checkpw(password, w.getPasswordHash());
     }
