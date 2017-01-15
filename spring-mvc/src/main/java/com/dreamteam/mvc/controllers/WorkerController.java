@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.Cookie;
@@ -37,6 +38,27 @@ public class WorkerController {
         return mav;
     }
 
+
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public String registration(RedirectAttributes attr, HttpServletResponse response,
+                               @RequestParam(value="email") String email,
+                               @RequestParam(value="password") String password)  throws IOException {
+        if (workerFacade.findWorkerByEmail(email) != null) {
+            attr.addFlashAttribute("message", "User with this email already exists");
+        } else {
+            WorkerDTO workerDTO = new WorkerDTO();
+            workerDTO.setEmail(email);
+            workerDTO.setAdministrator(false);
+            workerFacade.registerWorker(workerDTO, password);
+            WorkerDTO worker = workerFacade.findWorkerByEmail(email);
+
+            Cookie cookie = new Cookie("worker", worker.getId().toString());
+            cookie.setPath("/pa165/");
+            response.addCookie(cookie);
+        }
+
+        return "redirect:/";
+    }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public View login(Model model, HttpServletResponse response,

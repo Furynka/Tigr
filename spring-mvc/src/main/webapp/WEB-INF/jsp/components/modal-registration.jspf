@@ -1,0 +1,60 @@
+<!-- Modal Structure -->
+<div class="modal fade" id="myRegistrationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Registration</h4>
+            </div>
+            <div class="modal-body login-modal-body">
+
+                <form id="registrationForm"
+                      method="post"
+                      action="${contextPath}/workers/registration">
+
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="email" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <input minlength="6" type="password" class="form-control" id="password" name="password" value="password" placeholder="Password" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <spring:message code="tigr-message-page-registration"/>
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<spring:message var="errorEmail" code="tigr-message-login-error-email"/>
+<spring:message var="errorPassRequired" code="tigr-message-login-error-pass-required"/>
+<spring:message var="errorPasslength" code="tigr-message-login-error-pass-minlength"/>
+<script>
+    $().ready(function () {
+        $("#loginForm").validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                },
+                password: {
+                    required: true,
+                    minlength: 5
+                }
+            },
+            messages: {
+                email: "${errorEmail}",
+                password: {
+                    required: "${errorPassRequired}",
+                    minlength: "${errorPasslength}"
+                }
+            }
+        });
+    });
+</script>
