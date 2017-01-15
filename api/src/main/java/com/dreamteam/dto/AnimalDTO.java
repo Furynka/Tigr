@@ -81,10 +81,12 @@ public class AnimalDTO {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + Objects.hashCode(this.id);
-        hash = 67 * hash + Objects.hashCode(this.name);
-        return hash;
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + getName().hashCode();
+        result = prime * result + getId().hashCode();
+        result = prime * result + getDescription().hashCode();
+        return result;
     }
 
     @Override
@@ -95,14 +97,15 @@ public class AnimalDTO {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof AnimalDTO)){
             return false;
         }
-        final AnimalDTO other = (AnimalDTO) obj;
-        if (!Objects.equals(this.name, other.name)) {
+        AnimalDTO animalObj = (AnimalDTO) obj;
+        
+        if (getName() != null && !getName().equals(animalObj.getName())){
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
+        if (getId() != null && !getId().equals(animalObj.getId())){
             return false;
         }
         return true;
