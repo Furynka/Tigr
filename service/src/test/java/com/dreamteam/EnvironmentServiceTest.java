@@ -117,8 +117,8 @@ public class EnvironmentServiceTest extends AbstractTransactionalTestNGSpringCon
 
 	@Test
 	public void findByIdTest() {
-		when(daoMock.findById(1)).thenReturn(forest);
-		assertEquals(forest, service.findById(1));
+		when(daoMock.findById(1L)).thenReturn(forest);
+		assertEquals(forest, service.findById(1L));
 	}
 
 	@Test
