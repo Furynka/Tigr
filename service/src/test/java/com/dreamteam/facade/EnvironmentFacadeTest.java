@@ -1,41 +1,39 @@
 package com.dreamteam.facade;
 
+import com.dreamteam.EnvironmentServiceTest;
 import com.dreamteam.dto.AnimalDTO;
 import com.dreamteam.dto.EnvironmentDTO;
+import com.dreamteam.entity.Animal;
+import com.dreamteam.entity.Environment;
+import com.dreamteam.service.AnimalService;
 import com.dreamteam.service.BeanMappingService;
 import com.dreamteam.service.EnvironmentService;
 import com.dreamteam.service.config.ServiceConfig;
 import com.dreamteam.service.facade.EnvironmentFacadeImpl;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.test.context.ContextConfiguration;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import javax.inject.Inject;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 
 /**
  * Created by jan.novak
  */
 @ContextConfiguration(classes = ServiceConfig.class)
-@RunWith(MockitoJUnitRunner.class)
 public class EnvironmentFacadeTest {
 
 	@Mock
-	private EnvironmentService envService;
+	private EnvironmentService serviceMock;
 	@Mock
-	private BeanMappingService beanMappingService;
+	private AnimalService animalService;
+	@Mock
+	private BeanMappingService mappingMock;
 
-	@Inject
 	@InjectMocks
 	private EnvironmentFacadeImpl environmentFacade;
 
@@ -44,7 +42,6 @@ public class EnvironmentFacadeTest {
 	private AnimalDTO swallow;
 	private AnimalDTO mouse;
 	private AnimalDTO fly;
-	private List<AnimalDTO> animals = new ArrayList<>();
 
 	@BeforeClass
 	public void setup() {
@@ -53,7 +50,10 @@ public class EnvironmentFacadeTest {
 
 	@BeforeMethod
 	public void initializeEntities() {
-		animals.clear();
+		Mockito.reset(serviceMock);
+		Mockito.reset(mappingMock);
+
+
 		forest = new EnvironmentDTO();
 		forest.setName("Forest");
 		forest.setDescription("blablaforest");
@@ -93,19 +93,50 @@ public class EnvironmentFacadeTest {
 		forest.addAnimal(swallow);
 		forest.addAnimal(mouse);
 		forest.addAnimal(fly);
-	}
 
-	@AfterMethod
-	public void resetMocks() {
-		Mockito.reset(envService);
-		Mockito.reset(beanMappingService);
+		Mockito.when(mappingMock.mapTo(forest, Environment.class))
+				.thenReturn(EnvironmentServiceTest.getForest());
+		Mockito.when(mappingMock.mapTo(eagle, Animal.class))
+				.thenReturn(EnvironmentServiceTest.getForest().getAnimals().get(0));
+		Mockito.when(mappingMock.mapTo(swallow, Animal.class))
+				.thenReturn(EnvironmentServiceTest.getForest().getAnimals().get(1));
+		Mockito.when(mappingMock.mapTo(mouse, Animal.class))
+				.thenReturn(EnvironmentServiceTest.getForest().getAnimals().get(2));
+		Mockito.when(mappingMock.mapTo(fly, Animal.class))
+				.thenReturn(EnvironmentServiceTest.getForest().getAnimals().get(3));
 	}
 
 
 	@Test
 	public void createEnvironmentTest() {
 		environmentFacade.createEnvironment(forest);
+		Mockito.verify(serviceMock).create(EnvironmentServiceTest.getForest());
 	}
 
+	@Test
+	public void updateNameTest() {
+		environmentFacade.changeName("newName", forest);
+
+		Environment forestEntity = EnvironmentServiceTest.getForest();
+		forestEntity.setName("newName");
+		Mockito.verify(serviceMock).update(forestEntity);
+	}
+
+	@Test
+	public void updateDescriptionTest() {
+		environmentFacade.changeDescription("newD", forest);
+
+		Environment forestEntity = EnvironmentServiceTest.getForest();
+		forestEntity.setDescription("newD");
+		Mockito.verify(serviceMock).update(forestEntity);
+	}
+
+	@Test
+	public void deleteEnvironmentTest() {
+		Mockito.when(serviceMock.findById(1)).thenReturn(EnvironmentServiceTest.getForest());
+		environmentFacade.deleteEnvironment(1);
+		Mockito.verify(serviceMock).findById(1);
+		Mockito.verify(serviceMock).delete(EnvironmentServiceTest.getForest());
+	}
 
 }

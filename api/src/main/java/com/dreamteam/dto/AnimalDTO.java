@@ -51,9 +51,11 @@ public class AnimalDTO {
         this.description = description;
     }
 
-    public void setCount(int count) { this.count = count; }
-
     public int getCount() { return this.count; }
+
+	public void setCount(int count) {
+		this.count = count;
+	}
 
     public Set<AnimalDTO> getPreys() {
         return preys;
@@ -109,5 +111,18 @@ public class AnimalDTO {
         }
         return true;
     }
-    
+
+	@Override
+	public String toString() {
+		return "AnimalDTO{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", species='" + species + '\'' +
+				", description='" + description + '\'' +
+				", count=" + count +
+				", preys=" + preys +
+				", predators=" + predators +
+				", environments=" + environments +
+				'}';
+	}
 }

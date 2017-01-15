@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -33,19 +32,21 @@ public class EnvironmentFacadeImpl implements EnvironmentFacade {
     private BeanMappingService beanMappingService;
 
     @Override
-    public void createEnvironment(EnvironmentDTO e) {
+    public void createEnvironment(EnvironmentDTO environmentDTO) {
         //Environment mappedEnv = beanMappingService.mapTo(e, Environment.class);
-        Environment mappedEnv = new Environment(e.getId());
+        Environment mappedEnv = new Environment(environmentDTO.getId());
 
 
-        mappedEnv.setName(e.getName());
-        mappedEnv.setDescription(e.getDescription());
+		mappedEnv.setName(environmentDTO.getName());
+		mappedEnv.setDescription(environmentDTO.getDescription());
 
-        for(Iterator<AnimalDTO> i = e.getAnimals().iterator(); i.hasNext(); ) {
+		for (AnimalDTO animalDTO : environmentDTO.getAnimals()) {
+			Animal mappedAnimalEntity = beanMappingService.mapTo(animalDTO, Animal.class);
+			if (mappedAnimalEntity == null)
+				throw new IllegalStateException("Mapped entity is null! DTO from FE: " + environmentDTO + ", animal: " + animalDTO);
 
-            Animal mappedAnimal = beanMappingService.mapTo(i.next(), Animal.class);
-            mappedEnv.addAnimal(mappedAnimal);
-        }
+			mappedEnv.addAnimal(mappedAnimalEntity);
+		}
 
         //save Environment
         envService.create(mappedEnv);
