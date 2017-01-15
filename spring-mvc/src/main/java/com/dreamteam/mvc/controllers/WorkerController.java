@@ -77,10 +77,32 @@ public class WorkerController {
         return ResponseEntity.ok(null);
     }
 
+    @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
+    public ResponseEntity changePassword(HttpServletRequest request,
+                                         @RequestParam(value="oldPassword") String oldPassword,
+                                         @RequestParam(value="newPassword") String newPassword)  throws IOException {
+        WorkerDTO worker = (WorkerDTO) request.getAttribute("worker");
+        if (worker == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+
+
+        WorkerIdPasswordDTO workerIdPasswordDTO = new WorkerIdPasswordDTO();
+        workerIdPasswordDTO.setId(worker.getId());
+        workerIdPasswordDTO.setPassword(oldPassword);
+        if (!workerFacade.authenticate(workerIdPasswordDTO)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+
+        workerIdPasswordDTO.setPassword(newPassword);
+        workerFacade.changePassword(workerIdPasswordDTO);
+        return ResponseEntity.ok(null);
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public View login(Model model, HttpServletResponse response,
-                     @RequestParam(value="email") String email,
-                     @RequestParam(value="password") String password) {
+    public String login(RedirectAttributes attr, HttpServletResponse response,
+                        @RequestParam(value="email") String email,
+                        @RequestParam(value="password") String password) {
         WorkerDTO worker = workerFacade.findWorkerByEmail(email);
         if (worker != null) {
             WorkerIdPasswordDTO workerIdPasswordDTO = new WorkerIdPasswordDTO();
@@ -90,9 +112,14 @@ public class WorkerController {
                 Cookie cookie = new Cookie("worker", worker.getId().toString());
                 cookie.setPath("/pa165/");
                 response.addCookie(cookie);
+            } else {
+                attr.addFlashAttribute("message", "Wrong password");
             }
+        } else {
+            attr.addFlashAttribute("message", "User with this email does not exist");
         }
-        return new RedirectView("/pa165/");
+
+        return "redirect:/";
     }
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public View logout(Model model, HttpServletResponse response) {

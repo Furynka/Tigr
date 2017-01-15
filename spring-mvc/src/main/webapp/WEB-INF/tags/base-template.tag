@@ -56,6 +56,7 @@
 </div>
 
 <%--login modal window--%>
+<%@include file="../jsp/components/modal-changePassword.jspf" %>
 <%@include file="../jsp/components/modal-login.jspf" %>
 <%@include file="../jsp/components/modal-registration.jspf" %>
 

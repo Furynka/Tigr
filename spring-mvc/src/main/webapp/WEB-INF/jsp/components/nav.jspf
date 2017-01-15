@@ -48,18 +48,32 @@
             <ul class="nav navbar-nav navbar-right">
                 <c:if test="${not empty worker}">
                     <li>
-                        <p class="navbar-text">
-                            <spring:message code="tigr-message-page-login-hello"/>&nbsp;
-                            <c:out value="${worker.email}"/>
-                        </p>
+                        <div class="btn-group" style="margin-top: 8px">
+                            <div class="btn btn-default"><c:out value="${worker.email}"/></div>
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#" data-toggle="modal" data-target="#changePasswordModal">Change password</a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li>
+                                    <a href="${pageContext.request.contextPath}/workers/logout">
+                                        <spring:message code="tigr-message-page-logout"/>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
+                </c:if>
+                <c:if test="${empty worker}">
                     <li>
                         <a href="#" data-toggle="modal" data-target="#myRegistrationModal">
                             <spring:message code="tigr-message-page-registration"/>
                         </a>
                     </li>
-                </c:if>
-                <c:if test="${empty worker}">
                     <li>
                         <a href="#" data-toggle="modal" data-target="#myModal">
                             <spring:message code="tigr-message-page-login"/>
