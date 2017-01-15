@@ -4,6 +4,8 @@ import com.dreamteam.dto.WorkerDTO;
 import com.dreamteam.dto.WorkerIdPasswordDTO;
 import com.dreamteam.facade.WorkerFacade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * Created by khudiakov on 15.12.2016.
@@ -58,6 +61,20 @@ public class WorkerController {
         }
 
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "/changeRole", method = RequestMethod.POST)
+    public ResponseEntity changeRole(HttpServletRequest request,
+                                     @RequestParam(value="email") String email,
+                                     @RequestParam(value="admin") Boolean admin)  throws IOException {
+        WorkerDTO worker = (WorkerDTO) request.getAttribute("worker");
+        WorkerDTO workerDTO = workerFacade.findWorkerByEmail(email);
+        if (worker == null || !worker.getAdministrator() || workerDTO == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+        workerDTO.setAdministrator(admin);
+        workerFacade.changeRole(workerDTO);
+        return ResponseEntity.ok(null);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
