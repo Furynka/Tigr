@@ -84,7 +84,6 @@ public class AnimalDTO {
         final int prime = getId() != null ? getId().hashCode() : 31;
         int result = 1;
         result = prime * result + getName().hashCode();
-        result = prime * result + getId().hashCode();
         result = prime * result + getDescription().hashCode();
         return result;
     }
