@@ -13,3 +13,13 @@
 .footer .locales {
     float: right;
 }
+
+#message {
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    margin: -40px 10% 0;
+    width: 80%;
+    font-size: 1.6em;
+    transition: all 1s ease;
+}
