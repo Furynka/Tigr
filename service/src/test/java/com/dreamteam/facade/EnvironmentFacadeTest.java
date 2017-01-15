@@ -133,9 +133,9 @@ public class EnvironmentFacadeTest {
 
 	@Test
 	public void deleteEnvironmentTest() {
-		Mockito.when(serviceMock.findById(1)).thenReturn(EnvironmentServiceTest.getForest());
-		environmentFacade.deleteEnvironment(1);
-		Mockito.verify(serviceMock).findById(1);
+		Mockito.when(serviceMock.findById(1L)).thenReturn(EnvironmentServiceTest.getForest());
+		environmentFacade.deleteEnvironment(1L);
+		Mockito.verify(serviceMock).findById(1L);
 		Mockito.verify(serviceMock).delete(EnvironmentServiceTest.getForest());
 	}
 
