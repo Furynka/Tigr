@@ -30,6 +30,7 @@
 <%--Navigation--%>
 <%@include file="../jsp/components/nav.jspf" %>
 
+<div id="message" class="alert alert-info" style="z-index: 999999"></div>
 
 <div class="container">
     <%--Created by Eva Ambrusova--%>
@@ -58,6 +59,12 @@
 <%@include file="../jsp/components/modal-login.jspf" %>
 <%@include file="../jsp/components/modal-registration.jspf" %>
 
+<script src="${contextPath}/js/scripts.js"></script>
+<script>
+    <c:if test="${not empty message}">
+        showMessage("${message}", "danger");
+    </c:if>
+</script>
 
 </body>
 </html>
