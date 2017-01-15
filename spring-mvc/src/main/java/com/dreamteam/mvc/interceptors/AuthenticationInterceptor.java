@@ -46,9 +46,8 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter  {
                            ModelAndView modelAndView)
             throws Exception {
         WorkerDTO worker = (WorkerDTO)request.getAttribute("worker");
-        if (worker != null) {
-			if (modelAndView != null)
-				modelAndView.getModelMap().addAttribute("worker", worker);
+        if (worker != null && modelAndView != null) {
+            modelAndView.getModelMap().addAttribute("worker", worker);
 		}
 
     }
