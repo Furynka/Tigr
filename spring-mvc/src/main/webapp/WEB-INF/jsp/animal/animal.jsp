@@ -8,7 +8,10 @@
 
 <tigr:crud-template nav="animals">
 <jsp:attribute name="content">
-    NEW
+    <a href="${contextPath}/animals/create" class="btn btn-success btn-new">
+        <spring:message code="tigr-message-crud-new"/>
+    </a>
+    
     <table class="table table-hover">
         <thead>
         <tr>
@@ -26,12 +29,36 @@
             <tr>
                 <td><c:out value="${animal.id}"/></td>
                 <td><c:out value="${animal.name}"/></td>
-                <td><c:out value="${animal.species}"/></td>
+                <td>
+                    <c:if test="${not empty animal.species}">
+                        <c:forEach items="${animal.species}" var="spec">
+                            <c:out value="${spec.name}"/>&nbsp;
+                        </c:forEach>
+                    </c:if>
+                </td>
                 <td><c:out value="${animal.description}"/></td>
-                <td><c:out value="${animal.environments}"/></td>
+                <td>
+                    <c:if test="${not empty animal.environments}">
+                        <c:forEach items="${animal.environments}" var="environment">
+                            <c:out value="${environment.name}"/>&nbsp;
+                        </c:forEach>
+                    </c:if>
+                </td>
                 <td><c:out value="${animal.count}"/></td>
                 <td>
-                    EDIT DELETE
+                    <spring:message var="confirmMessage"
+                                    code="tigr-message-del-confirm-species"
+                                    arguments="${animal.name}"/>
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-default" href="${contextPath}/animals/edit/${animal.id}">
+                            <spring:message code="tigr-message-crud-edit"/>
+                        </a>
+                        <c:if test="${not empty worker && worker.administrator}">
+                            <a class="btn btn-danger" href="${contextPath}/animals/delete/${animal.id}">
+                                <spring:message code="tigr-message-crud-delete"/>
+                            </a>
+                        </c:if>
+                    </div>
                 </td>
             </tr>
         </c:forEach>
