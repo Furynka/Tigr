@@ -30,12 +30,13 @@ public class EnvironmentController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Model model) {
-        Collection<AnimalDTO> top3animals = new ArrayList<>();
+
         Collection<EnvironmentDTO> envs = environmentFacade.getAllEnvironments();
         Collection<Collection<AnimalDTO>> top3animalsCollection = new ArrayList<>();
 
 
         for (EnvironmentDTO e : envs){
+            Collection<AnimalDTO> top3animals = new ArrayList<>();
             top3animals = environmentFacade.getTopThreeEndangeredAnimals(e.getName());
             top3animalsCollection.add(top3animals);
         }

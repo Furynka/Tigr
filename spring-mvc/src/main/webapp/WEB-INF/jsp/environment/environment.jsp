@@ -13,7 +13,7 @@
         <spring:message code="tigr-message-crud-new"/>
     </a>
 
-    <div>
+
     <table class="table table-hover" >
         <thead>
         <tr>
@@ -21,12 +21,13 @@
             <th>Name</th>
             <th>Description</th>
             <th>Animals</th>
+            <th>Top 3 endangered</th>
             <th>Actions</th>
 
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${environmentList}" var="environment">
+        <c:forEach items="${environmentList}" var="environment" varStatus="myIndex">
             <tr>
                 <td><c:out value="${environment.id}"/></td>
                 <td><c:out value="${environment.name}"/></td>
@@ -43,11 +44,15 @@
                 </td>
 
                 <td>
+                    <c:forEach items="${top3animalsList[myIndex.index]}" var="endangeredAnimal">
+                        <c:out value="${endangeredAnimal.name}"/><br />
+                    </c:forEach>
+                </td>
+
+                <td>
                     <spring:message var="confirmMessage"
                                     code="tigr-message-del-confirm-species"
                                     arguments="${environment.name}"/>
-
-
                     <div class="btn-group" role="group">
                         <a class="btn btn-default" href="${contextPath}/environments/edit/${environment.id}">
                             <spring:message code="tigr-message-crud-edit"/>
@@ -66,26 +71,6 @@
         </tbody>
 
     </table>
-    <table class="table table-hover" >
-        <thead>
-        <th>Top 3 endangered</th>
-        </thead>
-        <tbody>
-                    <c:forEach items="${top3animalsList}" var="animalList">
-                        <tr>
-                            <td>
-                        <c:if test="${empty animalList}">
-                            <spring:message code="tigr-message-species-no-animal"/>
-                        </c:if>
-                            <c:forEach items="${animalList}" var="endangeredAnimal">
-                            <c:out value="${endangeredAnimal.name}"/><br />
-                        </c:forEach>
-                            </td>
-                        </tr>
-                    </c:forEach>
-        </tbody>
-    </table>
-    </div>
 </jsp:attribute>
 </tigr:crud-template>
 
