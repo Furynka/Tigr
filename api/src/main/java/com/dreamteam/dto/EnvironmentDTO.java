@@ -73,4 +73,13 @@ public class EnvironmentDTO {
                         && getAnimals().containsAll(env.getAnimals())
                 : env.getAnimals() == null;
     }
+
+	@Override
+	public String toString() {
+		return "EnvironmentDTO{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", description='" + description + '\'' +
+				'}';
+	}
 }

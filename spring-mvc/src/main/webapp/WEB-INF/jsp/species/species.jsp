@@ -29,7 +29,7 @@
                     </c:if>
                     <c:if test="${not empty species.animals}">
                         <c:forEach items="${species.animals}" var="animal">
-                            <c:out value="${animal}"/>
+                            <c:out value="${animal.name}"/>&nbsp;
                         </c:forEach>
                     </c:if>
                 </td>
