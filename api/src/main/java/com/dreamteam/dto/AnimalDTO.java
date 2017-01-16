@@ -12,7 +12,8 @@ public class AnimalDTO {
     private Long id;
     private String name;
     private SpeciesDTO species;
-    private String description;
+	private Long speciesId;
+	private String description;
     private int count;
     private List<AnimalDTO> preys = new ArrayList<>();
     private List<AnimalDTO> predators = new ArrayList<>();
@@ -79,6 +80,14 @@ public class AnimalDTO {
     public void setEnvironments(List<EnvironmentDTO> environments) {
         this.environments = environments;
     }
+
+	public Long getSpeciesId() {
+		return speciesId;
+	}
+
+	public void setSpeciesId(Long speciesId) {
+		this.speciesId = speciesId;
+	}
 
     @Override
     public int hashCode() {

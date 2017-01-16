@@ -10,6 +10,7 @@ import com.dreamteam.entity.Species;
 import com.dreamteam.facade.AnimalFacade;
 import com.dreamteam.service.AnimalService;
 import com.dreamteam.service.BeanMappingService;
+import com.dreamteam.service.SpeciesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,15 +30,25 @@ public class AnimalFacadeImpl implements AnimalFacade{
     
     @Inject
     private AnimalService animalService;
-    
-    @Autowired
+	@Inject
+	private SpeciesService speciesService;
+
+	@Autowired
     private BeanMappingService beanMappingService;
 
     @Override
-    public void createAnimal(AnimalDTO animal) {
-        Animal newAnimal = beanMappingService.mapTo(animal, Animal.class);
-        animalService.create(newAnimal);
-    }
+	public void createAnimal(AnimalDTO animalDTO) {
+		//Animal newAnimal = beanMappingService.mapTo(animal, Animal.class);
+		Animal animal = new Animal();
+		animal.setName(animalDTO.getName());
+		animal.setDescription(animalDTO.getDescription());
+		animal.setCount(animalDTO.getCount());
+
+		//if - because you dont set species in sampleData
+		if (animalDTO.getSpeciesId() != null)
+			animal.setSpecies(speciesService.getSpeciesById(animalDTO.getSpeciesId()));
+		animalService.create(animal);
+	}
 
     @Override
     public AnimalDTO findAnimalById(Long id) {

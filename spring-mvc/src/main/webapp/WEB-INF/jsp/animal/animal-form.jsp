@@ -20,8 +20,8 @@
             <form:input path="count" class="form-control"/>
         </div>
         <div class="form-group">
-            <label for="species"><spring:message code="tigr-message-animal-species"/></label>
-            <form:select path="species" items="${speciesList}" />
+            <label for="speciesId"><spring:message code="tigr-message-animal-species"/></label>
+            <form:select path="speciesId" items="${speciesList}" itemValue="id" itemLabel="name"/>
         </div>
 
 
