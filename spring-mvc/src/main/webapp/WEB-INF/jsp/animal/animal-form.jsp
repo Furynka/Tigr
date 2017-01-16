@@ -8,8 +8,7 @@
     <form:form modelAttribute="data" method="post" action="${continueLink}" cssClass="animal-form">
 
         <div class="form-group">
-            <label for="name"> <b><spring:message
-                    code="tigr-message-species-name"/></b></label>
+            <label for="name"> <b><spring:message code="tigr-message-species-name"/></b></label>
             <form:input path="name" class="form-control"/>
         </div>
         <div class="form-group">
@@ -19,6 +18,10 @@
         <div class="form-group">
             <label for="count"><spring:message code="tigr-message-animal-count"/></label>
             <form:input path="count" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="species"><spring:message code="tigr-message-animal-species"/></label>
+            <form:select path="species" items="${speciesList}" />
         </div>
 
 
@@ -38,6 +41,7 @@
 
 <spring:message var="errorNameRequired" code="tigr-message-species-error-name-required"/>
 <spring:message var="errorDescRequired" code="tigr-message-species-error-desc"/>
+<spring:message var="errorNumberRequired" code="tigr-message-species-error-desc"/>
 <script>
     $().ready(function () {
         $(".animal-form").validate({
@@ -61,8 +65,8 @@
                 description: {
                     required: "${errorDescRequired}"
                 },
-                count {
-                    required: "${errorDescRequired}"
+                count: {
+                    required: "${errorNumberRequired}"
                 }
             }
         });
