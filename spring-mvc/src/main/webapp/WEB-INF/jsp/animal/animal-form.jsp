@@ -16,6 +16,10 @@
             <label for="description"><spring:message code="tigr-message-species-description"/></label>
             <form:input path="description" class="form-control"/>
         </div>
+        <div class="form-group">
+            <label for="count"><spring:message code="tigr-message-animal-count"/></label>
+            <form:input path="count" class="form-control"/>
+        </div>
 
 
         <div class="btn-group" role="group">
@@ -33,7 +37,6 @@
 </tigr:crud-template>
 
 <spring:message var="errorNameRequired" code="tigr-message-species-error-name-required"/>
-<spring:message var="errorNameLength" code="tigr-message-species-error-name-minlength"/>
 <spring:message var="errorDescRequired" code="tigr-message-species-error-desc"/>
 <script>
     $().ready(function () {
@@ -41,18 +44,24 @@
             rules: {
                 name: {
                     required: true,
-                    minlength: 5
                 },
                 description: {
                     required: true
+                },
+                count: {
+                    required: true,
+                    number: true,
+                    min: 0
                 }
             },
             messages: {
                 name: {
                     required: "${errorNameRequired}",
-                    minlength: "${errorNameLength}"
                 },
                 description: {
+                    required: "${errorDescRequired}"
+                },
+                count {
                     required: "${errorDescRequired}"
                 }
             }
