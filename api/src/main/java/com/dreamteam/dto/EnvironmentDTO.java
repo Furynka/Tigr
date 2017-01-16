@@ -1,8 +1,8 @@
 package com.dreamteam.dto;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Eva Ambrusova
@@ -11,7 +11,7 @@ public class EnvironmentDTO {
     private Long id;
     private String name;
     private String description;
-    private List<AnimalDTO> animalsLiving = new ArrayList<>();
+    private Set<AnimalDTO> animalsLiving = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -42,12 +42,8 @@ public class EnvironmentDTO {
         this.animalsLiving.add(animal);
     }
 
-    public List<AnimalDTO> getAnimals() {
-        return Collections.unmodifiableList(animalsLiving);
-    }
-
-    public void setAnimals(List<AnimalDTO> animals) {
-        this.animalsLiving = animals;
+    public Set<AnimalDTO> getAnimals() {
+        return Collections.unmodifiableSet(animalsLiving);
     }
 
     public void removeAnimal(AnimalDTO animalLiving) { this.animalsLiving.remove(animalLiving); }
