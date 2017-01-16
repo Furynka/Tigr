@@ -20,8 +20,20 @@
             <form:input path="count" class="form-control"/>
         </div>
         <div class="form-group">
+            <label for="species"><spring:message code="tigr-message-animal-environment"/></label>
+            <form:select path="species" items="${environmentList}" itemLabel="name" class="form-control" />
+        </div>
+        <div class="form-group">
             <label for="species"><spring:message code="tigr-message-animal-species"/></label>
-            <form:select path="species" items="${speciesList}" />
+            <form:select path="species" items="${speciesList}" itemLabel="name" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="predators"><spring:message code="tigr-message-animal-predators"/></label>
+            <form:select path="predators" items="${predatorsList}" multiple="true" itemLabel="name" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="preys"><spring:message code="tigr-message-animal-preys"/></label>
+            <form:select path="preys" items="${preysList}" multiple="true" itemLabel="name" class="form-control"/>
         </div>
 
 

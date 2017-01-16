@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.dreamteam.facade.SpeciesFacade;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import com.dreamteam.facade.EnvironmentFacade;
 
 /**
  *
@@ -31,6 +29,9 @@ public class AnimalController {
     
     @Autowired
     private SpeciesFacade speciesFacade;
+    
+    @Autowired
+    private EnvironmentFacade environmentFacade;
 
     @RequestMapping(method = RequestMethod.GET)
     public String list(Model model) {
@@ -43,13 +44,10 @@ public class AnimalController {
         model.addAttribute("data", new AnimalDTO());
         model.addAttribute("continueLink", "/pa165/animals/create-action");
         model.addAttribute("buttonLabelCode", "tigr-message-crud-create");
-        List<SpeciesDTO> list = speciesFacade.getAllSpecieses();
-        Set<String> speciesNames = new HashSet<>();
-        for (SpeciesDTO dto : list)
-        {
-            speciesNames.add(dto.getName());
-        }
-        model.addAttribute("speciesList", speciesNames);
+        model.addAttribute("speciesList", speciesFacade.getAllSpecieses());
+        model.addAttribute("environmentList", environmentFacade.getAllEnvironments());
+        model.addAttribute("predatorsList", animalFacade.getAllAnimals());
+        model.addAttribute("preysList", animalFacade.getAllAnimals());
         return "animal/animal-form";
     }
     
