@@ -116,7 +116,7 @@ public class AnimalDTO {
 		return "AnimalDTO{" +
 				"id=" + id +
 				", name='" + name + '\'' +
-				", species='" + species + '\'' +
+				//", species='" + species + '\'' +
 				", description='" + description + '\'' +
 				", count=" + count +
 				", preys=" + preys +
