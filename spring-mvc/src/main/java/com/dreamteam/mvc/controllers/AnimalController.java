@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import com.dreamteam.facade.SpeciesFacade;
+import com.dreamteam.facade.EnvironmentFacade;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +31,9 @@ public class AnimalController {
     @Autowired
     private SpeciesFacade speciesFacade;
 
+    @Autowired
+    private EnvironmentFacade environmentFacade;
+
     @RequestMapping(method = RequestMethod.GET)
     public String list(Model model) {
             model.addAttribute("animalList", animalFacade.getAllAnimals());
@@ -41,7 +46,11 @@ public class AnimalController {
         model.addAttribute("continueLink", "/pa165/animals/create-action");
         model.addAttribute("buttonLabelCode", "tigr-message-crud-create");
 		model.addAttribute("speciesList", speciesFacade.getAllSpecieses());
-		return "animal/animal-form";
+
+	      model.addAttribute("environmentList", environmentFacade.getAllEnvironments());
+        model.addAttribute("predatorsList", animalFacade.getAllAnimals());
+        model.addAttribute("preysList", animalFacade.getAllAnimals());
+        return "animal/animal-form";
     }
     
     
