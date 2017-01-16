@@ -30,7 +30,7 @@
                 <td><c:out value="${animal.id}"/></td>
                 <td><c:out value="${animal.name}"/></td>
                 <td>
-                    <c:out value="${animal.species}"/>
+                    <c:out value="${animal.species.name}"/>
                 </td>
                 <td><c:out value="${animal.description}"/></td>
                 <td>

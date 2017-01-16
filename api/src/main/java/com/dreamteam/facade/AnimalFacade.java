@@ -46,6 +46,13 @@ public interface AnimalFacade {
      */
     public void changeAnimalSpecies(long id, SpeciesDTO species);
     
+    /**
+     * Updates existing Animal entity;
+     * @param id id of Animal to be updated
+     * @param count count of living animals
+     */
+    public void changeAnimalCount(long id, int count);
+    
      /**
      * Updates existing Animal entity;
      * @param id id of Animal to be updated
