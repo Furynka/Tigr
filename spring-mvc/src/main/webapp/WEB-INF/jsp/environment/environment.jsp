@@ -35,7 +35,7 @@
                     </c:if>
                     <c:if test="${not empty environment.animals}">
                         <c:forEach items="${environment.animals}" var="animal">
-                            <c:out value="${animal}"/>
+                            <c:out value="${animal.name}"/>
                         </c:forEach>
                     </c:if>
                 </td>
