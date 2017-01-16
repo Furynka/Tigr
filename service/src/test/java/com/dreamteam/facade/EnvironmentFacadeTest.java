@@ -19,7 +19,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by jan.novak
@@ -58,7 +59,7 @@ public class EnvironmentFacadeTest {
 		forest.setName("Forest");
 		forest.setDescription("blablaforest");
 
-		HashSet<EnvironmentDTO> forestSet = new HashSet<>();
+		List<EnvironmentDTO> forestSet = new ArrayList<>();
 		forestSet.add(forest);
 
 		eagle = new AnimalDTO();

@@ -1,8 +1,7 @@
 package com.dreamteam.dto;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Data Transfer Object for Animal entity
@@ -15,9 +14,9 @@ public class AnimalDTO {
     private String species;
     private String description;
     private int count;
-    private Set<AnimalDTO> preys = new HashSet<>();
-    private Set<AnimalDTO> predators = new HashSet<>();
-    private Set<EnvironmentDTO> environments = new HashSet<>();
+    private List<AnimalDTO> preys = new ArrayList<>();
+    private List<AnimalDTO> predators = new ArrayList<>();
+    private List<EnvironmentDTO> environments = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -57,27 +56,27 @@ public class AnimalDTO {
 		this.count = count;
 	}
 
-    public Set<AnimalDTO> getPreys() {
+    public List<AnimalDTO> getPreys() {
         return preys;
     }
 
-    public void setPreys(Set<AnimalDTO> preys) {
+    public void setPreys(List<AnimalDTO> preys) {
         this.preys = preys;
     }
 
-    public Set<AnimalDTO> getPredators() {
+    public List<AnimalDTO> getPredators() {
         return predators;
     }
 
-    public void setPredators(Set<AnimalDTO> predators) {
+    public void setPredators(List<AnimalDTO> predators) {
         this.predators = predators;
     }
 
-    public Set<EnvironmentDTO> getEnvironments() {
+    public List<EnvironmentDTO> getEnvironments() {
         return environments;
     }
 
-    public void setEnvironments(Set<EnvironmentDTO> environments) {
+    public void setEnvironments(List<EnvironmentDTO> environments) {
         this.environments = environments;
     }
 
@@ -85,8 +84,8 @@ public class AnimalDTO {
     public int hashCode() {
         final int prime = getId() != null ? getId().hashCode() : 31;
         int result = 1;
-        result = prime * result + getName().hashCode();
-        result = prime * result + getDescription().hashCode();
+        result = prime * result + /*getName().hashCode()*/ (getName() != null ? getName().hashCode() : 0);
+        result = prime * result + /*getDescription().hashCode()*/ (getDescription() != null ? getDescription().hashCode() : 0);
         return result;
     }
 

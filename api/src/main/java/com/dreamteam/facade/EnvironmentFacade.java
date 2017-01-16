@@ -4,7 +4,6 @@ import com.dreamteam.dto.AnimalDTO;
 import com.dreamteam.dto.EnvironmentDTO;
 
 import java.util.Collection;
-import java.util.Set;
 
 /**
  * @author Eva Ambrusova
@@ -23,7 +22,7 @@ public interface EnvironmentFacade {
 
     public void addAnimal(Long environmentId, Long animalId);
 
-    public Set<AnimalDTO> getAllAnimals(EnvironmentDTO e);
+    public Collection<AnimalDTO> getAllAnimals(EnvironmentDTO e);
 
     Collection<EnvironmentDTO> getAllEnvironments();
 
