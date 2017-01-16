@@ -1,6 +1,6 @@
 package com.dreamteam.facade;
 
-import com.dreamteam.EnvironmentServiceTest;
+import com.dreamteam.service.EnvironmentServiceTest;
 import com.dreamteam.dto.AnimalDTO;
 import com.dreamteam.dto.EnvironmentDTO;
 import com.dreamteam.entity.Animal;

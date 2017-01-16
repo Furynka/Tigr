@@ -123,7 +123,16 @@ public class EnvironmentFacadeImpl implements EnvironmentFacade {
     }
 
     public void deleteEnvironment(Long envId){
+
         Environment found = envService.findById(envId);
+
+        //Constraint violation
+        List<Animal> animals = found.getAnimals();
+
+        for (Animal animal : animals) {
+            animal.removeEnvironment(found);
+            animalService.update(animal);
+        }
         envService.delete(found);
     }
 
