@@ -1,6 +1,5 @@
 package com.dreamteam.facade;
 
-import com.dreamteam.EnvironmentServiceTest;
 import com.dreamteam.dto.AnimalDTO;
 import com.dreamteam.dto.EnvironmentDTO;
 import com.dreamteam.entity.Animal;
@@ -8,6 +7,7 @@ import com.dreamteam.entity.Environment;
 import com.dreamteam.service.AnimalService;
 import com.dreamteam.service.BeanMappingService;
 import com.dreamteam.service.EnvironmentService;
+import com.dreamteam.service.EnvironmentServiceTest;
 import com.dreamteam.service.config.ServiceConfig;
 import com.dreamteam.service.facade.EnvironmentFacadeImpl;
 import org.mockito.InjectMocks;

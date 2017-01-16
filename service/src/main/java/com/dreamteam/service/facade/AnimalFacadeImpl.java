@@ -88,6 +88,13 @@ public class AnimalFacadeImpl implements AnimalFacade{
         found.setSpecies(beanMappingService.mapTo(species, Species.class));
         animalService.update(found);
     }
+    
+    @Override
+    public void changeAnimalCount(long id, int count) {
+        Animal found = animalService.findById(id);
+        found.setCount(count);
+        animalService.update(found);
+    }
 
     @Override
     public void addAnimalPredator(long id, AnimalDTO predator) {
