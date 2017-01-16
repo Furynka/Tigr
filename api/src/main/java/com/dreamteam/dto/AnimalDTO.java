@@ -11,7 +11,7 @@ import java.util.List;
 public class AnimalDTO {
     private Long id;
     private String name;
-    private String species;
+    private SpeciesDTO species;
     private String description;
     private int count;
     private List<AnimalDTO> preys = new ArrayList<>();
@@ -34,11 +34,11 @@ public class AnimalDTO {
         this.name = name;
     }
 
-    public String getSpecies() {
+    public SpeciesDTO getSpecies() {
         return species;
     }
 
-    public void setSpecies(String species) {
+    public void setSpecies(SpeciesDTO species) {
         this.species = species;
     }
 

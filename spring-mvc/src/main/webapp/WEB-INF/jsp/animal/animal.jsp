@@ -30,11 +30,7 @@
                 <td><c:out value="${animal.id}"/></td>
                 <td><c:out value="${animal.name}"/></td>
                 <td>
-                    <c:if test="${not empty animal.species}">
-                        <c:forEach items="${animal.species}" var="spec">
-                            <c:out value="${spec.name}"/>&nbsp;
-                        </c:forEach>
-                    </c:if>
+                    <c:out value="${animal.species}"/>
                 </td>
                 <td><c:out value="${animal.description}"/></td>
                 <td>
