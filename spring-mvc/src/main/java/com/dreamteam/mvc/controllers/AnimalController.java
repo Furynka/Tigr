@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import com.dreamteam.facade.SpeciesFacade;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -24,6 +28,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class AnimalController {
     @Autowired
     private AnimalFacade animalFacade;
+    
+    @Autowired
+    private SpeciesFacade speciesFacade;
 
     @RequestMapping(method = RequestMethod.GET)
     public String list(Model model) {
@@ -36,8 +43,16 @@ public class AnimalController {
         model.addAttribute("data", new AnimalDTO());
         model.addAttribute("continueLink", "/pa165/animals/create-action");
         model.addAttribute("buttonLabelCode", "tigr-message-crud-create");
+        List<SpeciesDTO> list = speciesFacade.getAllSpecieses();
+        Set<String> speciesNames = new HashSet<>();
+        for (SpeciesDTO dto : list)
+        {
+            speciesNames.add(dto.getName());
+        }
+        model.addAttribute("speciesList", speciesNames);
         return "animal/animal-form";
     }
+    
     
     @RequestMapping(value = "create-action", method = RequestMethod.POST)
     public void create(@ModelAttribute("data") AnimalDTO animal, HttpServletResponse response) throws IOException {
