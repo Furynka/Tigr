@@ -35,18 +35,25 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 		worker("worker@test.com", "password", false);
 
 
-        AnimalDTO animalDTO = animal("Animal1", "Animal1Description", 1);
-        long animalId = animalFacade.findAnimalByName("Animal1").getId();
+        AnimalDTO animalDTO = animal("Animal1", "Animal1Description", 5);
+        AnimalDTO animalDTO2 = animal("Animal2", "Animal2Description", 3);
+        long animalId1 = animalFacade.findAnimalByName("Animal1").getId();
+        long animalId2 = animalFacade.findAnimalByName("Animal2").getId();
+    /*    List<AnimalDTO> preys = new ArrayList<>();
+        preys.add(animalDTO2);
+        animalDTO.setPreys(preys);*/
 
         EnvironmentDTO environmentDTO = environment("Environment1", "Environment1Description");
-        environmentFacade.addAnimal((long) 1, animalId);
+        environmentFacade.addAnimal((long) 1, animalId1);
+        environmentFacade.addAnimal((long) 1, animalId2);
 		SpeciesDTO speciesDTO = species("Species1", "Species1Descrition", true);
-        speciesFacade.addAnimalIntoSpecies(animalId,
+        speciesFacade.addAnimalIntoSpecies(animalId1,
                                            speciesFacade.getAllSpecieses().get(0).getId());
 		species("Species2", "Species2Descrition", false);
 		species("Species3", "Species3Descrition", true);
 
         environment("Environment2", "Environment1Description 2");
+        environmentFacade.addAnimal((long) 2, animalId1);
 	}
 
 	private SpeciesDTO species(String name, String description, boolean inDanger) {
