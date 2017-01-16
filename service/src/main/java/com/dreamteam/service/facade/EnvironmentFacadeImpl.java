@@ -126,4 +126,9 @@ public class EnvironmentFacadeImpl implements EnvironmentFacade {
         Environment found = envService.findById(envId);
         envService.delete(found);
     }
+
+    @Override
+    public List<AnimalDTO> getTopThreeEndangeredAnimals(String envName) {
+        return beanMappingService.mapTo(envService.getTopThreeEndangeredAnimals(envName), AnimalDTO.class);
+    }
 }

@@ -1,6 +1,7 @@
 
 package com.dreamteam.mvc.controllers;
 
+import com.dreamteam.dto.AnimalDTO;
 import com.dreamteam.dto.EnvironmentDTO;
 import com.dreamteam.facade.EnvironmentFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -28,8 +30,22 @@ public class EnvironmentController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Model model) {
+        Collection<AnimalDTO> top3animals = new ArrayList<>();
         Collection<EnvironmentDTO> envs = environmentFacade.getAllEnvironments();
+        Collection<Collection<AnimalDTO>> top3animalsCollection = new ArrayList<>();
+
+
+        for (EnvironmentDTO e : envs){
+            top3animals = environmentFacade.getTopThreeEndangeredAnimals(e.getName());
+            top3animalsCollection.add(top3animals);
+        }
+
+
+        //envs.iterator().next().
+        model.addAttribute("top3animalsList", top3animalsCollection);
 		model.addAttribute("environmentList", envs);
+
+
 		return "environment/environment";
 	}
 
