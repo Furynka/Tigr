@@ -12,8 +12,11 @@ public class AnimalDTO {
     private Long id;
     private String name;
     private SpeciesDTO species;
-	private Long speciesId;
-	private String description;
+    private Long speciesId;
+    private List<Long> environmentId;
+    private List<Long> predatorId;
+    private List<Long> preysId;
+    private String description;
     private int count;
     private List<AnimalDTO> preys = new ArrayList<>();
     private List<AnimalDTO> predators = new ArrayList<>();
@@ -41,6 +44,30 @@ public class AnimalDTO {
 
     public void setSpecies(SpeciesDTO species) {
         this.species = species;
+    }
+    
+    public List<Long> getEnvironmentId() {
+        return environmentId;
+    }
+
+    public void setEnvironmentId(List<Long> id) {
+        this.environmentId = id;
+    }
+    
+    public List<Long> getPredatorId() {
+        return predatorId;
+    }
+
+    public void setPredatortId(List<Long> id) {
+        this.predatorId = id;
+    }
+    
+    public List<Long> getPreysId() {
+        return preysId;
+    }
+
+    public void setPreysId(List<Long> id) {
+        this.preysId = id;
     }
 
     public String getDescription() {
@@ -128,9 +155,9 @@ public class AnimalDTO {
 				//", species='" + species + '\'' +
 				", description='" + description + '\'' +
 				", count=" + count +
-				", preys=" + preys +
-				", predators=" + predators +
-				", environments=" + environments +
+				//", preys=" + preys +
+				//", predators=" + predators +
+				//", environments=" + environments +
 				'}';
 	}
 }

@@ -15,11 +15,12 @@
     <table class="table table-hover">
         <thead>
         <tr>
-            <th>ID</th>
             <th>Name</th>
             <th>Species</th>
             <th>Description</th>
             <th>Environments</th>
+            <th>Predators</th>
+            <th>Preys</th>
             <th>Count</th>
             <th>Actions</th>
         </tr>
@@ -27,7 +28,6 @@
         <tbody>
         <c:forEach items="${animalList}" var="animal">
             <tr>
-                <td><c:out value="${animal.id}"/></td>
                 <td><c:out value="${animal.name}"/></td>
                 <td>
                     <c:out value="${animal.species.name}"/>
@@ -37,6 +37,20 @@
                     <c:if test="${not empty animal.environments}">
                         <c:forEach items="${animal.environments}" var="environment">
                             <c:out value="${environment.name}"/>&nbsp;
+                        </c:forEach>
+                    </c:if>
+                </td>
+                <td>
+                    <c:if test="${not empty animal.predators}">
+                        <c:forEach items="${animal.predators}" var="predator">
+                            <c:out value="${predator.name}"/>&nbsp;
+                        </c:forEach>
+                    </c:if>
+                </td>
+                <td>
+                    <c:if test="${not empty animal.preys}">
+                        <c:forEach items="${animal.preys}" var="prey">
+                            <c:out value="${prey.name}"/>&nbsp;
                         </c:forEach>
                     </c:if>
                 </td>

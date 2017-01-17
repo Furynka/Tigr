@@ -20,28 +20,20 @@
             <form:input path="count" class="form-control"/>
         </div>
 
-        johnnyho select
         <div class="form-group">
             <label for="speciesId"><spring:message code="tigr-message-animal-species"/></label>
-            <form:select path="speciesId" items="${speciesList}" itemValue="id" itemLabel="name"/>
-        </div>
-
-                <div class="form-group">
-                    <label for="species"><spring:message code="tigr-message-animal-environment"/></label>
-                    <form:select path="species" items="${environmentList}" itemLabel="name" class="form-control" />
-                </div>
-        <div class="form-group">
-            <label for="species"><spring:message code="tigr-message-animal-species"/></label>
-            <form:select path="species" items="${speciesList}" itemLabel="name" class="form-control"/>
+            <form:select path="speciesId" items="${speciesList}" itemValue="id" itemLabel="name" class="form-control"/>
         </div>
         <div class="form-group">
-            <label for="predators"><spring:message code="tigr-message-animal-predators"/></label>
-            <form:select path="predators" items="${predatorsList}" multiple="true" itemLabel="name" class="form-control"/>
+            <label for="environmentId"><spring:message code="tigr-message-animal-environment"/></label>
+            <form:select path="environmentId" items="${environmentList}" multiple="true" itemLabel="name" itemValue ="id" class="form-control"/>
         </div>
         <div class="form-group">
-            <label for="preys"><spring:message code="tigr-message-animal-preys"/></label>
-            <form:select path="preys" items="${preysList}" multiple="true" itemLabel="name" class="form-control"/>
+            <label for="preysId"><spring:message code="tigr-message-animal-preys"/></label>
+            <form:select path="preysId" items="${preysList}" multiple="true" itemLabel="name" itemValue ="id" class="form-control"/>
         </div>
+        
+       
 
 
         <div class="btn-group" role="group">
@@ -60,7 +52,7 @@
 
 <spring:message var="errorNameRequired" code="tigr-message-species-error-name-required"/>
 <spring:message var="errorDescRequired" code="tigr-message-species-error-desc"/>
-<spring:message var="errorNumberRequired" code="tigr-message-species-error-desc"/>
+<spring:message var="errorNumberRequired" code="tigr-message-animal-error-number-required"/>
 <script>
     $().ready(function () {
         $(".animal-form").validate({
@@ -75,6 +67,9 @@
                     required: true,
                     number: true,
                     min: 0
+                },
+                environmentId: {
+                    required: true
                 }
             },
             messages: {

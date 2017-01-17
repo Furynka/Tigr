@@ -116,4 +116,10 @@ public interface AnimalFacade {
     public List<AnimalDTO> getAllAnimals();
     
     public List<AnimalDTO> getTopOfFoodChain();
+    
+    public void clearEnvironments(Long id);
+    
+    public void clearPredators(Long id);
+    
+    public void clearPreys(Long id);
 }
