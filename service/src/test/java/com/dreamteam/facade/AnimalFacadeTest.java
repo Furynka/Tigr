@@ -88,12 +88,6 @@ public class AnimalFacadeTest {
     }
 
     @Test
-    public void createAnimalTest() {
-        animalFacade.createAnimal(eagleDTO);
-        Mockito.verify(animalService).create(eagle);
-    }
-
-    @Test
     public void changeAnimalNameTest() {
         final String newName = "newName";
         eagleDTO.setName(newName);
