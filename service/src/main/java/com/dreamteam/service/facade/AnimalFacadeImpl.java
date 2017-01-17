@@ -10,6 +10,8 @@ import com.dreamteam.entity.Species;
 import com.dreamteam.facade.AnimalFacade;
 import com.dreamteam.service.AnimalService;
 import com.dreamteam.service.BeanMappingService;
+import com.dreamteam.service.EnvironmentService;
+import com.dreamteam.service.SpeciesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,15 +31,70 @@ public class AnimalFacadeImpl implements AnimalFacade{
     
     @Inject
     private AnimalService animalService;
-    
+    @Inject
+    private SpeciesService speciesService;
+    @Inject
+    private EnvironmentService environmentService;
     @Autowired
     private BeanMappingService beanMappingService;
+        
+    public void clearEnvironments(Long id){
+        Animal found = animalService.findById(id);
+        found.clearEnvironments();
+        animalService.update(found);
+    }
+    
+    public void clearPredators(Long id){
+        Animal found = animalService.findById(id);
+        found.clearPredators();
+        animalService.update(found);
+    }
+    
+    public void clearPreys(Long id){
+        Animal found = animalService.findById(id);
+        found.clearPreys();
+        animalService.update(found);
+    }
 
     @Override
-    public void createAnimal(AnimalDTO animal) {
-        Animal newAnimal = beanMappingService.mapTo(animal, Animal.class);
-        animalService.create(newAnimal);
-    }
+	public void createAnimal(AnimalDTO animalDTO) {
+		//Animal newAnimal = beanMappingService.mapTo(animal, Animal.class);
+		Animal animal = new Animal();
+		animal.setName(animalDTO.getName());
+		animal.setDescription(animalDTO.getDescription());
+		animal.setCount(animalDTO.getCount());
+
+		//if - because you dont set species in sampleData
+		if (animalDTO.getSpeciesId() != null)
+			animal.setSpecies(speciesService.getSpeciesById(animalDTO.getSpeciesId()));
+                if (animalDTO.getEnvironmentId()!= null)
+                {
+                    animal.clearEnvironments();
+                    for (Long id : animalDTO.getEnvironmentId())
+                    {
+                        animal.addEnvironment(environmentService.findById(id));
+                    }
+                }
+                
+                if (animalDTO.getPredatorId()!= null)
+                {
+                    animal.clearPredators();
+                    for (Long id : animalDTO.getPredatorId())
+                    {
+                        animal.addPredator(animalService.findById(id));
+                    }
+                }
+                        
+                if (animalDTO.getPreysId()!= null)
+                {
+                    animal.clearPreys();
+                    for (Long id : animalDTO.getPreysId())
+                    {
+                        animal.addPrey(animalService.findById(id));
+                    }
+                }
+		animalService.create(animal);
+	}
 
     @Override
     public AnimalDTO findAnimalById(Long id) {
@@ -97,17 +154,25 @@ public class AnimalFacadeImpl implements AnimalFacade{
     }
 
     @Override
-    public void addAnimalPredator(long id, AnimalDTO predator) {
-        Animal found = animalService.findById(id);
-        found.addPredator(beanMappingService.mapTo(predator, Animal.class));
-        animalService.update(found);
+    public void addAnimalPredator(long id, AnimalDTO predatorDTO) {
+        Animal prey = animalService.findById(id);
+        Animal predator = animalService.findByName(predatorDTO.getName());
+        prey.addPredator(predator);
+        predator.addPrey(prey);
+
+        animalService.update(predator);
+        animalService.update(prey);
     }
 
     @Override
-    public void addAnimalPrey(long id, AnimalDTO prey) {
-        Animal found = animalService.findById(id);
-        found.addPrey(beanMappingService.mapTo(prey, Animal.class));
-        animalService.update(found);
+    public void addAnimalPrey(long id, AnimalDTO preyDTO) {
+        Animal predator = animalService.findById(id);
+        Animal prey = animalService.findByName(preyDTO.getName());
+        predator.addPrey(prey);
+        prey.addPredator(predator);
+
+        animalService.update(predator);
+        animalService.update(prey);
     }
 
     @Override

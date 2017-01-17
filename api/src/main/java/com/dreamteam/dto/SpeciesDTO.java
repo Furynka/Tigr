@@ -1,5 +1,7 @@
 package com.dreamteam.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,9 +11,12 @@ import java.util.List;
 public class SpeciesDTO {
 
     private Long id;
-    private String name;
-    private String description;
-    private List<AnimalDTO> animals = new ArrayList<>();
+	@NotNull
+	@Size(min = 5)
+	private String name;
+	@NotNull
+	private String description;
+	private List<AnimalDTO> animals = new ArrayList<>();
     private boolean inDanger;
 
     public Long getId() {
