@@ -12,7 +12,8 @@
         <spring:message code="tigr-message-crud-new"/>
     </a>
 
-    <table class="table table-bordered">
+    <table class="table table-hover">
+        <thead>
         <tr>
             <th><spring:message code="tigr-message-species-name"/></th>
             <th><spring:message code="tigr-message-species-description"/></th>
@@ -20,6 +21,7 @@
             <th><spring:message code="tigr-message-species-in-danger"/></th>
             <th><spring:message code="tigr-message-species-actions"/></th>
         </tr>
+        </thead>
         <c:forEach items="${speciesList}" var="species">
             <tr>
                 <td><c:out value="${species.name}"/></td>
@@ -51,16 +53,17 @@
                         <a class="btn btn-default" href="${contextPath}/species/edit/${species.id}">
                             <spring:message code="tigr-message-crud-edit"/>
                         </a>
-
-                        <c:if test="${empty species.animals}">
-                            <a class="btn btn-danger" href="${contextPath}/species/delete/${species.id}">
-                                <spring:message code="tigr-message-crud-delete"/>
-                            </a>
-                        </c:if>
-                        <c:if test="${!empty species.animals}">
-                            <a class="btn btn-danger" disabled="true" title="${disabledDeleteMessage}">
-                                <spring:message code="tigr-message-crud-delete"/>
-                            </a>
+                        <c:if test="${not empty worker && worker.administrator}">
+                            <c:if test="${empty species.animals}">
+                                <a class="btn btn-danger" href="${contextPath}/species/delete/${species.id}">
+                                    <spring:message code="tigr-message-crud-delete"/>
+                                </a>
+                            </c:if>
+                            <c:if test="${!empty species.animals}">
+                                <a class="btn btn-danger" disabled="true" title="${disabledDeleteMessage}">
+                                    <spring:message code="tigr-message-crud-delete"/>
+                                </a>
+                            </c:if>
                         </c:if>
                     </div>
                 </td>
