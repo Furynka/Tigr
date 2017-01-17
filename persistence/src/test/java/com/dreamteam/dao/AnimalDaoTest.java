@@ -82,9 +82,6 @@ public class AnimalDaoTest extends AbstractTestNGSpringContextTests {
         fly.setDescription("Fly lives in woodland and is eaten by swallows.");
         swallow.addEnvironment(woodland);
         animalDao.create(fly);
-
-        eagle.addPrey(swallow);
-        swallow.addPrey(fly);
     }
 
 	@AfterMethod
@@ -94,6 +91,25 @@ public class AnimalDaoTest extends AbstractTestNGSpringContextTests {
         animalDao.delete(fly);
 
         envDao.delete(woodland);
+    }
+
+    @Test()
+    public void PreyAndPredators() {
+        swallow.addPredator(eagle);
+        eagle.addPrey(swallow);
+        fly.addPredator(swallow);
+        swallow.addPrey(fly);
+
+        animalDao.update(eagle);
+        animalDao.update(swallow);
+        animalDao.update(fly);
+
+        Assert.assertEquals(animalDao.findByName(eagle.getName()).getPreys().size(), 1);
+        Assert.assertEquals(animalDao.findByName(swallow.getName()).getPreys().size(), 1);
+        Assert.assertEquals(animalDao.findByName(fly.getName()).getPredators().size(), 1);
+        Assert.assertEquals(animalDao.findByName(swallow.getName()).getPredators().size(), 1);
+
+        Assert.assertEquals(animalDao.getAll().size(), 3);
     }
 
     @Test()
