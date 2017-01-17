@@ -40,8 +40,7 @@
         $(".environment-form").validate({
             rules: {
                 name: {
-                    required: true,
-                    minlength: 5
+                    required: true
                 },
                 description: {
                     required: true

@@ -4,6 +4,7 @@ import com.dreamteam.dto.AnimalDTO;
 import com.dreamteam.dto.EnvironmentDTO;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Eva Ambrusova
@@ -30,5 +31,7 @@ public interface EnvironmentFacade {
 
 
     public void deleteAnimal(AnimalDTO animal, EnvironmentDTO e);
+
+    public List<AnimalDTO> getTopThreeEndangeredAnimals(String envName);
 
 }
