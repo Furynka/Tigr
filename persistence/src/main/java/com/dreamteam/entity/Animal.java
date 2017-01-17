@@ -124,13 +124,25 @@ public class Animal{
     public void removeEnvironment(Environment environment) {
         environments.remove(environment);
     }
+    
+    public void clearEnvironments() {
+        environments.clear();
+    }
+    
+    public void clearPredators() {
+        predators.clear();
+    }
+    
+    public void clearPreys() {
+        preys.clear();
+    }
 
     @Override
     public int hashCode() {
         final int prime = getId() != null ? getId().hashCode() : 31;
-        int result = 1;
-        result = prime * result + getName().hashCode();
-        result = prime * result + getDescription().hashCode();
+        int result = 1 * prime;
+        if (getName() != null) result = prime * result + getName().hashCode();
+        if (getDescription() != null) result = prime * result + getDescription().hashCode();
         return result;
     }
 

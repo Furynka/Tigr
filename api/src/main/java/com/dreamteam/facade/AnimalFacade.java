@@ -4,8 +4,8 @@ package com.dreamteam.facade;
 import com.dreamteam.dto.AnimalDTO;
 import com.dreamteam.dto.EnvironmentDTO;
 import com.dreamteam.dto.SpeciesDTO;
+
 import java.util.List;
-import java.util.Set;
 
 /**
  *  Facade layer for Animal data.
@@ -116,4 +116,10 @@ public interface AnimalFacade {
     public List<AnimalDTO> getAllAnimals();
     
     public List<AnimalDTO> getTopOfFoodChain();
+    
+    public void clearEnvironments(Long id);
+    
+    public void clearPredators(Long id);
+    
+    public void clearPreys(Long id);
 }
