@@ -119,8 +119,8 @@ public class AnimalDTO {
 				//", species='" + species + '\'' +
 				", description='" + description + '\'' +
 				", count=" + count +
-				", preys=" + preys +
-				", predators=" + predators +
+//				", preys=" + preys +
+//				", predators=" + predators +
 				", environments=" + environments +
 				'}';
 	}
