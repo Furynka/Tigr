@@ -2,6 +2,8 @@
 
 <%@include file="../init.jspf" %>
 
+<spring:message var="disabledDeleteMessage" code="tigr-message-species-disabled-delete"/>
+
 <tigr:crud-template nav="species">
 <jsp:attribute name="content">
 
@@ -49,8 +51,14 @@
                         <a class="btn btn-default" href="${contextPath}/species/edit/${species.id}">
                             <spring:message code="tigr-message-crud-edit"/>
                         </a>
-                        <c:if test="${not empty worker && worker.administrator}">
+
+                        <c:if test="${empty species.animals}">
                             <a class="btn btn-danger" href="${contextPath}/species/delete/${species.id}">
+                                <spring:message code="tigr-message-crud-delete"/>
+                            </a>
+                        </c:if>
+                        <c:if test="${!empty species.animals}">
+                            <a class="btn btn-danger" disabled="true" title="${disabledDeleteMessage}">
                                 <spring:message code="tigr-message-crud-delete"/>
                             </a>
                         </c:if>
