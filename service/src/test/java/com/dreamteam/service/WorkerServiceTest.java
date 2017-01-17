@@ -70,4 +70,16 @@ public class WorkerServiceTest extends AbstractTransactionalTestNGSpringContextT
         Assert.assertEquals(testWorker, found);
     }
     
+    @Test
+    public void testChangeOfPassword() {
+        workerService.changePassword(testWorker, "passwordd");
+        Mockito.verify(workerDao).update(testWorker);
+    }
+    
+    @Test
+    public void testChangeOfRole() {
+        workerService.changeRole(testWorker, Boolean.FALSE);
+        Mockito.verify(workerDao).update(testWorker);
+    }
+    
 }
