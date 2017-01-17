@@ -19,6 +19,12 @@ There are two users with roles WORKER and ADMIN
  worker  | worker@test.com | password
 
 
-### Rest
+We have created REST API for Worker entity.
 
-TODO Jirka
+Accessible by URL http://localhost:8080/pa165/rest/
+
+* GET `/worker/` - lists all workers
+* GET `/worker/{id}` - finds worker by given id
+* POST `/worker/` - creates worker
+* PUT `/worker/` - updates worker
+* DELETE `/worker/` - deletes worker

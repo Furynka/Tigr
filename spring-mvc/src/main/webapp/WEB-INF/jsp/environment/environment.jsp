@@ -13,18 +13,21 @@
         <spring:message code="tigr-message-crud-new"/>
     </a>
 
-    <table class="table table-hover">
+
+    <table class="table table-hover" >
         <thead>
         <tr>
             <th>ID</th>
             <th>Name</th>
             <th>Description</th>
             <th>Animals</th>
+            <th>Top 3 endangered</th>
             <th>Actions</th>
+
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${environmentList}" var="environment">
+        <c:forEach items="${environmentList}" var="environment" varStatus="myIndex">
             <tr>
                 <td><c:out value="${environment.id}"/></td>
                 <td><c:out value="${environment.name}"/></td>
@@ -35,16 +38,21 @@
                     </c:if>
                     <c:if test="${not empty environment.animals}">
                         <c:forEach items="${environment.animals}" var="animal">
-                            <c:out value="${animal.name}"/>
+                            <c:out value="${animal.name}"/><br />
                         </c:forEach>
                     </c:if>
                 </td>
+
+                <td>
+                    <c:forEach items="${top3animalsList[myIndex.index]}" var="endangeredAnimal">
+                        <c:out value="${endangeredAnimal.name}"/><br />
+                    </c:forEach>
+                </td>
+
                 <td>
                     <spring:message var="confirmMessage"
                                     code="tigr-message-del-confirm-species"
                                     arguments="${environment.name}"/>
-
-
                     <div class="btn-group" role="group">
                         <a class="btn btn-default" href="${contextPath}/environments/edit/${environment.id}">
                             <spring:message code="tigr-message-crud-edit"/>
@@ -56,9 +64,32 @@
                         </c:if>
                     </div>
                 </td>
-            </tr>
+
         </c:forEach>
+
+        </tr>
         </tbody>
+
     </table>
 </jsp:attribute>
 </tigr:crud-template>
+
+<!-- Modal Structure -->
+<div class="modal fade" id="top3EndangeredModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Top 3 endangered animals in </h4><c:out value="${environment.name}"/>
+            </div>
+            <div class="modal-body login-modal-body">
+
+                <form id="changePasswordForm">
+                    <p>zviera</p>
+                    <p>zviera</p>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

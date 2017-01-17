@@ -29,10 +29,10 @@ public class Animal{
     @Column
     private int count;
 
-    @ManyToMany(mappedBy="preys")
+    @ManyToMany(mappedBy="preys", fetch = FetchType.LAZY)
     private Set<Animal> predators = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private Set<Animal> preys = new HashSet<>();
 
     @ManyToMany

@@ -1,9 +1,8 @@
-package com.dreamteam;
+package com.dreamteam.service;
 
 import com.dreamteam.dao.EnvironmentDao;
 import com.dreamteam.entity.Animal;
 import com.dreamteam.entity.Environment;
-import com.dreamteam.service.EnvironmentService;
 import com.dreamteam.service.config.ServiceConfig;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;

@@ -154,17 +154,25 @@ public class AnimalFacadeImpl implements AnimalFacade{
     }
 
     @Override
-    public void addAnimalPredator(long id, AnimalDTO predator) {
-        Animal found = animalService.findById(id);
-        found.addPredator(beanMappingService.mapTo(predator, Animal.class));
-        animalService.update(found);
+    public void addAnimalPredator(long id, AnimalDTO predatorDTO) {
+        Animal prey = animalService.findById(id);
+        Animal predator = animalService.findByName(predatorDTO.getName());
+        prey.addPredator(predator);
+        predator.addPrey(prey);
+
+        animalService.update(predator);
+        animalService.update(prey);
     }
 
     @Override
-    public void addAnimalPrey(long id, AnimalDTO prey) {
-        Animal found = animalService.findById(id);
-        found.addPrey(beanMappingService.mapTo(prey, Animal.class));
-        animalService.update(found);
+    public void addAnimalPrey(long id, AnimalDTO preyDTO) {
+        Animal predator = animalService.findById(id);
+        Animal prey = animalService.findByName(preyDTO.getName());
+        predator.addPrey(prey);
+        prey.addPredator(predator);
+
+        animalService.update(predator);
+        animalService.update(prey);
     }
 
     @Override
